@@ -1,0 +1,62 @@
+{{- $id := .id -}}
+{{- $site := .site -}}
+{{- $mode := .mode -}}
+{{- $isMap := eq $mode "map" -}}
+{{- $image := "" -}}
+{{- if not $isMap -}}
+    {{- with resources.Get site.Params.hero_image -}}
+        {{- $image = .RelPermalink -}}
+    {{- end -}}
+    {{- with $site -}}
+        {{- with .image -}}
+            {{- with resources.Get . -}}
+                {{- $image = .RelPermalink -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+<article
+    class="{{ if $isMap }}map-callout{{ else }}site-card{{ end }} site-callout"
+    id="{{ $id }}"
+    {{ if $isMap }}
+        role="dialog"
+        aria-labelledby="{{ $id }}-title"
+        aria-live="polite"
+        hidden
+    {{ end }}
+>
+    {{ if $isMap }}
+        <button
+            class="map-callout-close"
+            type="button"
+            aria-label="Close site details"
+        >&times;</button>
+    {{ end }}
+
+    <img
+        class="map-callout-image site-callout-image"
+        {{ with $image }}src="{{ . }}"{{ end }}
+        alt="{{ with $site }}{{ .campaign }} field site{{ end }}"
+        {{ if $isMap }}aria-hidden="true"{{ end }}
+    />
+
+    <div class="site-callout-content">
+        <h3
+            class="map-callout-title site-callout-title"
+            {{ if $isMap }}id="{{ $id }}-title" tabindex="-1"{{ end }}
+        >{{ with $site }}{{ .campaign }}{{ end }}</h3>
+        <p class="map-callout-text site-callout-text">{{ with $site }}{{ .description }}{{ end }}</p>
+        <ul class="map-callout-species site-callout-species">
+            {{ with $site }}
+                {{ range .species }}
+                    <li>{{ .name }}</li>
+                {{ end }}
+            {{ end }}
+        </ul>
+        <a
+            class="map-callout-link site-callout-link"
+            {{ with $site }}href="{{ .page }}"{{ end }}
+        >Learn more and verify calls</a>
+    </div>
+</article>

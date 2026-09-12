@@ -1,0 +1,7 @@
+.hugo_build.lock
+/resources
+/ef
+/public
+.env.local
+.DS_Store
+

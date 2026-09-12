@@ -1,0 +1,224 @@
+.map {
+	--map-ink: #243238;
+	--map-muted: #65757a;
+	--map-border: #c8d4d2;
+	--map-accent: #c7623d;
+	--map-accent-dark: #8f3f29;
+	--map-line: #d9784f;
+
+	color: var(--map-ink);
+	grid-column: fullbleed;
+	margin: 0;
+}
+
+#home-page > .map {
+	grid-column: fullbleed;
+}
+
+.map-stage,
+.map-shell {
+	position: relative;
+	min-height: 44rem;
+}
+
+.map-shell {
+	overflow: hidden;
+	border: 1px solid var(--map-border);
+	background: #a9c6d2;
+	box-shadow: 0 0.5rem 1.5rem rgba(36, 50, 56, 0.18);
+}
+
+.map-element {
+	position: absolute;
+	inset: 0;
+}
+
+.map-message {
+	display: grid;
+	place-items: center;
+	height: 100%;
+	padding: var(--micro-padding-large);
+	color: var(--map-muted);
+	background: #edf3f1;
+	text-align: center;
+}
+
+.map-leader-lines {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+	pointer-events: none;
+	z-index: 3;
+}
+
+.map-leader-line {
+	stroke: var(--map-line);
+	stroke-width: 6;
+	stroke-dasharray: 0.45rem 0.35rem;
+	vector-effect: non-scaling-stroke;
+	filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+}
+
+.map-callout {
+	position: absolute;
+	width: calc(100% - 3rem);
+	max-width: 22rem;
+	padding: var(--micro-padding-medium);
+	border: 1px solid var(--map-border);
+	background: rgba(255, 255, 255, 0.97);
+	box-shadow: 0.4rem 0.4rem 0.8rem rgba(0, 0, 0, 0.9);
+	z-index: 4;
+}
+
+.map-onboarding-callout {
+	top: 1.5rem;
+	right: 1.5rem;
+	left: auto;
+}
+
+.map-callout-close {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	width: 2rem;
+	height: 2rem;
+	border: 0;
+	font: inherit;
+	cursor: pointer;
+	color: var(--map-muted);
+	background: transparent;
+	font-size: 1.5rem;
+	line-height: 1;
+	background: white;
+}
+
+.map-callout-close:hover,
+.map-callout-close:focus-visible {
+	color: var(--map-accent-dark);
+}
+
+.map-callout-image {
+	width: 100%;
+	height: 9rem;
+	margin-bottom: var(--micro-padding-medium);
+	object-fit: cover;
+	background: #e6efeb;
+}
+
+.map-callout-title {
+	margin: 0;
+	font-size: 1.35rem;
+}
+
+.map-callout-text {
+	margin: var(--micro-padding-small) 0;
+	color: var(--map-muted);
+	line-height: 1.35;
+}
+
+.map-callout-species {
+	display: grid;
+	gap: 0.35rem;
+	margin: 0;
+	padding-left: 1.25rem;
+}
+
+.map-callout-link {
+	display: inline-block;
+	margin-top: var(--micro-padding-small);
+	font-weight: 700;
+}
+
+.map-marker-button {
+	display: grid;
+	place-items: center;
+	width: 2.8rem;
+	height: 2.8rem;
+	padding: 0;
+	border: 2px solid white;
+	border-radius: 50%;
+	background: rgba(36, 50, 56, 0.78);
+	box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.38);
+	cursor: pointer;
+}
+
+.map-marker-dot {
+	display: block;
+	width: 0.95rem;
+	height: 0.95rem;
+	border-radius: 50%;
+	background: var(--map-accent);
+	transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.map-marker-button:hover .map-marker-dot,
+.map-marker-button:focus-visible .map-marker-dot,
+.map-marker-button.is-selected .map-marker-dot {
+	background: #f2b66f;
+	transform: scale(1.45);
+}
+
+.site-cards {
+	margin-block: var(--micro-padding-large);
+}
+
+.site-cards h2 {
+	margin-bottom: var(--micro-padding-medium);
+}
+
+.site-cards-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	gap: var(--micro-padding-medium);
+}
+
+.site-card {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	padding: var(--micro-padding-medium);
+	border: 1px solid var(--map-border);
+	background: rgba(255, 255, 255, 0.97);
+	box-shadow: 0 0.35rem 1rem rgba(36, 50, 56, 0.18);
+}
+
+.site-card .site-callout-image {
+	height: 10rem;
+	margin-bottom: var(--micro-padding-medium);
+}
+
+.site-card .site-callout-content {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
+.site-card .site-callout-link {
+	margin-top: auto;
+	padding-top: var(--micro-padding-small);
+}
+
+@media (max-width: 768px) {
+	.map-stage,
+	.map-shell {
+		min-height: 32rem;
+	}
+
+	.map-callout {
+		top: auto !important;
+		right: 1rem !important;
+		bottom: 1rem;
+		left: 1rem !important;
+		width: auto;
+	}
+
+	.map-onboarding-callout {
+		top: 1rem !important;
+		right: 1rem !important;
+		bottom: auto;
+		left: 1rem !important;
+		width: auto;
+	}
+}

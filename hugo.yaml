@@ -1,0 +1,261 @@
+# baseURL: https://development.ecosounds.org/
+locale: en-US
+title: Call Detective
+theme: "microsite-template"
+server:
+  headers:
+    - for: /**
+      values:
+        Access-Control-Allow-Origin: "*"
+        Cross-Origin-Opener-Policy: same-origin
+        Cross-Origin-Embedder-Policy: require-corp
+        Cross-Origin-Resource-Policy: cross-origin
+        # CSP for local development - must be kept in sync with netlify.toml
+        Content-Security-Policy-Report-Only: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.jsdelivr.net https://maps.googleapis.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://maps.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com https://*.googleusercontent.com; connect-src 'self' data: https://*.ecosounds.org https://*.acousticobservatory.org https://cdn.jsdelivr.net https://maps.googleapis.com https://maps.gstatic.com https://www.google-analytics.com; media-src 'self' https://*.ecosounds.org https://*.acousticobservatory.org; frame-src 'none'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';"
+        ignoreLogs:
+          - warning-goldmark-raw-html
+module:
+  hugoVersion:
+    extended: false
+    min: 0.116.0
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+security:
+  funcs:
+    getenv:
+      - "^HUGO_"
+      - "^CI$"
+      - "^GOOGLE_MAPS_API_KEY$"
+      - "^GOOGLE_MAPS_MAP_ID$"
+services:
+  # https://gohugo.io/templates/embedded/#configuration-google-analytics
+  # googleAnalytics:
+  #   id: G-MEASUREMENT_ID
+menus:
+  # main:
+  #   - name: Credits
+  #     pageRef: https://ecosounds.org/about/credits
+  #     weight: 10
+  # footer:
+  #   - name: Ecosounds Project
+  #     pageRef: https://www.ecosounds.org/projects/1131
+# Avoid camel casing params. Hugo downcases all params when it parses the config.
+# We can still case-insensitively access params, but if we try to dump them as a json blob
+# we will lose the camel casing which can be confusing later.
+params:
+  api_host: https://api.acousticobservatory.org
+  workbench_host: https://data.acousticobservatory.org
+  hero_image: images/riflebird_banner.jpg
+  # navbar:
+  #   logo:
+  #     image: "images/OpenEcoacoustics_horizontal_rgb.svg" # default: none
+  #     text: "Call Detective" # default: {{ .site.Title }}
+  # To add stakeholder logos to the footer, uncomment and configure below:
+  # sponsors:
+  #   logos:
+  #     - image: "images/OpenEcoacoustics_horizontal_rgb.svg"
+  #       alt: "Open Ecoacoustics Logo"
+  #       url: "https://stakeholder.org/"
+  tasks:
+    verification: true # default: true
+  campaigns:
+    - name: "KANGAROO ISLAND"
+      filters:
+        filter:
+          and:
+            - regions.id:
+                eq: 103
+            - tags.id:
+                in:
+                  - "kangaroo-island-glossy-black-cockatoo"
+                  - "tinkling-frog"
+    - name: "South Western Australia: Boyagin"
+      filters:
+        filter:
+          and:
+            - regions.id:
+                eq: 55
+            - tags.id:
+                in:
+                  - "quacking-frog"
+                  - "numbat"
+                  - "carnabys-black-cockatoo"
+    - name: "Central Tasmanian Highlands: Five Rivers"
+      filters:
+        filter:
+          and:
+            - regions.id:
+                eq: 70
+            - tags.id:
+                in:
+                  - "tasmanian-devil"
+                  - "yellow-wattlebird"
+                  - "tasmanian-tree-frog"
+    - name: "Sturt National Park"
+      filters:
+        filter:
+          and:
+            - regions.id:
+                eq: 79
+            - tags.id:
+                in:
+                  - "dingo"
+                  - "chirruping-wedgebill"
+    - name: "Daintree Rainforest Observatory"
+      filters:
+        filter:
+          and:
+            - regions.id:
+                eq: 50
+            - tags.id:
+                in:
+                  - "southern-cassowary"
+                  - "white-lipped-tree-frog"
+                  - "spectacled-flying-fox"
+    - name: "Nardoo Hills"
+      filters:
+        filter:
+          and:
+            - regions.id:
+                eq: 5
+            - tags.id:
+                in:
+                  - "swift-parrot"
+                  - "eastern-banjo-frog"
+                  - "sugar-glider"
+  map:
+    # Map bounds use decimal degrees: latitude ranges north/south and longitude
+    # ranges east/west. These defaults leave room around the current sites.
+    min_zoom: 1
+    max_zoom: 28
+    # When true, the first view fits the configured geographic bounds. When
+    # false, initial_center and initial_zoom control the first view instead.
+    fit_initial_bounds: false
+    initial_center:
+      latitude: -27.5
+      longitude: 150
+    initial_zoom: 4
+    # When false, the viewport may show the full bounds at once. When true,
+    # Google keeps the entire viewport inside the bounds and may force a closer
+    # minimum zoom.
+    strict_bounds: false
+    bounds:
+      north: -5
+      south: -50
+      east: 220
+      west: 65
+    sites:
+      - campaign: "Daintree Rainforest Observatory"
+        latitude: -16.103236
+        longitude: 145.452491
+        description: "The Daintree Rainforest Observatory captures sound from one of Australia's richest tropical ecosystems. Species of interest:"
+        page: "/site-information/"
+        species:
+          - name: "Buff-breasted Paradise-Kingfisher"
+            image: "images/species/Buff-breasted-Paradise-Kingfisher.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/491051"
+          - name: "Wompoo Fruit Dove"
+            image: "images/species/Wompoo-Fruit-Dove.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/492563?start=5850&end=5880"
+          - name: "Spotted Catbird"
+            image: "images/species/Spotted-Catbird.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/490212?start=540&end=570"
+          - name: "Victoria's Riflebird"
+            image: "images/species/Victorias-Riflebird.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/492310?start=2640&end=2670"
+          - name: "Southern Cassowary"
+            examples: []
+      - campaign: "Mount Barney"
+        latitude: -28.234639
+        longitude: 152.641407
+        description: "Mount Barney supports a diverse mix of woodland and mountain species. Species of interest:"
+        page: "/site-information/"
+        species:
+          - name: "Glossy-black Cockatoo"
+            image: "images/species/Glossy-black-Cockatoo.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/1421163?start=4620&end=4650"
+          - name: "Koala"
+            image: "images/species/Koala.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/508757?start=30&end=60"
+          - name: "Spotted Quail-thrush"
+            image: "images/species/Spotted-Quail-thrush.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/1417075?start=4410&end=4440"
+          - name: "Scarlet Myzomela"
+            image: "images/species/Scarlet-Myzomela.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/1420677?start=4110&end=4140"
+          - name: "White-throated Nightjar"
+            image: "images/species/White-throated-Nightjar.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/511298?start=5070&end=5100"
+      - campaign: "Bowra Station"
+        latitude: -27.981830
+        longitude: 145.611615
+        description: "Bowra Station records the distinctive soundscape of inland Queensland. Species of interest:"
+        page: "/site-information/"
+        species:
+          - name: "Pink Cockatoo"
+            image: "images/species/Pink-Cockatoo.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/1540597?start=120&end=150"
+          - name: "Budgerigar"
+            image: "images/species/Budgerigar.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/457814?start=420&end=450"
+          - name: "Crested Bellbird"
+            image: "images/species/Crested-Bellbird.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/1406387?start=45270&end=45300"
+          - name: "Spotted Nightjar"
+            image: "images/species/Spotted-Nightjar.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/7315?start=6100&end=6130"
+          - name: "Cockatiel"
+            image: "images/species/Cockatiel.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/7213?start=4140&end=4170"
+          - name: "Brown Treecreeper"
+            image: "images/species/Brown-Treecreeper.jpg"
+            examples:
+              - url: "https://data.acousticobservatory.org/listen/7213?start=4170&end=4200"
+  style:
+    xsmallBreakPoint: 425px
+    smallBreakPoint: 768px
+    mediumBreakPoint: 1024px
+    largeBreakPoint: 1200px
+    roundedButtons: true
+    # Theme colors are defined using "hsl" (hue, saturation, lightness).
+    # To create your own hsl theme color, you can use the following website.
+    # https://hslpicker.com/#ca7d2f
+    themeColor:
+      hue: 30deg
+      saturation: 62%
+      lightness: 49%
+    # TODO: We should derive the theme shades from the ThemeColor so that we
+    # don't have to explicitly define every theme color shade.
+    # https://github.com/ecoacoustics/microsite-template/issues/49
+    #
+    # In the interim, you can create theme colors using the shoelace color
+    # token generator.
+    # https://codepen.io/claviska/full/QWveRgL
+    themeShades:
+      "50": rgb(252 249 245)
+      "100": rgb(247 234 222)
+      "200": rgb(240 219 196)
+      "300": rgb(233 201 168)
+      "400": rgb(224 177 130)
+      "500": rgb(211 146 80)
+      "600": rgb(186 115 44)
+      "700": rgb(153 95 36)
+      "800": rgb(126 78 30)
+      "900": rgb(90 56 21)
+      "950": rgb(55 34 13)

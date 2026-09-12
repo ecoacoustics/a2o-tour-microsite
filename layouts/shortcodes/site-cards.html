@@ -1,0 +1,13 @@
+<section class="site-cards" aria-labelledby="site-cards-title">
+    <h2 id="site-cards-title">Explore the field sites</h2>
+    <div class="site-cards-grid">
+        {{ range $site := site.Params.map.sites }}
+            {{ $cardID := printf "site-card-%s" ($site.campaign | urlize) }}
+            {{ partial "site-callout.html" (dict
+                "id" $cardID
+                "site" $site
+                "mode" "card"
+            ) }}
+        {{ end }}
+    </div>
+</section>
