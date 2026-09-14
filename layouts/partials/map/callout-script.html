@@ -1,0 +1,177 @@
+        let selectedSpeciesIndex = 0;
+        let slideshowTimer;
+        let slideshowPlaying = true;
+        let speciesTransitionTimer;
+
+        function stopSlideshow() {
+            if (slideshowTimer) {
+                window.clearInterval(slideshowTimer);
+                slideshowTimer = null;
+            }
+        }
+
+        function stopAudio() {
+            calloutAudio.pause();
+            calloutAudio.currentTime = 0;
+            callout.querySelectorAll(".species-item-play.is-playing").forEach((button) => {
+                button.classList.remove("is-playing");
+                button.querySelector("sl-icon").name = "volume-up";
+                button.ariaLabel = button.dataset.playLabel;
+            });
+        }
+
+        function toggleAudio(button, url, label) {
+            if (button.classList.contains("is-playing")) {
+                stopAudio();
+                return;
+            }
+
+            stopAudio();
+            calloutAudio.src = url;
+            calloutAudio.play().then(() => {
+                button.classList.add("is-playing");
+                button.querySelector("sl-icon").name = "stop-fill";
+                button.ariaLabel = `Stop ${label} example call`;
+            }).catch(() => {
+                button.ariaLabel = `Audio unavailable for ${label}`;
+            });
+        }
+
+        function startSlideshow(site) {
+            stopSlideshow();
+            if (!slideshowPlaying || site.content?.species?.length === 0 || site.content?.species?.length === 1) {
+                return;
+            }
+            slideshowTimer = window.setInterval(() => {
+                renderSpecies(selectedSpeciesIndex + 1, 1);
+            }, 5000);
+        }
+
+        function pauseSlideshow() {
+            slideshowPlaying = false;
+            stopSlideshow();
+        }
+
+        function renderSpecies(index, direction = 1) {
+            const site = sites[selectedIndex];
+            stopAudio();
+            const speciesList = site?.content?.species || [];
+            if (!speciesList.length) {
+                calloutSpecies.replaceChildren();
+                slideshowDots.replaceChildren();
+                return;
+            }
+
+            selectedSpeciesIndex = (index + speciesList.length) % speciesList.length;
+            const species = speciesList[selectedSpeciesIndex];
+            const previousItem = calloutSpecies.querySelector(".species-item--slideshow");
+            const hasPreviousItem = previousItem?.querySelector(".species-item-body");
+            const item = document.createElement("li");
+            item.className = `species-item species-item--slideshow species-item--reverse${hasPreviousItem ? ` is-entering-from-${direction > 0 ? "right" : "left"}` : " is-current"}`;
+
+            const imageContainer = document.createElement("span");
+            imageContainer.className = "species-item-image";
+            if (species.image) {
+                const image = document.createElement("img");
+                image.src = species.image;
+                image.alt = species.name;
+                image.loading = "lazy";
+                imageContainer.append(image);
+            } else {
+                imageContainer.classList.add("species-item-image--missing");
+            }
+
+            const body = document.createElement("span");
+            body.className = "species-item-body";
+            const name = document.createElement("span");
+            name.className = "species-item-name";
+            name.textContent = species.name;
+            body.append(name);
+
+            const example = species.examples?.[0];
+            if (example?.url) {
+                const playLink = document.createElement("a");
+                playLink.className = "species-item-play";
+                playLink.href = example.url;
+                playLink.dataset.audioUrl = example.url;
+                playLink.dataset.playLabel = `Play ${species.name} example call`;
+                playLink.role = "button";
+                playLink.ariaLabel = `Play ${species.name} example call`;
+                playLink.title = `Play ${species.name} example call`;
+                const playIcon = document.createElement("sl-icon");
+                playIcon.name = "volume-up";
+                playIcon.ariaHidden = "true";
+                playLink.append(playIcon);
+                playLink.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    toggleAudio(playLink, example.url, species.name);
+                });
+                body.append(playLink);
+            }
+
+            item.append(imageContainer, body);
+            if (!hasPreviousItem) {
+                calloutSpecies.replaceChildren(item);
+            } else {
+                previousItem.classList.add(direction > 0 ? "is-exiting-left" : "is-exiting-right");
+                calloutSpecies.append(item);
+                window.requestAnimationFrame(() => {
+                    item.classList.remove("is-entering-from-right", "is-entering-from-left");
+                    item.classList.add("is-current");
+                });
+                if (speciesTransitionTimer) {
+                    window.clearTimeout(speciesTransitionTimer);
+                }
+                speciesTransitionTimer = window.setTimeout(() => {
+                    previousItem.remove();
+                    speciesTransitionTimer = null;
+                }, 400);
+            }
+
+            slideshowDots.replaceChildren(...speciesList.map((dotSpecies, dotIndex) => {
+                const dot = document.createElement("button");
+                dot.type = "button";
+                dot.className = "species-slideshow-dot";
+                dot.setAttribute("role", "tab");
+                dot.ariaLabel = `Show ${dotSpecies.name}`;
+                dot.setAttribute("aria-selected", String(dotIndex === selectedSpeciesIndex));
+                dot.addEventListener("click", () => {
+                    pauseSlideshow();
+                    renderSpecies(dotIndex, dotIndex >= selectedSpeciesIndex ? 1 : -1);
+                });
+                return dot;
+            }));
+            slideshowPrevious.disabled = speciesList.length === 0 || speciesList.length === 1;
+            slideshowNext.disabled = speciesList.length === 0 || speciesList.length === 1;
+            startSlideshow(site);
+        }
+
+        function renderCallout(site) {
+            slideshowPlaying = true;
+            calloutTitle.textContent = site.campaign;
+            calloutText.textContent = site.description || "";
+            calloutLink.href = site.page || "#";
+            calloutImage.src = site.content?.image || "";
+            calloutImage.alt = `${site.campaign} field site`;
+            renderSpecies(0, 1);
+        }
+
+        function closeCalloutContent() {
+            stopAudio();
+            stopSlideshow();
+            if (speciesTransitionTimer) {
+                window.clearTimeout(speciesTransitionTimer);
+                speciesTransitionTimer = null;
+            }
+        }
+
+        function initializeCalloutControls() {
+            slideshowPrevious.addEventListener("click", () => {
+                pauseSlideshow();
+                renderSpecies(selectedSpeciesIndex - 1, -1);
+            });
+            slideshowNext.addEventListener("click", () => {
+                pauseSlideshow();
+                renderSpecies(selectedSpeciesIndex + 1, 1);
+            });
+        }

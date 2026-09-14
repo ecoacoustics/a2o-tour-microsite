@@ -4,13 +4,10 @@
 {{- $isMap := eq $mode "map" -}}
 {{- $image := "" -}}
 {{- if not $isMap -}}
-    {{- with resources.Get site.Params.hero_image -}}
-        {{- $image = .RelPermalink -}}
-    {{- end -}}
     {{- with $site -}}
-        {{- with .image -}}
+        {{- with .content.image -}}
             {{- with resources.Get . -}}
-                {{- $image = .RelPermalink -}}
+                {{- $image = (.Fill "600x200 center").RelPermalink -}}
             {{- end -}}
         {{- end -}}
     {{- end -}}
@@ -34,29 +31,70 @@
         >&times;</button>
     {{ end }}
 
-    <img
-        class="map-callout-image site-callout-image"
-        {{ with $image }}src="{{ . }}"{{ end }}
-        alt="{{ with $site }}{{ .campaign }} field site{{ end }}"
-        {{ if $isMap }}aria-hidden="true"{{ end }}
-    />
-
-    <div class="site-callout-content">
+    <div class="site-callout-visual">
+        <img
+            class="map-callout-image site-callout-image"
+            {{ with $image }}src="{{ . }}"{{ end }}
+            alt="{{ with $site }}{{ .campaign }} field site{{ end }}"
+            {{ if $isMap }}aria-hidden="true"{{ end }}
+        />
         <h3
             class="map-callout-title site-callout-title"
             {{ if $isMap }}id="{{ $id }}-title" tabindex="-1"{{ end }}
         >{{ with $site }}{{ .campaign }}{{ end }}</h3>
+    </div>
+
+    <div class="site-callout-content">
         <p class="map-callout-text site-callout-text">{{ with $site }}{{ .description }}{{ end }}</p>
-        <ul class="map-callout-species site-callout-species">
-            {{ with $site }}
-                {{ range .species }}
-                    <li>{{ .name }}</li>
-                {{ end }}
-            {{ end }}
-        </ul>
         <a
             class="map-callout-link site-callout-link"
             {{ with $site }}href="{{ .page }}"{{ end }}
-        >Learn more and verify calls</a>
+        >Learn more and contribute</a>
+        <ul class="map-callout-species site-callout-species">
+            {{ if $isMap }}
+                <li class="species-item species-item--slideshow"></li>
+            {{ else }}
+                {{ with $site }}
+                {{ range $index, $species := .content.species }}
+                    {{ $speciesImage := "" }}
+                    {{ with $species.image }}
+                        {{ with resources.Get . }}
+                            {{ $speciesImage = (.Fill "300x300 center").RelPermalink }}
+                        {{ end }}
+                    {{ end }}
+                    <li class="species-item{{ if eq (mod $index 2) 1 }} species-item--reverse{{ end }}">
+                        <span class="species-item-image{{ if not $speciesImage }} species-item-image--missing{{ end }}">
+                            {{ with $speciesImage }}
+                                <img src="{{ . }}" alt="{{ $species.name }}" loading="lazy" />
+                            {{ end }}
+                        </span>
+                        <span class="species-item-body">
+                            <span class="species-item-name">{{ $species.name }}</span>
+                            {{ with $species.examples }}
+                                {{ with index . 0 }}
+                                    <a
+                                        class="species-item-play"
+                                        href="{{ .url }}"
+                                        data-audio-url="{{ .url }}"
+                                        role="button"
+                                        aria-label="Play {{ $species.name }} example call"
+                                        title="Play {{ $species.name }} example call"
+                                    ><sl-icon name="volume-up" aria-hidden="true"></sl-icon></a>
+                                {{ end }}
+                            {{ end }}
+                        </span>
+                    </li>
+                {{ end }}
+                {{ end }}
+            {{ end }}
+        </ul>
+        {{ if $isMap }}
+            <div class="species-slideshow-controls" aria-label="Species slideshow controls">
+                <button class="species-slideshow-previous" type="button" aria-label="Previous species">&#8592;</button>
+                <div class="species-slideshow-dots" role="tablist" aria-label="Choose a species"></div>
+                <button class="species-slideshow-next" type="button" aria-label="Next species">&#8594;</button>
+            </div>
+        {{ end }}
     </div>
+    <audio class="species-audio" preload="none" crossorigin="anonymous"></audio>
 </article>
