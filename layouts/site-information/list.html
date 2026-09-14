@@ -1,0 +1,106 @@
+{{ define "main" }}
+{{- $site := index (where site.Params.map.sites "campaign" .Params.site_name) 0 -}}
+{{- $outline := resources.Get "images/maps/australia-coarse.svg" -}}
+{{- $banner := "" -}}
+{{- with $site.content.image -}}
+    {{- with resources.Get . -}}
+        {{- $banner = (.Fill "1600x500 center").RelPermalink -}}
+    {{- end -}}
+{{- end -}}
+
+{{ with $site }}
+{{- $verifyURL := printf "%sverify/" $.RelPermalink -}}
+<section class="oe-hero page-section fullbleed site-information-hero" data-site="{{ $.Params.site_name | urlize }}"{{ with $banner }} style="background-image: url('{{ . }}');"{{ end }}>
+    <div class="site-information-hero-inner">
+        <div class="site-information-hero-map">
+            {{ with $outline }}
+                {{ $width := 1000.0 }}
+                {{ $height := 780.0 }}
+                {{ $padding := 70.0 }}
+                {{ $viewboxWidth := add $width (mul $padding 2) }}
+                {{ $viewboxHeight := add $height (mul $padding 2) }}
+                {{ $west := 110.0 }}
+                {{ $east := 155.0 }}
+                {{ $north := -9.0 }}
+                {{ $south := -45.0 }}
+                {{ $latitude := float $site.latitude }}
+                {{ $longitude := float $site.longitude }}
+                {{ $x := mul (div (sub $longitude $west) (sub $east $west)) $width }}
+                {{ $y := mul (div (sub $north $latitude) (sub $north $south)) $height }}
+                <div class="site-information-map-canvas site-information-map-{{ $.Params.site_name | urlize }}">
+                    <div class="site-information-map-outline" role="img" aria-label="Simplified map of Australia">
+                        {{ .Content | safeHTML }}
+                    </div>
+                    <svg class="site-information-map-marker-svg" viewBox="-{{ $padding }} -{{ $padding }} {{ $viewboxWidth }} {{ $viewboxHeight }}" aria-labelledby="site-map-title site-map-description">
+                        <title id="site-map-title">{{ $.Params.site_name }} recording site</title>
+                        <desc id="site-map-description">A simplified map of Australia with the {{ $.Params.site_name }} recording site marked.</desc>
+                        <circle class="site-information-map-ring" cx="{{ $x }}" cy="{{ $y }}" r="60" aria-hidden="true"></circle>
+                        <circle class="site-information-map-ring" cx="{{ $x }}" cy="{{ $y }}" r="40" aria-hidden="true"></circle>
+                        <circle class="site-information-map-marker" cx="{{ $x }}" cy="{{ $y }}" r="20">
+                            <title>{{ $.Params.site_name }}</title>
+                        </circle>
+                    </svg>
+                </div>
+            {{ end }}
+        </div>
+        <div class="site-information-hero-panel">
+            <h1>{{ .campaign }}</h1>
+            <div class="site-information-hero-description">
+            {{ $.Params.banner_description | markdownify }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="site-information-cards" aria-label="Progress and species of interest">
+    <section class="site-progress-card">
+        {{ $.RenderString "{{< section/project-progress >}}{{< /section/project-progress >}}" }}
+        <a class="site-information-verify-link" href="{{ $verifyURL }}">Verify calls from {{ .campaign }}</a>
+    </section>
+
+    {{ range $index, $species := .content.species }}
+        {{ $speciesImage := "" }}
+        {{ $speciesImageAlt := $species.name }}
+        {{ with $species.image }}
+            {{ with resources.Get . }}
+                {{ $speciesImage = (.Fill "600x320 center").RelPermalink }}
+            {{ end }}
+        {{ end }}
+        {{ if not $speciesImage }}
+            {{ with $site.content.image }}
+                {{ with resources.Get . }}
+                    {{ $speciesImage = (.Fill "600x320 center").RelPermalink }}
+                    {{ $speciesImageAlt = printf "%s habitat" $site.campaign }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        <article class="site-information-card site-species-card">
+            {{ with $speciesImage }}<img class="site-species-image" src="{{ . }}" alt="{{ $speciesImageAlt }}" loading="lazy">{{ end }}
+            <div class="site-species-card-content">
+                <h2>{{ $species.name }}</h2>
+                <p>{{ $species.description }}</p>
+                {{ with $species.examples }}
+                    {{ with index . 0 }}
+                        {{ $spectrogramID := printf "site-%s-species-%d" ($.Params.site_name | urlize) $index }}
+                        <div class="oe-spectrogram site-species-spectrogram">
+                            <oe-axes>
+                                <oe-indicator>
+                                    <oe-spectrogram id="{{ $spectrogramID }}" src="{{ .url }}"></oe-spectrogram>
+                                </oe-indicator>
+                            </oe-axes>
+                            <oe-media-controls for="{{ $spectrogramID }}"></oe-media-controls>
+                        </div>
+                    {{ end }}
+                {{ else }}
+                    <p class="site-information-no-example">Example call coming soon.</p>
+                {{ end }}
+            </div>
+        </article>
+    {{ end }}
+</div>
+
+<article class="site-information-markdown">
+    {{ $.Content }}
+</article>
+{{ end }}
+{{ end }}

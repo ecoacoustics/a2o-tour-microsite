@@ -5,15 +5,18 @@ date = 2023-01-01T08:00:00-07:00
 
 {{< section/hero
 caption="Image: JJ Harrison, CC BY-SA 3.0, via Wikimedia Commons"
-title="<img class='oe-hero-logo' src='/images/AAO_logo_horiz_white.png' alt=''>Ecoacoustic tour of Australia">}}
+title="<img class='oe-hero-logo' src='/images/AAO_logo_horiz_white.png' alt=''><span class='home-hero-title-text'>Ecoacoustic Tour Of Australia</span>">}}
 {{< /section/hero >}}
 
-{{< map >}}
-
 {{% section class="oe-call-to-action" %}}
-The Plains Wanderer is critically endangered due to habitat loss, predation, and climate change. We're on a mission to train our AI to recognise their calls, and we need your help! By checking the tags our system has put on bird calls, you can help ensure they're correct. This helps us monitor their populations and habitats more effectively, contributing to conservation efforts.
+
+The Australian Acoustic Observatory is a continental-scale acoustic sensor network continuously producing data freely available to researchers, citizen scientists, and the general public.  This Eeoacoustic tour gives you a chance to explore some of the soundscapes and contribute verifications Of automated detections of species of interest. 
+
 [Sign up or log in to start verifying calls](/verify).
 {{% /section %}}
+
+
+{{< map >}}
 
 {{< site-cards >}}
 

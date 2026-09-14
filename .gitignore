@@ -4,4 +4,6 @@
 /public
 .env.local
 .DS_Store
+local/
+/assets/images/species/
 

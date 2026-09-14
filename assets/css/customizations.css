@@ -1,41 +1,224 @@
 /* Banner font options: leave one import and one font-family active at a time. */
+
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Bhaiksuki&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dokdo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-@import "map";
+@import "map-customizations";
+@import "hero-customizations";
+
+.site-information-hero {
+	min-height: clamp(20rem, 38vw, 31rem);
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.site-information-hero-inner {
+	grid-column: main;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+	align-items: stretch;
+	width: 100%;
+	min-height: inherit;
+	margin: 0 auto;
+}
+
+.site-information-hero-map {
+	display: grid;
+	place-items: center;
+	padding: var(--micro-padding-medium);
+}
 
 
-#home-page .oe-hero-title {
-	/* font-family: "Nunito Sans", sans-serif; */
+.site-information-map-canvas {
+	--site-map-land-color: rgba(99, 126, 101, 0.7);
+	--site-map-coast-color: #a2c2a5;
+	--site-map-coast-width: 8;
+	position: relative;
+	width: 100%;
+	aspect-ratio: 1140 / 920;
+}
 
-	/* font-family: "Noto Sans Bhaiksuki", sans-serif; */
-	/* font-family: "Dokdo", sans-serif; */
-	/* font-family: "Cabin Sketch", sans-serif; */
-	font-family: "Kodchasan", sans-serif;
+.site-information-map-outline,
+.site-information-map-outline > svg,
+.site-information-map-marker-svg {
+	display: block;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.site-information-map-outline {
+	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 1));
+	filter: drop-shadow(0 0 18px rgba(0, 0, 0, 1));
+}
+
+.site-information-map-outline .australia-map-land {
+	fill: var(--site-map-land-color);
+	stroke: var(--site-map-coast-color);
+	stroke-width: var(--site-map-coast-width);
+}
+
+.site-information-map-marker-svg {
+	display: block;
+}
+
+.site-information-map-marker {
+	fill: #c7623d;
+	stroke: white;
+	stroke-width: 3;
+	opacity: 1;
+	vector-effect: non-scaling-stroke;
+}
+
+.site-information-map-ring {
+	fill: none;
+	stroke: white;
+	stroke-width: 3;
+	vector-effect: non-scaling-stroke;
+}
+
+.site-information-map-ring:nth-of-type(2) {
+	opacity: 0.8;
+}
+
+.site-information-map-ring:nth-of-type(1) {
+	opacity: 0.6;
+}
+
+.site-information-hero-panel {
 	display: flex;
-	align-items: center;
-	gap: 1rem;
-	font-size: 5rem;
-	line-height: 1.1;
+	flex-direction: column;
+	justify-content: center;
+	align-self: center;
+	margin: var(--micro-padding-medium) 0;
+	padding: var(--micro-padding-medium);
+	background: rgba(13, 24, 28, 0.78);
+	color: white;
 }
 
-.oe-hero-logo {
-	flex: 0 0 auto;
-	height: 15rem;
-	object-fit: contain;
+.site-information-hero-panel h1 {
+	margin: 0 0 var(--micro-padding-medium);
+	color: white;
 }
 
-@media (max-width: 64em) {
-	#home-page .oe-hero-title {
-		font-size: 2.25rem;
-	}
+.site-information-hero-description p {
+	margin: 0;
+}
+
+.site-information-cards {
+	grid-column: main;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--micro-padding-medium);
+	width: 100%;
+	margin: 0 auto;
+	padding: var(--micro-padding-large) 0;
+}
+
+.site-progress-card {
+	display: flex;
+	flex-direction: column;
+}
+
+.site-progress-card .project-progress-widget,
+.site-progress-card sl-card {
+	width: 100%;
+}
+
+.site-progress-card sl-button[href="/verify"] {
+	display: none;
+}
+
+.site-information-verify-link {
+	display: block;
+	margin-top: var(--micro-padding-small);
+	padding: var(--micro-padding-small) var(--micro-padding-medium);
+	color: white;
+	background: var(--sl-color-primary-600);
+	text-align: center;
+	text-decoration: none;
+}
+
+.site-information-verify-link:hover,
+.site-information-verify-link:focus-visible {
+	background: var(--sl-color-primary-700);
+}
+
+.site-information-card {
+	min-width: 0;
+	border: 1px solid var(--map-border);
+	background: rgba(255, 255, 255, 0.98);
+	box-shadow: 0 0.5rem 1.5rem rgba(36, 50, 56, 0.16);
+}
+
+.site-species-card {
+	overflow: hidden;
+}
+
+.site-species-image {
+	display: block;
+	width: 100%;
+	aspect-ratio: 3 / 1.6;
+	object-fit: cover;
+}
+
+.site-species-card-content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--micro-padding-small);
+	padding: var(--micro-padding-medium);
+}
+
+.site-species-card h2 {
+	margin: 0;
+	font-size: var(--micro-font-size-medium);
+}
+
+.site-species-card p {
+	margin: 0;
+}
+
+.site-species-spectrogram {
+	margin-top: var(--micro-padding-small);
+}
+
+.site-information-no-example {
+	color: var(--map-muted);
+	font-style: italic;
+}
+
+.site-information-markdown {
+	grid-column: main;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 0 var(--micro-padding-large);
 }
 
 @media (max-width: 48em) {
-	#home-page .oe-hero-title {
-		font-size: 1.5rem;
+	.site-information-hero-inner {
+		grid-template-columns: 1fr;
+		width: 100%;
+	}
+
+	.site-information-hero-map {
+		padding: var(--micro-padding-large) 0;
+	}
+
+	.site-information-hero-panel {
+		margin: 0 0 var(--micro-padding-large);
+	}
+
+	.site-information-cards {
+		grid-template-columns: 1fr;
+		width: 100%;
+	}
+
+	.site-information-markdown {
+		width: 100%;
 	}
 }

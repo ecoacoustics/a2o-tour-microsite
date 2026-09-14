@@ -1,0 +1,12 @@
+{{- $campaign := .Get "campaign" | default .Page.Params.campaign -}}
+{{- if not $campaign -}}
+    {{- errorf "site-verification requires a campaign parameter or campaign front matter" -}}
+{{- end -}}
+{{- $id := printf "verification-grid-%s" ($campaign | urlize) -}}
+
+<oe-verification-grid data-campaign="{{ $campaign }}" id="{{ $id }}" grid-size="1">
+    <oe-verification verified="true" shortcut="y">Yes</oe-verification>
+    <oe-verification verified="false" shortcut="n">No</oe-verification>
+    <oe-verification verified="unsure" shortcut="u">Unsure</oe-verification>
+    <oe-data-source slot="data-source" for="{{ $id }}" allow-downloads="false"></oe-data-source>
+</oe-verification-grid>

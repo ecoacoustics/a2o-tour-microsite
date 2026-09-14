@@ -1,5 +1,5 @@
 <section class="site-cards" aria-labelledby="site-cards-title">
-    <h2 id="site-cards-title">Explore the field sites</h2>
+    <h2 id="site-cards-title">Recording locations</h2>
     <div class="site-cards-grid">
         {{ range $site := site.Params.map.sites }}
             {{ $cardID := printf "site-card-%s" ($site.campaign | urlize) }}
