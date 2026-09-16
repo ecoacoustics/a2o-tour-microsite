@@ -2,6 +2,11 @@
 locale: en-US
 title: Ecoacoustics Tour of Australia
 theme: "microsite-template"
+menus:
+  main:
+    - name: Image Credits
+      pageRef: /image-credits/
+      weight: 10
 server:
   headers:
     - for: /**

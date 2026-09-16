@@ -12,7 +12,10 @@ title="<img class='oe-hero-logo' src='/images/AAO_logo_horiz_white.png' alt=''><
 
 The Australian Acoustic Observatory is a continental-scale acoustic sensor network continuously producing data freely available to researchers, citizen scientists, and the general public.  This Eeoacoustic tour gives you a chance to explore some of the soundscapes and contribute verifications Of automated detections of species of interest. 
 
-[Sign up or log in to start verifying calls](/verify).
+<sl-button href="#map-002" variant="primary" pill>
+    Use the map to start exploring
+    <sl-icon slot="suffix" name="arrow-right" aria-hidden="true"></sl-icon>
+</sl-button>
 {{% /section %}}
 
 

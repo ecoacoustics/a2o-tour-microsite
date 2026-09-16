@@ -1,3 +1,7 @@
+html:has(#home-page) {
+	scroll-behavior: smooth;
+}
+
 #home-page .oe-hero-title {
 	/* font-family: "Nunito Sans", sans-serif; */
 
@@ -16,6 +20,14 @@
 #home-page > .oe-hero .hero-content > .oe-hero-title {
 	flex: 0 0 60%;
 	max-width: 100%;
+}
+
+#home-page > .oe-call-to-action > .page-section-content {
+	padding-top: var(--micro-padding-medium);
+}
+
+#home-page > .map {
+	scroll-margin-top: var(--micro-navbar-height);
 }
 
 /* Desktop overlay layout: keep the hero and intro text in the same grid row. */
@@ -86,6 +98,7 @@
 		padding: 0;
 		color: white;
 		background: transparent;
+		text-shadow: 0 0 0.5rem rgba(0, 0, 0, 1);
 	}
 
 	#home-page > .oe-call-to-action > .page-section-content {
