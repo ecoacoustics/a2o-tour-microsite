@@ -5,5 +5,4 @@ type = "verify"
 campaign = "Mount Barney"
 +++
 
-{{< site-verification-banner >}}
 {{< site-verification >}}

@@ -5,5 +5,4 @@ type = "verify"
 campaign = "Daintree Rainforest Observatory"
 +++
 
-{{< site-verification-banner >}}
 {{< site-verification >}}

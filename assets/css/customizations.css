@@ -9,6 +9,54 @@
 @import "map-customizations";
 @import "hero-customizations";
 
+body:has(#verify-page) {
+	grid-template-rows:
+		[header-start]
+		0
+		[header-end main-start]
+		minmax(4rem, auto)
+		[main-end footer-start]
+		4rem
+		[footer-end];
+}
+
+#verify-page {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-column: fullbleed;
+	position: relative;
+	padding-top: var(--micro-navbar-height);
+	background-position: top center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#verify-page::before {
+	content: "";
+	position: absolute;
+	top: 8rem;
+	bottom: 4rem;
+	left: 50%;
+	width: min(78rem, calc(90% - 2rem));
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.5);
+	pointer-events: none;
+}
+
+#verify-page > * {
+	position: relative;
+	z-index: 1;
+}
+
+#verify-page oe-verification-grid {
+	--oe-background-color: transparent !important;
+}
+
+#verify-page oe-verification-grid[grid-size="1"] {
+	height: clamp(30rem, 72vh, 42rem);
+	max-height: 42rem;
+}
+
 .site-information-hero {
 	min-height: clamp(20rem, 38vw, 31rem);
 	background-position: center;

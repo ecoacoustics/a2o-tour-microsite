@@ -5,5 +5,4 @@ type = "verify"
 campaign = "Bowra Station"
 +++
 
-{{< site-verification-banner >}}
 {{< site-verification >}}
