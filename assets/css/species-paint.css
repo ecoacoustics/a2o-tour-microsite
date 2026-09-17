@@ -1,0 +1,73 @@
+/* Paint-mask image skin: retain the existing list/carousel geometry. */
+.species-item-image {
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	-webkit-mask-image: var(--species-mask-image);
+	mask-image: var(--species-mask-image);
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
+
+.species-item:nth-child(5n + 1) .species-item-image {
+	--species-mask-image: url("/images/paint/1399a8cb6734d0e9d406fbb92c50d2f0.png");
+}
+
+.species-item:nth-child(5n + 2) .species-item-image {
+	--species-mask-image: url("/images/paint/2d42dd09c1cc65a26eb13e3da6ed99d2.png");
+}
+
+.species-item:nth-child(5n + 3) .species-item-image {
+	--species-mask-image: url("/images/paint/2f12663eaac0be010b73af70a9df6d5c.png");
+}
+
+.species-item:nth-child(5n + 4) .species-item-image {
+	--species-mask-image: url("/images/paint/77caac7c3596316b519b86f055ef723d.png");
+}
+
+.species-item:nth-child(5n + 5) .species-item-image {
+	--species-mask-image: url("/images/paint/d2a2fb1343b0b133323fb2984bdee4ab.png");
+}
+
+.map-callout .species-item .species-item-image {
+	position: relative;
+	width: 14rem;
+	max-width: calc(100% - 6rem);
+	height: 10rem;
+}
+
+.map-callout .species-item .species-item-image img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center center;
+}
+
+.map-callout .species-item-body {
+	border-bottom: 0;
+}
+
+.map-callout .species-item-body::after {
+	display: none;
+}
+
+.map-callout .species-item-name {
+	position: relative;
+	z-index: 3;
+	display: block;
+	flex: 0 0 auto;
+	width: max-content;
+	min-width: max-content;
+	padding: 0;
+	background: transparent;
+	box-shadow: none;
+	white-space: nowrap;
+	transform: none;
+}

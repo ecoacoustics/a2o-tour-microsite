@@ -3,6 +3,54 @@ title = "Home"
 date = 2023-01-01T08:00:00-07:00
 +++
 
+<script>
+function stopSiteInfoAudio(container) {
+    const audio = container.querySelector(".site-info-audio");
+    if (!audio) return;
+    audio.pause();
+    audio.currentTime = 0;
+    container.querySelectorAll(".species-item-play.is-playing").forEach((button) => {
+        button.classList.remove("is-playing");
+        button.querySelector("sl-icon").name = "volume-up";
+        button.ariaLabel = button.dataset.playLabel;
+    });
+}
+
+document.addEventListener("click", (event) => {
+    const button = event.target.closest(".species-item-play[data-audio-url]");
+    if (!button) return;
+
+    event.preventDefault();
+    const container = button.closest(".site-info");
+    const audio = container?.querySelector(".site-info-audio");
+    if (!container || !audio) return;
+
+    button.dataset.playLabel ||= button.ariaLabel;
+    if (button.classList.contains("is-playing")) {
+        stopSiteInfoAudio(container);
+        return;
+    }
+
+    document.querySelectorAll(".site-info-audio").forEach((otherAudio) => {
+        if (otherAudio !== audio) stopSiteInfoAudio(otherAudio.closest(".site-info"));
+    });
+    stopSiteInfoAudio(container);
+    audio.src = button.dataset.audioUrl;
+    audio.onended = () => stopSiteInfoAudio(container);
+    audio.play().then(() => {
+        button.classList.add("is-playing");
+        button.querySelector("sl-icon").name = "stop-fill";
+        button.ariaLabel = button.dataset.playLabel.replace("Play", "Stop");
+    }).catch(() => {
+        button.ariaLabel = "Audio unavailable";
+    });
+});
+
+function onMapCalloutHidden(callout) {
+    stopSiteInfoAudio(callout.querySelector(".site-info"));
+}
+</script>
+
 {{< section/hero
 caption="Image: JJ Harrison, CC BY-SA 3.0, via Wikimedia Commons"
 title="<img class='oe-hero-logo' src='/images/AAO_logo_horiz_white.png' alt=''><span class='home-hero-title-text'>Ecoacoustic Tour Of Australia</span>">}}
@@ -19,7 +67,7 @@ The Australian Acoustic Observatory is a continental-scale acoustic sensor netwo
 {{% /section %}}
 
 
-{{< map >}}
+{{< map on-callout-hidden=onMapCalloutHidden >}}
 
 {{< site-cards >}}
 

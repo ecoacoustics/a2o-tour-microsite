@@ -1,0 +1,79 @@
+{{/*
+    Shared inner site-information content for map callouts and site cards.
+
+    The outer map-callout or site-card wrapper is supplied by the caller.
+    This partial deliberately has no mode flag and no wrapper-specific controls.
+    It always renders the same site image, title, description, link, species
+    list, species images, audio hooks, and names from the supplied site object.
+
+    Parent CSS uses the caller's outer class to choose between the map carousel
+    layout and the site-card list layout. Parent JavaScript controls map-only
+    behavior; this partial does not create or run JavaScript.
+*/}}
+{{- $site := .site -}}
+{{- $image := "" -}}
+{{- with $site -}}
+    {{- with .content.image -}}
+        {{- with resources.Get . -}}
+            {{- $image = (.Fill "600x200 center").RelPermalink -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+<div class="site-info">
+    <div class="site-info-visual">
+        <img
+            class="site-info-image"
+            {{ with $image }}src="{{ . }}"{{ end }}
+            alt="{{ with $site }}{{ .campaign }} field site{{ end }}"
+        />
+        <h3 class="site-info-title">{{ with $site }}{{ .campaign }}{{ end }}</h3>
+    </div>
+
+    <div class="site-info-content">
+        <p class="site-info-text">{{ with $site }}{{ .description }}{{ end }}</p>
+        <sl-button
+            class="site-info-link"
+            {{ with $site }}href="{{ .page }}"{{ end }}
+            variant="primary"
+            pill
+        >Learn more and contribute
+            <sl-icon slot="suffix" name="arrow-right" aria-hidden="true"></sl-icon>
+        </sl-button>
+        <ul class="site-info-species">
+            {{ with $site }}
+            {{ range $index, $species := .content.species }}
+                {{ $speciesImage := "" }}
+                {{ with $species.image }}
+                    {{ with resources.Get . }}
+                        {{ $speciesImage = (.Fill "300x300 center").RelPermalink }}
+                    {{ end }}
+                {{ end }}
+                <li class="species-item{{ if eq (mod $index 2) 1 }} species-item--reverse{{ end }}" data-acc-name="{{ $species.name }}">
+                    <span class="species-item-image{{ if not $speciesImage }} species-item-image--missing{{ end }}">
+                        {{ with $speciesImage }}
+                            <img src="{{ . }}" alt="{{ $species.name }}" loading="lazy" />
+                        {{ end }}
+                    </span>
+                    <span class="species-item-body">
+                        <span class="species-item-name">{{ $species.name }}</span>
+                        {{ with $species.examples }}
+                            {{ with index . 0 }}
+                                <a
+                                    class="species-item-play"
+                                    href="{{ .url }}"
+                                    data-audio-url="{{ .url }}"
+                                    role="button"
+                                    aria-label="Play {{ $species.name }} example call"
+                                    title="Play {{ $species.name }} example call"
+                                ><sl-icon name="volume-up" aria-hidden="true"></sl-icon></a>
+                            {{ end }}
+                        {{ end }}
+                    </span>
+                </li>
+            {{ end }}
+            {{ end }}
+        </ul>
+    </div>
+    <audio class="site-info-audio" preload="none" crossorigin="anonymous"></audio>
+</div>
