@@ -1,32 +1,29 @@
 .site-info-species {
+	container-type: inline-size;
+	--species-image-size: clamp(5.75rem, 50cqw, 10rem);
+	--species-list-height: clamp(8.5rem, calc(var(--species-image-size) + 3rem), 13rem);
 	display: grid;
-	gap: 0;
 	margin: 0;
 	padding: 0.5rem 0 1rem;
 	list-style: none;
 }
 
+/* Individual classic species item: image, name, and audio relationship. */
 .species-item {
 	display: grid;
-	grid-template-columns: 6.5rem minmax(0, 1fr);
+	grid-template-columns: var(--species-image-size) minmax(0, 1fr);
 	align-items: center;
-	min-height: 7rem;
-	margin-top: -1.5rem;
-}
-
-.species-item:first-child {
-	margin-top: 0;
+	min-height: var(--species-image-size);
 }
 
 .species-item--reverse {
-	grid-template-columns: minmax(0, 1fr) 6.5rem;
+	grid-template-columns: minmax(0, 1fr) var(--species-image-size);
 }
 
 .species-item-image {
-	display: grid;
-	place-items: center;
-	width: 12rem;
-	height: 12rem;
+	position: relative;
+	width: var(--species-image-size);
+	height: var(--species-image-size);
 	overflow: hidden;
 	border: 3px solid var(--map-accent);
 	border-radius: 50%;
@@ -36,9 +33,12 @@
 }
 
 .species-item-image img {
+	position: absolute;
+	inset: 0;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	object-position: center 50%;
 }
 
 .species-item--reverse .species-item-image {
@@ -149,6 +149,29 @@
 	display: none;
 }
 
+/* Classic map item arrangement: every callout keeps the name left of the image. */
+.map-callout .species-item {
+	grid-template-columns: minmax(0, 1fr) var(--species-image-size);
+	grid-template-rows: auto;
+	--species-item-justify: center;
+}
+
+.map-callout .species-item-image {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.map-callout .species-item-body {
+	grid-column: 1;
+	grid-row: 1;
+	justify-self: end;
+	justify-content: flex-end;
+	margin: 0 -2.5rem 0 0;
+	padding-left: 0.15rem;
+	padding-right: 2.5rem;
+	text-align: right;
+}
+
 /* The map species list is a native horizontal scroll-snap carousel. */
 .map-callout .site-info-species {
 	position: relative;
@@ -173,50 +196,15 @@
 	inset: auto;
 	flex: 0 0 100%;
 	width: 100%;
-	min-height: 13rem;
+	min-height: var(--species-list-height);
 	margin: 0;
-	grid-template-columns: minmax(0, 1fr);
-	grid-template-rows: auto auto;
-	justify-items: center;
-	align-content: start;
 	scroll-snap-align: center;
 	scroll-snap-stop: always;
 }
 
-.map-callout .species-item .species-item-image {
-	grid-column: 1;
-	grid-row: 1;
-	width: 10rem;
-	height: 10rem;
-	transform: none;
-}
-
-.map-callout .species-item .species-item-body {
-	grid-column: 1;
-	grid-row: 2;
-	justify-self: center;
-	justify-content: center;
-	align-self: start;
-	width: max-content;
-	max-width: 100%;
-	margin: 0;
-	padding: 0.5rem 0 0.75rem;
-	border-bottom: 0;
-	text-align: center;
-}
-
-.map-callout .species-item .species-item-body::after {
-	display: none;
-}
-
-.map-callout .species-item .species-item-body .species-item-play {
-	position: static;
-	margin: 0;
-}
-
 .map-callout .site-info-species::scroll-button(*) {
 	position: absolute;
-	top: 18rem;
+	top: clamp(16rem, calc(var(--species-list-height) + 5rem), 18rem);
 	z-index: 3;
 	width: 2.75rem;
 	height: 2.75rem;
@@ -284,126 +272,15 @@
 	background: var(--map-accent-dark);
 }
 
-.site-card .species-item:first-child {
-	margin-top: -1rem;
+/* The card species list controls vertical spacing; item internals stay classic. */
+.site-card .site-info-species {
+	gap: 0.75rem;
 }
 
 .site-card .species-item {
-	grid-template-columns: 7.75rem minmax(0, 1fr);
-	min-height: 7.25rem;
-	margin-top: -3.75rem;
+	--species-item-justify: start;
 }
 
 .site-card .species-item--reverse {
-	grid-template-columns: minmax(0, 1fr) 7.75rem;
-}
-
-.site-card .species-item-image {
-	width: 10rem;
-	height: 10rem;
-	transform: translateX(-3.5rem);
-}
-
-.site-card .species-item-image img {
-	transform: translateX(1.5rem);
-}
-
-.site-card .species-item--reverse .species-item-image {
-	transform: translateX(1rem);
-}
-
-.site-card .species-item--reverse .species-item-image img {
-	background: #aaaaa3;
-	transform: translateX(-1.5rem);
-}
-
-.site-card .species-item-body {
-	margin-left: -3rem;
-	max-width: 77%;
-	width: auto;
-	padding-left: 3rem;
-}
-
-.site-card .species-item--reverse .species-item-body {
-	margin-left: 0;
-	margin-right: -2.5rem;
-	padding-left: 0.15rem;
-	padding-right: 2.5rem;
-}
-
-@media (max-width: 768px) {
-	.species-item {
-		grid-template-columns: 5.25rem minmax(0, 1fr);
-		min-height: 5.75rem;
-		margin-top: -0.75rem;
-	}
-
-	.species-item--reverse {
-		grid-template-columns: minmax(0, 1fr) 5.25rem;
-	}
-
-	.species-item-image {
-		width: 4.75rem;
-		height: 4.75rem;
-	}
-
-	.site-card .species-item {
-		grid-template-columns: 6.25rem minmax(0, 1fr);
-		min-height: 6.75rem;
-	}
-
-	.site-card .species-item--reverse {
-		grid-template-columns: minmax(0, 1fr) 6.25rem;
-	}
-
-	.site-card .species-item-image {
-		width: 5.75rem;
-		height: 5.75rem;
-		transform: translateX(-1.75rem);
-	}
-
-	.site-card .species-item--reverse .species-item-image {
-		transform: translateX(1.75rem);
-	}
-
-	.site-card .species-item-body {
-		margin-left: -2.25rem;
-		padding-left: 2.25rem;
-	}
-
-	.site-card .species-item--reverse .species-item-body {
-		margin-left: 0;
-		margin-right: -1.75rem;
-		padding-left: 0.15rem;
-		padding-right: 1.75rem;
-	}
-
-	.map-callout .species-item {
-		grid-template-columns: minmax(0, 1fr);
-		grid-template-rows: auto auto;
-		min-height: 8.5rem;
-	}
-
-	.map-callout .species-item .species-item-image {
-		grid-column: 1;
-		grid-row: 1;
-		width: 5.75rem;
-		height: 5.75rem;
-		transform: none;
-	}
-
-	.map-callout .species-item .species-item-body {
-		grid-column: 1;
-		grid-row: 2;
-		margin: 0;
-		padding: 0.5rem 0 0.75rem;
-	}
-
-	.map-callout .site-info-species {
-		min-height: 8.5rem;
-	}
-
-	.map-callout .site-info-species::scroll-button(*) {
-		top: 16rem;
-	}
+	--species-item-justify: end;
 }

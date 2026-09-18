@@ -169,10 +169,6 @@
 		min-height: 32rem;
 	}
 
-	.map-callout {
-		top: auto !important;
-	}
-
 	.map-onboarding-callout {
 		top: 1rem !important;
 		right: 1rem !important;
