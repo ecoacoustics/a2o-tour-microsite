@@ -44,6 +44,29 @@
 	box-shadow: 0.4rem 0.4rem 0.8rem rgba(0, 0, 0, 0.9);
 }
 
+.map-preview-callout-only .map-stage,
+.map-preview-callout-only .map-shell {
+	min-height: 0;
+}
+
+.map-preview-callout-only .map-shell {
+	overflow: visible;
+	border: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.map-preview-callout-only .dev-callout-preview {
+	position: relative;
+	top: auto;
+	right: auto;
+	bottom: auto;
+	left: auto;
+	width: calc(100% - 2rem);
+	max-width: 22rem;
+	margin: var(--micro-padding-large) auto;
+}
+
 .map-onboarding-callout {
 	top: 1.5rem;
 	right: 1.5rem;

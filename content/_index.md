@@ -67,7 +67,9 @@ The Australian Acoustic Observatory is a continental-scale acoustic sensor netwo
 {{% /section %}}
 
 
-{{< map on-callout-hidden=onMapCalloutHidden >}}
+<!-- Google Maps is commented out temporarily because the Maps Demo Key daily quota is exhausted. -->
+<!-- The preview-callout-only mode keeps callout styling available without loading Google Maps. -->
+{{< map preview-callout-only=true >}}
 
 {{< site-cards >}}
 

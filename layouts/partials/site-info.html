@@ -40,6 +40,7 @@
         >Learn more and contribute
             <sl-icon slot="suffix" name="arrow-right" aria-hidden="true"></sl-icon>
         </sl-button>
+        <div class="site-info-species-frame">
         <ul class="site-info-species">
             {{ with $site }}
             {{ range $index, $species := .content.species }}
@@ -49,7 +50,11 @@
                         {{ $speciesImage = (.Fill "300x300 center").RelPermalink }}
                     {{ end }}
                 {{ end }}
-                <li class="species-item{{ if eq (mod $index 2) 1 }} species-item--reverse{{ end }}" data-acc-name="{{ $species.name }}">
+                <li
+                    class="species-item"
+                    data-acc-name="{{ $species.name }}"
+                    {{ with $speciesImage }}style="--species-thumbnail: url('{{ . }}');"{{ end }}
+                >
                     <span class="species-item-image{{ if not $speciesImage }} species-item-image--missing{{ end }}">
                         {{ with $speciesImage }}
                             <img src="{{ . }}" alt="{{ $species.name }}" loading="lazy" />
@@ -74,6 +79,7 @@
             {{ end }}
             {{ end }}
         </ul>
+        </div>
     </div>
     <audio class="site-info-audio" preload="none" crossorigin="anonymous"></audio>
 </div>
