@@ -52,7 +52,6 @@ function onMapCalloutHidden(callout) {
 </script>
 
 {{< section/hero
-caption="Image: JJ Harrison, CC BY-SA 3.0, via Wikimedia Commons"
 title="<img class='oe-hero-logo' src='/images/AAO_logo_horiz_white.png' alt=''><span class='home-hero-title-text'>Ecoacoustic Tour Of Australia</span>">}}
 {{< /section/hero >}}
 
