@@ -1,0 +1,62 @@
+{{- $progress := site.Params.progress_mock | default dict -}}
+{{- $verifyURL := .verifyURL | default "/verify/" -}}
+{{- $counterID := .counterID | default "progress-counter" -}}
+
+<div class="progress-counter" id="{{ $counterID }}" data-progress-counter>
+    <div class="progress-counter-gauge">
+        <svg class="progress-counter-gauge-svg" viewBox="0 0 200 110" aria-hidden="true">
+            <path class="progress-counter-gauge-track" d="M 30 100 A 70 70 0 0 1 170 100" pathLength="100" />
+            <path class="progress-counter-gauge-progress" d="M 30 100 A 70 70 0 0 1 170 100" pathLength="100" />
+            <circle class="progress-counter-pivot" cx="100" cy="100" r="6" />
+            <g class="progress-counter-needle">
+                <line x1="100" y1="100" x2="100" y2="40" />
+            </g>
+        </svg>
+        <p class="progress-counter-fraction" data-progress-fraction>-- out of -- verifications completed.</p>
+        <sl-button href="{{ $verifyURL }}" variant="primary" pill>
+            Keep Contributing
+            <sl-icon slot="suffix" name="arrow-right" aria-hidden="true"></sl-icon>
+        </sl-button>
+    </div>
+
+    <div class="progress-counter-leaderboard">
+        <h2>Top Contributors</h2>
+        <table>
+            <tbody data-progress-leaderboard></tbody>
+        </table>
+        <p class="progress-counter-total">
+            <strong data-progress-total>--</strong>
+            Total Community Verifications
+        </p>
+    </div>
+</div>
+
+<script>
+(() => {
+    const root = document.getElementById({{ $counterID | jsonify | safeJS }});
+    const data = {{ $progress | jsonify | safeJS }};
+    if (!root || !data) return;
+
+    const totalTasks = Number(data.total_tasks) || 0;
+    const completedTasks = Math.max(0, Number(data.user_tasks) || 0);
+    const percentage = totalTasks ? Math.min(100, completedTasks / totalTasks * 100) : 0;
+    const angle = -90 + percentage / 100 * 180;
+
+    root.querySelector("[data-progress-fraction]").textContent = `${completedTasks} out of ${totalTasks} verifications completed.`;
+    root.querySelector("[data-progress-total]").textContent = (Number(data.total_verifications) || 0).toLocaleString();
+    root.querySelector(".progress-counter-gauge-progress").style.strokeDashoffset = String(100 - percentage);
+    root.querySelector(".progress-counter-needle").style.transform = `rotate(${angle}deg)`;
+
+    const leaderboard = root.querySelector("[data-progress-leaderboard]");
+    (data.leaderboard || []).forEach((user, index) => {
+        const row = document.createElement("tr");
+        if (user.is_current) row.classList.add("is-current");
+        [String(index + 1), user.name || ""].forEach((value) => {
+            const cell = document.createElement("td");
+            cell.textContent = String(value);
+            row.appendChild(cell);
+        });
+        leaderboard.appendChild(row);
+    });
+})();
+</script>

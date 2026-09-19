@@ -153,9 +153,9 @@
 	margin-bottom: var(--micro-padding-medium);
 }
 
-.site-cards-grid {
+.cards-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr));
 	gap: var(--micro-padding-medium);
 }
 

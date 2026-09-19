@@ -19,6 +19,14 @@
         {{- end -}}
     {{- end -}}
 {{- end -}}
+{{- $paintMasks := slice
+    "/images/paint/paint1.png"
+    "/images/paint/paint2.png"
+    "/images/paint/paint3.png"
+    "/images/paint/paint4.png"
+    "/images/paint/paint5.png"
+-}}
+{{- $maskOrder := collections.Shuffle $paintMasks -}}
 
 <div class="site-info">
     <div class="site-info-visual">
@@ -47,13 +55,13 @@
                 {{ $speciesImage := "" }}
                 {{ with $species.image }}
                     {{ with resources.Get . }}
-                        {{ $speciesImage = (.Fill "300x300 center").RelPermalink }}
+                        {{ $speciesImage = (.Fill "400x400 center").RelPermalink }}
                     {{ end }}
                 {{ end }}
                 <li
                     class="species-item"
                     data-acc-name="{{ $species.name }}"
-                    {{ with $speciesImage }}style="--species-thumbnail: url('{{ . }}');"{{ end }}
+                    style="--species-mask-image: url('{{ index $maskOrder (mod $index (len $maskOrder)) }}');{{ with $speciesImage }} --species-thumbnail: url('{{ . }}');{{ end }}"
                 >
                     <span class="species-item-image{{ if not $speciesImage }} species-item-image--missing{{ end }}">
                         {{ with $speciesImage }}

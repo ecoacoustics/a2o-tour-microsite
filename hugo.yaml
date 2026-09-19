@@ -40,6 +40,19 @@ params:
   hero_image: images/riflebird_banner.jpg
   tasks:
     verification: true
+  progress_mock:
+    user_tasks: 3
+    total_tasks: 10
+    total_verifications: 12480
+    leaderboard:
+      - name: "Alice Smith"
+        is_current: false
+      - name: "Bob Jones"
+        is_current: false
+      - name: "Charlie Brown"
+        is_current: false
+      - name: "You"
+        is_current: true
   campaigns:
     - name: "Daintree Rainforest Observatory"
       tags:

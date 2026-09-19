@@ -48,14 +48,20 @@
             <div class="site-information-hero-description">
             {{ $.Params.banner_description | markdownify }}
             </div>
+            <sl-button class="site-information-hero-verify" href="{{ $verifyURL }}" variant="primary" pill>
+                Verify calls from {{ .campaign }}
+                <sl-icon slot="suffix" name="arrow-right" aria-hidden="true"></sl-icon>
+            </sl-button>
         </div>
     </div>
 </section>
 
-<div class="site-information-cards" aria-label="Progress and species of interest">
+<div class="cards-grid site-information-cards" aria-label="Progress and species of interest">
     <section class="site-progress-card">
-        {{ $.RenderString "{{< section/project-progress >}}{{< /section/project-progress >}}" }}
-        <a class="site-information-verify-link" href="{{ $verifyURL }}">Verify calls from {{ .campaign }}</a>
+        {{ partial "progress-counter.html" (dict
+            "counterID" (printf "progress-counter-%s" ($.Params.site_name | urlize))
+            "verifyURL" $verifyURL
+        ) }}
     </section>
 
     {{ range $index, $species := .content.species }}
@@ -74,7 +80,7 @@
                 {{ end }}
             {{ end }}
         {{ end }}
-        <article class="site-information-card site-species-card">
+        <article class="content-card site-species-card">
             {{ with $speciesImage }}<img class="site-species-image" src="{{ . }}" alt="{{ $speciesImageAlt }}" loading="lazy">{{ end }}
             <div class="site-species-card-content">
                 <h2>{{ $species.name }}</h2>

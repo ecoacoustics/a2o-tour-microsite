@@ -9,6 +9,7 @@
 @import "map-customizations";
 @import "hero-customizations";
 @import "species";
+@import "progress-counter";
 
 body:has(#verify-page) {
 	grid-template-rows:
@@ -159,11 +160,14 @@ body:has(#verify-page) {
 	margin: 0;
 }
 
+.site-information-hero-verify {
+	align-self: flex-start;
+	margin-top: var(--micro-padding-medium);
+}
+
+
 .site-information-cards {
 	grid-column: main;
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: var(--micro-padding-medium);
 	width: 100%;
 	margin: 0 auto;
 	padding: var(--micro-padding-large) 0;
@@ -198,7 +202,7 @@ body:has(#verify-page) {
 	background: var(--sl-color-primary-700);
 }
 
-.site-information-card {
+.content-card {
 	min-width: 0;
 	border: 1px solid var(--map-border);
 	background: rgba(255, 255, 255, 0.98);
@@ -260,11 +264,6 @@ body:has(#verify-page) {
 
 	.site-information-hero-panel {
 		margin: 0 0 var(--micro-padding-large);
-	}
-
-	.site-information-cards {
-		grid-template-columns: 1fr;
-		width: 100%;
 	}
 
 	.site-information-markdown {
