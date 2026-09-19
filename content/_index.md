@@ -3,6 +3,7 @@ title = "Home"
 date = 2023-01-01T08:00:00-07:00
 +++
 
+[comment]: # "JS to handle species-call playback and stop audio when a map callout closes"
 <script>
 function stopSiteInfoAudio(container) {
     const audio = container.querySelector(".site-info-audio");
@@ -52,12 +53,12 @@ function onMapCalloutHidden(callout) {
 </script>
 
 {{< section/hero
-title="<img class='oe-hero-logo' src='/images/AAO_logo_horiz_white.png' alt=''><span class='home-hero-title-text'>Ecoacoustic Tour Of Australia</span>">}}
+title="<img class='oe-hero-logo' src='/images/AAO_logo_horiz_white.png' alt=''><span class='home-hero-title-text'>Ecoacoustic Tour of Australia</span>">}}
 {{< /section/hero >}}
 
 {{% section class="oe-call-to-action" %}}
 
-The Australian Acoustic Observatory is a continental-scale acoustic sensor network continuously producing data freely available to researchers, citizen scientists, and the general public.  This Eeoacoustic tour gives you a chance to explore some of the soundscapes and contribute verifications Of automated detections of species of interest. 
+The Australian Acoustic Observatory is a continental-scale acoustic sensor network continuously producing data freely available to researchers, citizen scientists, and the general public.  This Eeoacoustic tour gives you a chance to explore some of the soundscapes and contribute verifications of automated detections of species of interest. 
 
 <sl-button href="#map-002" variant="primary" pill>
     Use the map to start exploring
@@ -66,9 +67,8 @@ The Australian Acoustic Observatory is a continental-scale acoustic sensor netwo
 {{% /section %}}
 
 
-<!-- Google Maps is commented out temporarily because the Maps Demo Key daily quota is exhausted. -->
-<!-- The preview-callout-only mode keeps callout styling available without loading Google Maps. -->
-{{< map preview-callout-only=true >}}
+{{< map preview-callout-only=false >}}
+
 
 {{< site-cards >}}
 
