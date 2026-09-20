@@ -34,7 +34,6 @@ security:
       - "^GOOGLE_MAPS_API_KEY$"
       - "^GOOGLE_MAPS_MAP_ID$"
 params:
-  use_dart_sass: true
   api_host: https://api.acousticobservatory.org
   workbench_host: https://data.acousticobservatory.org
   hero_image: images/riflebird_banner.jpg
@@ -102,7 +101,7 @@ params:
               - 4
   map:
     min_zoom: 1
-    max_zoom: 28
+    max_zoom: 21
     fit_initial_bounds: false
     initial_center:
       latitude: -27.5
@@ -112,13 +111,14 @@ params:
     bounds:
       north: -5
       south: -50
-      east: 220
+      east: -140
       west: 65
     sites:
       - campaign: "Daintree Rainforest Observatory"
         latitude: -16.103236
         longitude: 145.452491
         page: "/daintree/"
+        description: "A layered tropical soundscape where many species are easier to detect by sound than by sight."
         content:
           image: "images/sites/daintree/daintree.jpg"
           species:
@@ -150,6 +150,7 @@ params:
         latitude: -28.234639
         longitude: 152.641407
         page: "/mount-barney/"
+        description: "A diverse mix of woodland, wet forest, and mountain habitats in a relatively small area."
         content:
           image: "images/sites/mtbarney/mtbarney.jpg"
           species:
@@ -182,6 +183,7 @@ params:
         latitude: -27.981830
         longitude: 145.611615
         page: "/bowra/"
+        description: "An inland Queensland soundscape shaped by rainfall, water availability, and nocturnal activity."
         content:
           image: "images/sites/bowra/bowra.jpg"
           species:

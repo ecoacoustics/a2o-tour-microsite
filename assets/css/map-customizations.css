@@ -9,18 +9,10 @@
 }
 
 .map {
+	--map-min-height: 44rem;
+	--map-min-height-mobile: 32rem;
 	color: var(--map-ink);
 }
-
-#home-page > .map {
-	grid-column: fullbleed;
-}
-
-.map-stage,
-.map-shell {
-	min-height: 44rem;
-}
-
 .map-shell {
 	border-color: var(--map-border);
 	box-shadow: 0 0.5rem 1.5rem rgba(36, 50, 56, 0.18);
@@ -116,8 +108,8 @@
 	text-shadow: 0 0 15px black, 0px 0 10px black;
 }
 
-.map-callout .site-info-text {
-	margin: var(--micro-padding-small) 0;
+.site-info-text {
+	margin: var(--micro-padding-medium) 0;
 	color: var(--map-muted);
 }
 
@@ -187,16 +179,11 @@
 }
 
 @media (max-width: 768px) {
-	.map-stage,
-	.map-shell {
-		min-height: 32rem;
-	}
-
 	.map-onboarding-callout {
-		top: 1rem !important;
-		right: 1rem !important;
+		top: 1rem;
+		right: 1rem;
 		bottom: auto;
-		left: 1rem !important;
+		left: 1rem;
 		width: auto;
 	}
 }

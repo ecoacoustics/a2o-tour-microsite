@@ -1,10 +1,5 @@
 /* Banner font options: leave one import and one font-family active at a time. */
 
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Bhaiksuki&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Dokdo&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200..1000&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import "map-customizations";
 @import "hero-customizations";
@@ -103,7 +98,6 @@ body:has(#verify-page) {
 }
 
 .site-information-map-outline {
-	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 1));
 	filter: drop-shadow(0 0 18px rgba(0, 0, 0, 1));
 }
 

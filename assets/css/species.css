@@ -133,6 +133,7 @@
 	scroll-snap-type: x mandatory;
 	scroll-marker-group: after;
 	scrollbar-width: none;
+	--species-scroll-button-top: 50%;
 }
 
 .map-callout .site-info-species::-webkit-scrollbar,
@@ -149,11 +150,6 @@
 	margin: 0;
 	scroll-snap-align: center;
 	scroll-snap-stop: always;
-}
-
-.map-callout .site-info-species,
-.site-card .site-info-species {
-	--species-scroll-button-top: 50%;
 }
 
 .map-callout .site-info-species {
