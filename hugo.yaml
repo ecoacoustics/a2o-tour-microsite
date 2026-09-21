@@ -37,8 +37,22 @@ params:
   api_host: https://api.acousticobservatory.org
   workbench_host: https://data.acousticobservatory.org
   hero_image: images/riflebird_banner.jpg
+  sponsors:
+    logos:
+      - image: "images/footer/Google_2026_logo.svg"
+        alt: "Google"
+        url: "https://about.google/"
+      - image: "images/footer/JCU.webp"
+        alt: "James Cook University"
+        url: "https://www.jcu.edu.au/"
+      - image: "images/footer/QUT_RGB.png"
+        alt: "Queensland University of Technology"
+        url: "https://www.qut.edu.au/"
+      - image: "images/footer/BirdLife_Australia_logo.jpg"
+        alt: "BirdLife Australia"
+        url: "https://birdlife.org.au/"
   tasks:
-    verification: true
+    verification: false
   progress_mock:
     user_tasks: 3
     total_tasks: 10

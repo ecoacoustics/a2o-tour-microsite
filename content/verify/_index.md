@@ -1,5 +1,8 @@
 +++
 title = "Can you hear a Southern Cassowary?"
+[build]
+render = "never"
+list = "never"
 +++
 
 <oe-verification-grid data-campaign="Daintree Rainforest Observatory" id="verification-grid" grid-size="1">
