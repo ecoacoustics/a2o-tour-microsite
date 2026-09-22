@@ -1,0 +1,255 @@
+# baseURL: https://development.ecosounds.org/
+locale: en-US
+title: Ecoacoustic Tour of Australia
+theme: "microsite-template"
+menus:
+  main:
+    - name: Image Credits
+      pageRef: /image-credits/
+      weight: 10
+server:
+  headers:
+    - for: /**
+      values:
+        Access-Control-Allow-Origin: "*"
+        Cross-Origin-Opener-Policy: same-origin
+        Cross-Origin-Embedder-Policy: require-corp
+        Cross-Origin-Resource-Policy: cross-origin
+        Content-Security-Policy-Report-Only: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.jsdelivr.net https://maps.googleapis.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://maps.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com https://*.googleusercontent.com; connect-src 'self' data: https://*.ecosounds.org https://*.acousticobservatory.org https://cdn.jsdelivr.net https://maps.googleapis.com https://maps.gstatic.com https://www.google-analytics.com; media-src 'self' https://*.ecosounds.org https://*.acousticobservatory.org; frame-src 'none'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';"
+        ignoreLogs:
+          - warning-goldmark-raw-html
+module:
+  hugoVersion:
+    extended: false
+    min: 0.116.0
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+security:
+  funcs:
+    getenv:
+      - "^HUGO_"
+      - "^CI$"
+      - "^GOOGLE_MAPS_API_KEY$"
+      - "^GOOGLE_MAPS_MAP_ID$"
+params:
+  api_host: https://api.acousticobservatory.org
+  workbench_host: https://data.acousticobservatory.org
+  hero_image: images/riflebird_banner.jpg
+  sponsors:
+    logos:
+      - image: "images/footer/Google_2026_logo.svg"
+        alt: "Google"
+        url: "https://about.google/"
+      - image: "images/footer/JCU.webp"
+        alt: "James Cook University"
+        url: "https://www.jcu.edu.au/"
+      - image: "images/footer/QUT_RGB.png"
+        alt: "Queensland University of Technology"
+        url: "https://www.qut.edu.au/"
+      - image: "images/footer/BirdLife_Australia_logo.jpg"
+        alt: "BirdLife Australia"
+        url: "https://birdlife.org.au/"
+  tasks:
+    verification: false
+  progress_mock:
+    user_tasks: 3
+    total_tasks: 10
+    total_verifications: 12480
+    leaderboard:
+      - name: "Alice Smith"
+        is_current: false
+      - name: "Bob Jones"
+        is_current: false
+      - name: "Charlie Brown"
+        is_current: false
+      - name: "You"
+        is_current: true
+  campaigns:
+    - name: "Daintree Rainforest Observatory"
+      tags:
+        - "Buff-breasted Paradise-Kingfisher"
+        - "Wompoo Fruit Dove"
+        - "Spotted Catbird"
+        - "Victoria's Riflebird"
+        - "Southern Cassowary"
+      filters:
+        filter:
+          sites.id:
+            in:
+              - 197
+              - 198
+              - 199
+              - 200
+    - name: "Bowra Station"
+      tags:
+        - "Pink Cockatoo"
+        - "Budgerigar"
+        - "Crested Bellbird"
+        - "Spotted Nightjar"
+        - "Cockatiel"
+        - "Brown Treecreeper"
+      filters:
+        filter:
+          sites.id:
+            in:
+              - 257
+              - 258
+              - 259
+              - 260
+    - name: "Mount Barney"
+      tags:
+        - "Glossy-black Cockatoo"
+        - "Koala"
+        - "Spotted Quail-thrush"
+        - "Scarlet Myzomela"
+        - "White-throated Nightjar"
+      filters:
+        filter:
+          sites.id:
+            in:
+              - 1
+              - 2
+              - 3
+              - 4
+  map:
+    min_zoom: 1
+    max_zoom: 21
+    fit_initial_bounds: false
+    initial_center:
+      latitude: -27.5
+      longitude: 150
+    initial_zoom: 4
+    strict_bounds: false
+    bounds:
+      north: -5
+      south: -50
+      east: -140
+      west: 65
+    sites:
+      - campaign: "Daintree Rainforest Observatory"
+        latitude: -16.103236
+        longitude: 145.452491
+        page: "/daintree/"
+        description: "A layered tropical soundscape where many species are easier to detect by sound than by sight."
+        content:
+          image: "images/sites/daintree/daintree.jpg"
+          species:
+            - name: "Buff-breasted Paradise-Kingfisher"
+              description: "A bright, long-tailed kingfisher that breeds in North Queensland rainforests and announces its territory with a distinctive repeated call."
+              image: "images/species/Buff-breasted-Paradise-Kingfisher.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/491051/media.mp3"
+            - name: "Wompoo Fruit Dove"
+              description: "A large purple-and-green fruit dove that feeds quietly in the canopy and gives a deep, resonant call."
+              image: "images/species/Wompoo-Fruit-Dove.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/492563/media.mp3?end_offset=5880&start_offset=5850"
+            - name: "Spotted Catbird"
+              description: "A green rainforest bowerbird that forages for fruit and insects and is often detected by its loud, cat-like calls."
+              image: "images/species/Spotted-Catbird.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/490212/media.mp3?end_offset=570&start_offset=540"
+            - name: "Victoria's Riflebird"
+              description: "A compact bird-of-paradise with iridescent male plumage; males advertise and court with raspy calls and elaborate wing displays."
+              image: "images/species/Victorias-Riflebird.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/492310/media.mp3?end_offset=2670&start_offset=2640"
+            - name: "Southern Cassowary"
+              description: "A tall, flightless rainforest bird that disperses fallen fruit and produces low, resonant mating calls."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/487381/media.mp3"
+      - campaign: "Mount Barney"
+        latitude: -28.234639
+        longitude: 152.641407
+        page: "/mount-barney/"
+        description: "A diverse mix of woodland, wet forest, and mountain habitats in a relatively small area."
+        content:
+          image: "images/sites/mtbarney/mtbarney.jpg"
+          species:
+            - name: "Glossy-black Cockatoo"
+              description: "A dark, quiet cockatoo that specializes in she-oak seeds, with males showing red tail panels and females yellow markings."
+              image: "images/species/Glossy-black-Cockatoo.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1421163/media.mp3?end_offset=4650&start_offset=4620"
+            - name: "Koala"
+              description: "A mostly nocturnal, tree-dwelling marsupial that rests for long periods, feeds on eucalypt leaves, and communicates with deep bellows."
+              image: "images/species/Koala.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/508757/media.mp3?end_offset=60&start_offset=30"
+            - name: "Spotted Quail-thrush"
+              description: "A cryptic, ground-dwelling bird of dry forest that forages through leaf litter and is more often heard than seen."
+              image: "images/species/Spotted-Quail-thrush.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1417075/media.mp3?end_offset=4440&start_offset=4410"
+            - name: "Scarlet Myzomela"
+              description: "A tiny honeyeater whose bright-red males visit flowering trees for nectar and insects and sing a tuneful, tinkling song."
+              image: "images/species/Scarlet-Myzomela.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1420677/media.mp3?end_offset=4140&start_offset=4110"
+            - name: "White-throated Nightjar"
+              description: "A nocturnal aerial hunter with mottled camouflage and a white throat patch, known for a bubbling song at dusk and dawn."
+              image: "images/species/White-throated-Nightjar.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/511298/media.mp3?end_offset=5100&start_offset=5070"
+      - campaign: "Bowra Station"
+        latitude: -27.981830
+        longitude: 145.611615
+        page: "/bowra/"
+        description: "An inland Queensland soundscape shaped by rainfall, water availability, and nocturnal activity."
+        content:
+          image: "images/sites/bowra/bowra.jpg"
+          species:
+            - name: "Pink Cockatoo"
+              description: "A striking white-and-pink cockatoo with a raised red-and-yellow crest that usually travels in pairs or small groups."
+              image: "images/species/Pink-Cockatoo.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1540597/media.mp3?end_offset=150&start_offset=120"
+            - name: "Budgerigar"
+              description: "A small green-and-yellow parrot that travels in nomadic flocks, feeds on grass seeds, and gives frequent chattering contact calls."
+              image: "images/species/Budgerigar.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/457814/media.mp3?end_offset=450&start_offset=420"
+            - name: "Crested Bellbird"
+              description: "A grey woodland bird with a black crest and breast whose bell-like call carries across open scrub."
+              image: "images/species/Crested-Bellbird.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1406387/media.mp3?end_offset=45300&start_offset=45270"
+            - name: "Spotted Nightjar"
+              description: "A heavily mottled, ground-roosting nightjar that hunts flying insects after dark and calls with an ascending series of notes."
+              image: "images/species/Spotted-Nightjar.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/7315/media.mp3?end_offset=6130&start_offset=6100"
+            - name: "Cockatiel"
+              description: "A nomadic cockatoo with an expressive crest and long tail that moves between water and seed-rich country in pairs or flocks."
+              image: "images/species/Cockatiel.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/7213/media.mp3?end_offset=4170&start_offset=4140"
+            - name: "Brown Treecreeper"
+              description: "A social treecreeper that spirals up rough trunks and probes bark and leaf litter for insects in small groups."
+              image: "images/species/Brown-Treecreeper.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/7213/media.mp3?end_offset=4200&start_offset=4170"
+  style:
+    xsmallBreakPoint: 425px
+    smallBreakPoint: 768px
+    mediumBreakPoint: 1024px
+    largeBreakPoint: 1200px
+    roundedButtons: true
+    themeColor:
+      hue: 30deg
+      saturation: 62%
+      lightness: 49%
+    themeShades:
+      "50": rgb(252 249 245)
+      "100": rgb(247 234 222)
+      "200": rgb(240 219 196)
+      "300": rgb(233 201 168)
+      "400": rgb(224 177 130)
+      "500": rgb(211 146 80)
+      "600": rgb(186 115 44)
+      "700": rgb(153 95 36)
+      "800": rgb(126 78 30)
+      "900": rgb(90 56 21)
+      "950": rgb(55 34 13)

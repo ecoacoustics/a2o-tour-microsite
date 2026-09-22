@@ -1,0 +1,158 @@
+html:has(#home-page) {
+	scroll-behavior: smooth;
+}
+
+#home-page .oe-hero-title {
+	/* font-family: "Nunito Sans", sans-serif; */
+
+	/* font-family: "Noto Sans Bhaiksuki", sans-serif; */
+	/* font-family: "Dokdo", sans-serif; */
+	/* font-family: "Cabin Sketch", sans-serif; */
+	font-family: "Kodchasan", sans-serif;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-size: 5rem;
+	line-height: 1.1;
+}
+
+/* Override the theme's 30% flex basis so the title can use the full narrow row. */
+#home-page > .oe-hero .hero-content > .oe-hero-title {
+	flex: 0 0 60%;
+	max-width: 100%;
+}
+
+#home-page > .oe-call-to-action > .page-section-content {
+	padding-top: var(--micro-padding-medium);
+}
+
+#home-page > .map {
+	scroll-margin-top: var(--micro-navbar-height);
+}
+
+/* Desktop overlay layout: keep the hero and intro text in the same grid row. */
+/* The intro panel overlays the lower part of the hero banner from 1051px up. */
+@media (min-width: 1051px) {
+	#home-page {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: fullbleed;
+	}
+
+	#home-page > .oe-hero .oe-hero-title {
+		flex: 0 0 66.6667%;
+		max-width: 66.6667%;
+		font-size: 3.3rem;
+		justify-content: flex-start;
+	}
+
+	#home-page > .oe-hero .oe-hero-logo {
+		height: 9.9rem;
+	}
+
+	#home-page > .oe-hero .home-hero-title-text {
+		flex: 1 1 auto;
+		min-width: 0;
+		white-space: normal;
+		text-align: left;
+	}
+
+	#home-page > .oe-hero {
+		position: relative;
+		grid-column: fullbleed;
+		grid-row: 1;
+		aspect-ratio: auto;
+		height: clamp(28rem, 38vw, 40rem);
+		overflow: hidden;
+	}
+
+	#home-page > .oe-hero::before {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		background: inherit;
+		content: "";
+		transform: scale(1.1);
+		transform-origin: left center;
+	}
+
+	#home-page > .oe-hero .hero-content-container {
+		align-items: flex-start;
+		z-index: 1;
+	}
+
+	#home-page > .oe-hero .hero-content {
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		justify-content: flex-start;
+		padding-top: clamp(2rem, calc(90vh - 14rem), 6rem);
+	}
+
+	#home-page > .oe-call-to-action {
+		grid-column: main;
+		grid-row: 1;
+		align-self: end;
+		z-index: 2;
+		margin: 0 0 var(--micro-padding-large);
+		padding: 0;
+		color: white;
+		background: transparent;
+		text-shadow: 0 0 0.5rem rgba(0, 0, 0, 1);
+	}
+
+	#home-page > .oe-call-to-action > .page-section-content {
+		justify-self: start;
+		width: 70%;
+		padding: var(--micro-padding-medium) var(--micro-padding-large);
+		background: rgba(0, 0, 0, 0);
+	}
+
+	#home-page > .oe-call-to-action a {
+		color: white;
+	}
+
+	#home-page > .map {
+		grid-column: fullbleed;
+		grid-row: 2;
+	}
+}
+
+@media (min-width: 1051px) and (max-width: 1495px) {
+	#home-page > .oe-hero .oe-hero-title {
+		font-size: 2.64rem;
+	}
+
+	#home-page > .oe-hero .oe-hero-logo {
+		height: 7.92rem;
+	}
+
+	#home-page > .oe-hero .hero-content {
+		position: relative;
+		top: 15%;
+		padding-top: 0;
+	}
+
+	#home-page > .oe-call-to-action > .page-section-content {
+		width: 70%;
+		font-size: 1.2rem;
+	}
+}
+
+.oe-hero-logo {
+	flex: 0 0 auto;
+	height: 8rem;
+	object-fit: contain;
+}
+
+@media (max-width: 64em) {
+	#home-page .oe-hero-title {
+		font-size: 2.25rem;
+	}
+}
+
+@media (max-width: 48em) {
+	#home-page .oe-hero-title {
+		font-size: 1.5rem;
+	}
+}

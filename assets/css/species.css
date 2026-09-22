@@ -1,0 +1,283 @@
+.site-info-species {
+	container-type: inline-size;
+	--species-image-size: clamp(5.75rem, 50cqw, 10rem);
+	--species-list-height: clamp(8.5rem, calc(var(--species-image-size) + 3rem), 13rem);
+	display: grid;
+	margin: 0;
+	padding: 0.5rem 0 1rem;
+	list-style: none;
+}
+
+.species-item {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-rows: auto auto;
+	justify-items: center;
+	align-content: start;
+}
+
+.species-item-image {
+	position: relative;
+	grid-column: 1;
+	grid-row: 1;
+	justify-self: center;
+	width: 24rem;
+	max-width: calc(100% - 1rem);
+	height: 12rem;
+	overflow: hidden;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	z-index: 1;
+	-webkit-mask-image: var(--species-mask-image);
+	mask-image: var(--species-mask-image);
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
+
+.species-item-image img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 10%;
+}
+
+.species-item-body {
+	display: flex;
+	grid-column: 1;
+	grid-row: 2;
+	align-items: center;
+	justify-self: center;
+	justify-content: center;
+	align-self: start;
+	width: 14rem;
+	max-width: calc(100% - 2rem);
+	margin: 0;
+	padding: 0.5rem 0 0.75rem;
+	gap: 0.45rem;
+	text-align: center;
+}
+
+.species-item-name {
+	flex: 0 0 auto;
+	width: max-content;
+	min-width: max-content;
+	font-weight: 700;
+	line-height: 1.15;
+	white-space: nowrap;
+}
+
+.species-item-play {
+	position: static;
+	flex: 0 0 auto;
+	display: inline-grid;
+	place-items: center;
+	width: 1.8rem;
+	height: 1.8rem;
+	padding: 0;
+	border: 0;
+	color: var(--map-accent-dark);
+	background: transparent;
+	font: inherit;
+	cursor: pointer;
+	opacity: 0.8;
+	text-decoration: none;
+}
+
+.species-item-play sl-icon {
+	font-size: 1.25rem;
+	opacity: 0.8;
+}
+
+.species-item-play:hover,
+.species-item-play:focus-visible {
+	color: var(--map-accent-dark);
+	background: white;
+	opacity: 1;
+}
+
+.species-item-play:hover sl-icon,
+.species-item-play:focus-visible sl-icon {
+	opacity: 1;
+}
+
+.species-item-play:focus-visible {
+	outline: 2px solid var(--map-accent-dark);
+	outline-offset: 2px;
+}
+
+.site-info-audio {
+	display: none;
+}
+
+.site-info-species-frame {
+	position: relative;
+	min-width: 0;
+}
+
+/* Map and card species lists share native horizontal carousel mechanics. */
+.map-callout .site-info-species,
+.site-card .site-info-species {
+	position: relative;
+	display: flex;
+	min-width: 0;
+	overflow-x: auto;
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+	scroll-marker-group: after;
+	scrollbar-width: none;
+	--species-scroll-button-top: 50%;
+}
+
+.map-callout .site-info-species::-webkit-scrollbar,
+.site-card .site-info-species::-webkit-scrollbar {
+	display: none;
+}
+
+.map-callout .species-item,
+.site-card .species-item {
+	position: relative;
+	inset: auto;
+	flex: 0 0 100%;
+	width: 100%;
+	margin: 0;
+	scroll-snap-align: center;
+	scroll-snap-stop: always;
+}
+
+.map-callout .site-info-species {
+	gap: 2rem;
+	min-height: 13rem;
+	padding: 0.5rem 0.5rem 1.5rem;
+	--species-scroll-button-top: 4.5rem;
+}
+
+.map-callout .species-item {
+	min-height: var(--species-list-height);
+}
+
+.map-callout .site-info-species::scroll-button(*),
+.site-card .site-info-species::scroll-button(*) {
+	position: absolute;
+	top: var(--species-scroll-button-top);
+	z-index: 3;
+	width: 2.75rem;
+	height: 2.75rem;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	color: var(--map-accent-dark);
+	background: rgba(255, 255, 255, 0.6);
+	font: inherit;
+	font-size: 1.7rem;
+	font-weight: 700;
+	line-height: 1;
+	transform: translateY(-50%);
+	transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+	cursor: pointer;
+}
+
+.map-callout .site-info-species::scroll-button(left),
+.site-card .site-info-species::scroll-button(left) {
+	left: 0.25rem;
+	content: "←" / "Previous species";
+}
+
+.map-callout .site-info-species::scroll-button(right),
+.site-card .site-info-species::scroll-button(right) {
+	right: 0.25rem;
+	content: "→" / "Next species";
+}
+
+.map-callout .site-info-species::scroll-button(*):hover,
+.map-callout .site-info-species::scroll-button(*):focus-visible,
+.site-card .site-info-species::scroll-button(*):hover,
+.site-card .site-info-species::scroll-button(*):focus-visible {
+	color: white;
+	background: var(--map-accent-dark);
+	box-shadow: 0 0.2rem 0.5rem rgba(36, 50, 56, 0.28);
+	transform: translateY(-50%) scale(1.06);
+}
+
+.map-callout .site-info-species::scroll-button(*):disabled,
+.site-card .site-info-species::scroll-button(*):disabled {
+	opacity: 0.35;
+	cursor: default;
+}
+
+.map-callout .site-info-species::scroll-marker-group {
+	position: absolute;
+	bottom: 0.65rem;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	gap: 0.35rem;
+	z-index: 3;
+}
+
+.map-callout .species-item::scroll-marker {
+	width: 0.55rem;
+	height: 0.55rem;
+	overflow: hidden;
+	border: 1px solid var(--map-accent-dark);
+	border-radius: 50%;
+	background: transparent;
+	content: attr(data-acc-name);
+	text-indent: 100%;
+	white-space: nowrap;
+}
+
+.map-callout .species-item::scroll-marker:target-current {
+	background: var(--map-accent-dark);
+}
+
+.site-card .site-info-species {
+	--species-marker-size: 2.4rem;
+	--species-marker-gap: 0.25rem;
+	--species-scroll-button-top: 4.5rem;
+	gap: 0.75rem;
+	min-height: calc(var(--species-list-height));
+	padding: 0.5rem 0.5rem 3.2rem;
+}
+
+.site-card .site-info-species::scroll-marker-group {
+	position: absolute;
+	bottom: 1.5rem;
+	left: 5%;
+	right: 5%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(var(--species-marker-size), 1fr));
+	grid-auto-rows: var(--species-marker-size);
+	gap: var(--species-marker-gap);
+	justify-items: center;
+	z-index: 3;
+}
+
+.site-card .species-item::scroll-marker {
+	width: var(--species-marker-size);
+	height: var(--species-marker-size);
+	overflow: hidden;
+	border: 2px solid rgba(0,0,0,0.2);
+	border-radius: 50%;
+	background-color: #e6efeb;
+	background-image: var(--species-thumbnail, none);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	content: attr(data-acc-name);
+	text-indent: 100%;
+	white-space: nowrap;
+}
+
+.site-card .species-item::scroll-marker:target-current {
+	border-color: var(--map-accent-dark);
+	box-shadow: 0 0 0 2px white, 0 0 0 4px var(--map-accent-dark);
+}

@@ -1,0 +1,60 @@
++++
+title = "Can you hear a Southern Cassowary?"
+[build]
+render = "never"
+list = "never"
++++
+
+<oe-verification-grid data-campaign="Daintree Rainforest Observatory" id="verification-grid" grid-size="1">
+    <!-- Insert a template element to give non-default attibutes to the spectrogram, example below. 
+    https://oe-web-components.netlify.app/examples/create-verification-grid/ --> 
+    <!-- <template>
+        <div class="tile-spacing">
+            <oe-subject-tag></oe-subject-tag>
+            <oe-media-controls for="spectrogram"></oe-media-controls>
+        </div>
+        <oe-axes>
+        <oe-indicator>
+            <oe-spectrogram id="spectrogram" mel-scale></oe-spectrogram>
+        </oe-indicator>
+        </oe-axes>
+        <div class="tile-block">
+            <oe-task-meter></oe-task-meter>
+        </div>
+    </template> -->
+    <oe-verification verified="true" shortcut="y">Yes</oe-verification>
+    <oe-verification verified="false" shortcut="n">No</oe-verification>
+    <oe-verification verified="unsure" shortcut="u">Unsure</oe-verification>
+    <oe-data-source
+        slot="data-source"
+        for="verification-grid"
+        allow-downloads="false"
+    ></oe-data-source>
+</oe-verification-grid>
+
+<div class="examples-container">
+    <h3>Example Calls</h3>
+    <div class="example-calls">
+        {{< event-card audioRecordingId="487381" audioEventId="44302852" label="Southern Cassowary example 1" >}}
+        {{< /event-card >}}
+        {{< event-card audioRecordingId="490770" audioEventId="44278409" label="Southern Cassowary example 2" >}}
+        {{< /event-card >}}
+    </div>
+</div>
+
+<style>
+.examples-container {
+    margin-block: var(--micro-padding-large);
+}
+
+.example-calls {
+    display: flex;
+    gap: var(--micro-padding-medium);
+    flex-wrap: wrap;
+
+    > * {
+        flex: 1 1;
+        min-width: 20rem;
+    }
+}
+</style>

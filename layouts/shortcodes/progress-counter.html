@@ -1,0 +1,6 @@
+{{- $verifyURL := .Get "verify-url" | default "/verify/" -}}
+{{- $counterID := printf "progress-counter-%d" .Ordinal -}}
+{{ partial "progress-counter.html" (dict
+    "counterID" $counterID
+    "verifyURL" $verifyURL
+) }}
