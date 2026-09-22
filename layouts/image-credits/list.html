@@ -1,0 +1,105 @@
+{{ define "main" }}
+<div id="image-credits-page" class="page">
+  <section class="page-section fullbleed image-credits-section">
+    <div class="page-section-content">
+      <h1>{{ .Title }}</h1>
+      {{ .Content }}
+
+      <div class="image-credits-grid">
+        {{- $licenseLinks := dict
+          "cc-by" "https://creativecommons.org/licenses/by/4.0/"
+          "cc-by-sa" "https://creativecommons.org/licenses/by-sa/4.0/"
+          "cc0" "https://creativecommons.org/public-domain/zero/1.0/"
+        -}}
+        {{ range $index, $item := .Params.credits }}
+          {{ $credit := $item }}
+          {{ $image := resources.Get $credit.image }}
+          <figure class="image-credit">
+            {{ with $image }}
+              <div class="image-credit-media">
+                <img src="{{ .RelPermalink }}" alt="{{ $credit.title }}">
+              </div>
+            {{ end }}
+            <figcaption>
+              <h2>{{ $credit.title }}</h2>
+              {{ with $credit.author }}<p><strong>By:</strong> {{ . }}</p>{{ end }}
+              {{ with $credit.source }}
+                {{ $sourceURL := urls.Parse . }}
+                <p><a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $sourceURL.Host }}</a></p>
+              {{ end }}
+              {{ with $credit.license }}
+                {{ $licenseKey := lower . }}
+                <p>
+                  <strong>License:</strong>
+                  {{ with index $licenseLinks $licenseKey }}
+                    <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $credit.license }}</a>
+                  {{ else }}
+                    {{ $credit.license }}
+                  {{ end }}
+                </p>
+              {{ end }}
+            </figcaption>
+          </figure>
+        {{ end }}
+    </div>
+  </section>
+</div>
+
+<style>
+  #image-credits-page .image-credits-section {
+    padding: var(--micro-padding-large) 0;
+  }
+
+  #image-credits-page .page-section-content {
+    width: 100%;
+  }
+
+  #image-credits-page h1 {
+    margin-top: 0;
+  }
+
+  #image-credits-page .image-credits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--micro-padding-medium);
+    margin-top: var(--micro-padding-large);
+  }
+
+  #image-credits-page .image-credit {
+    min-width: 0;
+    margin: 0;
+    border: 1px solid #c8d4d2;
+    background: var(--micro-panel-color);
+  }
+
+  #image-credits-page .image-credit-media {
+    aspect-ratio: 3 / 2;
+  }
+
+  #image-credits-page .image-credit img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #image-credits-page .image-credit figcaption {
+    padding: var(--micro-padding-medium);
+  }
+
+  #image-credits-page .image-credit h2,
+  #image-credits-page .image-credit p {
+    margin: 0;
+  }
+
+  #image-credits-page .image-credit h2 {
+    font-size: var(--micro-font-size-small);
+    padding-bottom: 0.5em
+  }
+
+  #image-credits-page .image-credit p + p {
+    margin-top: var(--micro-padding-small);
+  }
+
+</style>
+{{ end }}
