@@ -1,10 +1,10 @@
 /* Banner font options: leave one import and one font-family active at a time. */
 
 @import url('https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-@import "map-customizations";
-@import "hero-customizations";
-@import "species";
-@import "progress-counter";
+@import "./map-customizations.css";
+@import "./hero-customizations.css";
+@import "./species.css";
+@import "./progress-counter.css";
 
 body:has(#verify-page) {
 	grid-template-rows:
