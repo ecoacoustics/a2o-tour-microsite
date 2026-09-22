@@ -5,7 +5,6 @@
 .env.local
 .DS_Store
 local/
-/assets/images/species/
 /content/image-credits/
 /layouts/image-credits/
 
