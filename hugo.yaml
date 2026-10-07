@@ -74,6 +74,9 @@ params:
         - "Spotted Catbird"
         - "Victoria's Riflebird"
         - "Southern Cassowary"
+        - "Bar-shouldered Dove"
+        - "Sulphur-crested Cockatoo"
+        - "Fan-tailed Cuckoo"
       filters:
         filter:
           sites.id:
@@ -90,6 +93,8 @@ params:
         - "Spotted Nightjar"
         - "Cockatiel"
         - "Brown Treecreeper"
+        - "Crucifix Frog"
+        - "Red Tree Frog"
       filters:
         filter:
           sites.id:
@@ -105,6 +110,9 @@ params:
         - "Spotted Quail-thrush"
         - "Scarlet Myzomela"
         - "White-throated Nightjar"
+        - "Sugar Glider"
+        - "Southern Boobook"
+        - "Grey Shrike-thrush"
       filters:
         filter:
           sites.id:
@@ -113,6 +121,51 @@ params:
               - 2
               - 3
               - 4
+    - name: "Monjebup Reserve"
+      tags:
+        - "Western Whipbird"
+        - "Malleefowl"
+        - "Weebill"
+        - "Stubble Quail"
+        - "Carnaby's Black-Cockatoo"
+      filters:
+        filter:
+          sites.id:
+            in:
+              - 361
+              - 362
+              - 363
+              - 364
+    - name: "Marshmead"
+      tags:
+        - "Yellow-bellied Glider"
+        - "Bell Miner"
+        - "Superb Lyrebird"
+        - "Wonga Pigeon"
+        - "Yellow-tailed Black-Cockatoo"
+      filters:
+        filter:
+          sites.id:
+            in:
+              - 309
+              - 310
+              - 311
+              - 312
+    - name: "Binya"
+      tags:
+        - "Painted Honeyeater"
+        - "Horsfield's Bronze-cuckoo"
+        - "Red-capped Robin"
+        - "Striped Honeyeater"
+        - "Tawny Frogmouth"
+      filters:
+        filter:
+          sites.id:
+            in:
+              - 333
+              - 334
+              - 335
+              - 336
   map:
     min_zoom: 1
     max_zoom: 21
@@ -132,27 +185,28 @@ params:
         latitude: -16.103236
         longitude: 145.452491
         page: "/daintree/"
-        description: "A layered tropical soundscape where many species are easier to detect by sound than by sight."
+        description: "The oldest rainforest in the world, listed as a UNESCO Heritage Site."
         content:
           image: "images/sites/daintree/daintree.jpg"
           species:
             - name: "Buff-breasted Paradise-Kingfisher"
-              description: "A bright, long-tailed kingfisher that breeds in North Queensland rainforests and announces its territory with a distinctive repeated call."
+              description: "A bright, long-tailed kingfisher that breeds in North Queensland rainforests and migrates to New Guinea for the winter."
+
               image: "images/species/Buff-breasted-Paradise-Kingfisher.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/491051/media.mp3"
             - name: "Wompoo Fruit Dove"
-              description: "A large purple-and-green fruit dove that feeds quietly in the canopy and gives a deep, resonant call."
+              description: "A large fruit dove that feeds quietly in the canopy. Known for its 'Wompoo!' call."
               image: "images/species/Wompoo-Fruit-Dove.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/492563/media.mp3?end_offset=5880&start_offset=5850"
             - name: "Spotted Catbird"
-              description: "A green rainforest bowerbird that forages for fruit and insects and is often detected by its loud, cat-like calls."
+              description: "A large rainforest species with highly unusual cat-like calls."
               image: "images/species/Spotted-Catbird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/490212/media.mp3?end_offset=570&start_offset=540"
             - name: "Victoria's Riflebird"
-              description: "A compact bird-of-paradise with iridescent male plumage; males advertise and court with raspy calls and elaborate wing displays."
+              description: "Iconic rainforest bird-of-paradise. Voice is not as showy as its plumage."
               image: "images/species/Victorias-Riflebird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/492310/media.mp3?end_offset=2670&start_offset=2640"
@@ -160,11 +214,17 @@ params:
               description: "A tall, flightless rainforest bird that disperses fallen fruit and produces low, resonant mating calls."
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/487381/media.mp3"
+            - name: "Bar-shouldered Dove"
+              description: "A long-tailed dove that feeds on the ground near water and gives a rhythmic, cooing call."
+            - name: "Sulphur-crested Cockatoo"
+              description: "A large white cockatoo with a yellow crest that travels in noisy flocks and gives loud, harsh screeches."
+            - name: "Fan-tailed Cuckoo"
+              description: "A grey-and-rufous cuckoo that lays its eggs in other birds' nests and gives a mournful, descending trill."
       - campaign: "Mount Barney"
         latitude: -28.234639
         longitude: 152.641407
         page: "/mount-barney/"
-        description: "A diverse mix of woodland, wet forest, and mountain habitats in a relatively small area."
+        description: "South-east Queensland's most well-known mountain."
         content:
           image: "images/sites/mtbarney/mtbarney.jpg"
           species:
@@ -193,11 +253,19 @@ params:
               image: "images/species/White-throated-Nightjar.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/511298/media.mp3?end_offset=5100&start_offset=5070"
+            - name: "Sugar Glider"
+              description: "A small nocturnal glider that sails between trees on furry membranes, feeds on sap and nectar, and gives yapping calls."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1873028/media.mp3?end_offset=4680&start_offset=4650"
+            - name: "Southern Boobook"
+              description: "Australia's smallest and most widespread owl, best known for its familiar two-note 'boo-book' call at night."
+            - name: "Grey Shrike-thrush"
+              description: "A plain grey songbird of forest and woodland with one of the richest, most melodious songs in the bush."
       - campaign: "Bowra Station"
         latitude: -27.981830
         longitude: 145.611615
         page: "/bowra/"
-        description: "An inland Queensland soundscape shaped by rainfall, water availability, and nocturnal activity."
+        description: "An inland Queensland soundscape near Cunnamulla, a haven for birdwatchers."
         content:
           image: "images/sites/bowra/bowra.jpg"
           species:
@@ -231,6 +299,109 @@ params:
               image: "images/species/Brown-Treecreeper.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/7213/media.mp3?end_offset=4200&start_offset=4170"
+            - name: "Crucifix Frog"
+              description: "A bright yellow, burrowing frog of inland plains that emerges after heavy rain and calls with a low 'whoop'."
+            - name: "Red Tree Frog"
+              description: "A small reddish-brown tree frog that gathers at temporary pools after rain and gives a long, nasal, buzzing call."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1681043/media.mp3?end_offset=1170&start_offset=1140"
+      - campaign: "Monjebup Reserve"
+        latitude: -34.243607
+        longitude: 118.560849
+        page: "/monjebup/"
+        description: "Mallee and heathland in south-western Australia that shelters several threatened species."
+        content:
+          species:
+            - name: "Western Whipbird"
+              description: "A shy, olive-grey bird of dense mallee and heath that is far more often heard than seen, with pairs singing a duet of scratchy whistles."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/156490/media.mp3?end_offset=60&start_offset=30"
+            - name: "Malleefowl"
+              description: "A large, ground-dwelling bird of mallee country; males tend huge incubation mounds and give deep, booming calls."
+            - name: "Weebill"
+              description: "Australia's smallest bird, a pale, short-billed canopy forager that moves through eucalypts in busy groups with a loud, cheerful song."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/344871/media.mp3?end_offset=4830&start_offset=4800"
+            - name: "Stubble Quail"
+              description: "A cryptic, ground-dwelling quail of grassland and crops, usually detected by its far-carrying, repeated whistled call."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/344510/media.mp3?end_offset=7140&start_offset=7110"
+            - name: "Baudin's/Carnaby's Black Cockatoo"
+              description: "Two closely related white-tailed black cockatoos found only in south-western Australia, which travel in noisy flocks and give wailing contact calls."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/351141/media.mp3?end_offset=4350&start_offset=4320"
+            - name: "Placeholder species"
+              description: "Placeholder description."
+            - name: "Placeholder species"
+              description: "Placeholder description."
+            - name: "Placeholder species"
+              description: "Placeholder description."
+      - campaign: "Marshmead"
+        latitude: -37.486020
+        longitude: 149.831509
+        page: "/marshmead/"
+        description: "Tall coastal forest in far East Gippsland, rich with nocturnal and forest-dwelling species."
+        content:
+          species:
+            - name: "Yellow-bellied Glider"
+              description: "A nocturnal glider of tall eucalypt forest that feeds on sap and nectar and is known for its loud, gurgling shrieks."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1209740/media.mp3?end_offset=7170&start_offset=7140"
+            - name: "Bell Miner"
+              description: "A colonial green honeyeater whose constant, tinkling bell-like calls ring through the forest understorey."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1208936/media.mp3?end_offset=6990&start_offset=6960"
+            - name: "Superb Lyrebird"
+              description: "A large ground-dwelling songbird famous for its elaborate song, which mimics many other forest species."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1209384/media.mp3?end_offset=4980&start_offset=4950"
+            - name: "Wonga Pigeon"
+              description: "A plump grey-and-white pigeon of the forest floor that repeats a loud, monotonous call for long periods."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1209912/media.mp3?end_offset=3720&start_offset=3690"
+            - name: "Yellow-tailed Black-Cockatoo"
+              description: "A large black cockatoo with yellow cheek and tail panels that feeds on seeds and wood-boring grubs and gives a far-carrying, wailing call."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1214877/media.mp3?end_offset=5490&start_offset=5460"
+            - name: "Placeholder species"
+              description: "Placeholder description."
+            - name: "Placeholder species"
+              description: "Placeholder description."
+            - name: "Placeholder species"
+              description: "Placeholder description."
+      - campaign: "Binya"
+        latitude: -34.219819
+        longitude: 146.267081
+        page: "/binya/"
+        description: "Dry inland woodland in the Riverina of New South Wales."
+        content:
+          species:
+            - name: "Painted Honeyeater"
+              description: "A nomadic black-and-white honeyeater with yellow wing edges that specialises in mistletoe fruit."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1452067/media.mp3?end_offset=750&start_offset=720"
+            - name: "Horsfield's Bronze Cuckoo"
+              description: "A small bronze-green cuckoo that lays its eggs in other birds' nests and gives a descending, whistled call."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1240530/media.mp3?end_offset=4380&start_offset=4350"
+            - name: "Red-capped Robin"
+              description: "A small dry-woodland robin; males have a bright red cap and breast and sing a rapid, insect-like trill."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1243187/media.mp3?end_offset=690&start_offset=660"
+            - name: "Striped Honeyeater"
+              description: "A streaky grey-and-white honeyeater of inland woodland that builds a hanging nest and sings rich, rollicking phrases."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/670669/media.mp3?end_offset=5280&start_offset=5250"
+            - name: "Tawny Frogmouth"
+              description: "A nocturnal, owl-like bird that roosts by day disguised as a broken branch and gives a low, repeated 'oom' call at night."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/667535/media.mp3?end_offset=1350&start_offset=1320"
+            - name: "Placeholder species"
+              description: "Placeholder description."
+            - name: "Placeholder species"
+              description: "Placeholder description."
+            - name: "Placeholder species"
+              description: "Placeholder description."
   style:
     xsmallBreakPoint: 425px
     smallBreakPoint: 768px
