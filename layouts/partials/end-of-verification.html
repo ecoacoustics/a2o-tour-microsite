@@ -1,0 +1,131 @@
+{{- $campaign := .campaign -}}
+{{- $mapParams := site.Params.map | default dict -}}
+{{- $sites := $mapParams.sites | default slice -}}
+{{- $currentSites := where $sites "campaign" $campaign -}}
+{{- if not $currentSites -}}
+    {{- errorf "end-of-verification campaign %q is not configured in params.map.sites" $campaign -}}
+{{- end -}}
+{{- $orderedSites := slice (index $currentSites 0) -}}
+{{- range $site := $sites -}}
+    {{- if ne $site.campaign $campaign -}}
+        {{- $orderedSites = $orderedSites | append $site -}}
+    {{- end -}}
+{{- end -}}
+
+<style>
+.end-of-verification-grid {
+    --end-of-verification-card-width: calc(var(--card-width) / 2);
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--end-of-verification-card-width)), var(--end-of-verification-card-width)));
+    justify-content: center;
+    gap: var(--space-large);
+    justify-self: center;
+    width: min(100%, var(--content-width));
+}
+
+.end-of-verification {
+    box-sizing: border-box;
+    align-self: start;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: var(--space-xlarge) var(--space-medium);
+    background: var(--color-surface-alt);
+    color: var(--color-text-strong);
+    font-size: var(--font-size-medium);
+    text-align: center;
+}
+
+.end-of-verification > h2 {
+    margin: 0 0 var(--space-xsmall);
+    color: var(--color-text-strong);
+}
+
+.end-of-verification-intro {
+    margin: 0 0 var(--space-large);
+}
+
+.end-of-verification-card {
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: calc(var(--space-medium) / 2);
+    border-radius: var(--radius-card);
+    background: var(--color-card);
+}
+
+.end-of-verification-image-link {
+    display: block;
+}
+
+.end-of-verification-image {
+    display: block;
+    width: 100%;
+    height: 5.25rem;
+    border-radius: var(--radius-callout);
+    object-fit: cover;
+}
+
+.end-of-verification-title {
+    margin: calc(var(--space-small) / 2) 0 0;
+    font-size: var(--font-size-medium);
+}
+
+.end-of-verification-title a {
+    color: var(--color-text-strong);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.end-of-verification-complete {
+    margin: calc(var(--space-xsmall) / 2) 0 0;
+    color: var(--color-text);
+    font-size: var(--font-size-small);
+    font-weight: 700;
+}
+
+@media (max-width: 48em) {
+    .end-of-verification-grid {
+        grid-template-columns: repeat(2, minmax(0, min(8rem, calc((100% - var(--space-small)) / 2))));
+        gap: var(--space-small);
+    }
+
+    .end-of-verification-card {
+        min-width: 0;
+        padding: calc(var(--space-medium) / 4);
+    }
+
+    .end-of-verification-image {
+        height: auto;
+        aspect-ratio: 2 / 1;
+    }
+
+    .end-of-verification-title {
+        font-size: var(--font-size-small);
+        overflow-wrap: anywhere;
+    }
+}
+</style>
+
+<section class="end-of-verification" aria-labelledby="end-of-verification-title">
+    <h2 id="end-of-verification-title">You’ve completed {{ $campaign }}!</h2>
+    <p class="end-of-verification-intro">Choose another location to keep going.</p>
+    <div class="cards-grid end-of-verification-grid">
+        {{- range $site := $orderedSites -}}
+            {{- $isCurrent := eq $site.campaign $campaign -}}
+            <article class="end-of-verification-card{{ if $isCurrent }} end-of-verification-card-current{{ end }}">
+                <a class="end-of-verification-image-link" href="{{ $site.page }}">
+                    {{- with $site.content.image -}}
+                        {{- with resources.Get . -}}
+                            <img class="end-of-verification-image" src="{{ (.Fill "600x300 center webp").RelPermalink }}" alt="{{ $site.campaign }} field site" loading="lazy">
+                        {{- end -}}
+                    {{- end -}}
+                </a>
+                <h3 class="end-of-verification-title"><a href="{{ $site.page }}">{{ $site.campaign }}</a></h3>
+                {{- if $isCurrent }}
+                    <p class="end-of-verification-complete"><span aria-hidden="true">✓</span> Complete</p>
+                {{- end }}
+            </article>
+        {{- end }}
+    </div>
+</section>
