@@ -61,9 +61,8 @@
             {{ end }}
         </div>
         <div class="site-information-why-progress">
-            {{ partial "site-information-progress-counter.html" (dict
+            {{ partial "progress-counter.html" (dict
                 "campaign" .campaign
-                "verifyURL" $verifyURL
             ) }}
         </div>
     </div>

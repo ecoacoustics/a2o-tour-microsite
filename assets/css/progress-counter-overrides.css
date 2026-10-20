@@ -7,31 +7,71 @@
     via color-mix, so overriding the accent recolors the whole widget.
 */
 
-.progress-counter {
+.home-progress-section  {
+    background: var(--color-surface-muted);
+	background: rgb(247	244	231);
+	.progress-counter {
+        margin: 2rem auto;
+	}
+}
+
+:root {
 	--progress-accent: var(--color-text);
+}
+
+.progress-counter {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+	align-items: center;
+	gap: var(--space-xlarge);
+	width: min(100%, var(--content-width));
+	max-width: none;
+	margin: 0 auto;
 	font-family: var(--font-body);
+	container: progress-counter / inline-size;
+}
+
+@container progress-counter (max-width: 45.999rem) {
+	.progress-counter > .leaderboard-total {
+		grid-column: 1 / -1;
+		justify-self: center;
+	}
 }
 
 .progress-counter .leaderboard h2 {
+	margin-bottom: var(--space-xsmall);
 	color: var(--color-text-strong);
 	font-family: var(--font-accent);
-	font-size: var(--font-size-large);
+	font-size: 1.2rem;
 	font-style: italic;
 	font-weight: 500;
 	line-height: 2rem;
 }
 
 /* Echo the design system's large serif stat numerals. */
-.progress-counter .leaderboard > .leaderboard-total {
+.progress-counter > .leaderboard-total {
 	border-radius: var(--radius-callout);
 	color: var(--color-text-strong);
+	background: var(--progress-light);
+	background: var(--color-surface-muted);
+	text-align: center;
 }
 
-.progress-counter .leaderboard > .leaderboard-total strong {
+.progress-counter-gauge-track {
+    stroke: var(--color-surface-muted);
+}
+
+.progress-counter > .leaderboard-total strong {
+	display: block;
+	margin-bottom: 0.25rem;
 	font-family: var(--font-accent);
 	font-size: var(--font-size-xlarge);
 	font-weight: 400;
 	line-height: 1.1;
+}
+
+.progress-counter > .leaderboard-total span {
+	display: block;
 }
 
 /* Match the accent buttons used in the hero and initiative sections. */
@@ -57,57 +97,14 @@
 	padding: 0;
 }
 
-/*
-    Two-column layout: gauge | button on the top row, leaderboard | total on
-    the bottom row. Both children adopt the parent's columns via subgrid so
-    the right-hand column stays aligned across rows.
-*/
-.progress-counter {
-	grid-template-columns: minmax(0, 1.5fr) minmax(10rem, 1fr);
-	column-gap: var(--space-xlarge);
-	row-gap: var(--space-xlarge);
-}
-
-.progress-counter-gauge,
-.progress-counter .leaderboard {
-	display: grid;
-	grid-column: 1 / -1;
-	grid-template-columns: subgrid;
-}
-
 .progress-counter-gauge {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
 	justify-items: center;
 	align-items: center;
 	row-gap: 0;
 }
 
-/* Hidden state/message paragraphs are display:none and create no rows. */
-.progress-counter-gauge > * {
-	grid-column: 1;
-}
-
-.progress-counter-gauge > sl-button {
-	grid-column: 2;
-	grid-row: 1 / span 2;
-	justify-self: center;
-	align-self: center;
-}
-
-@media (max-width: 450px) {
-	.progress-counter {
-		grid-template-columns: minmax(0, 1fr);
-	}
-
-	.progress-counter-gauge > sl-button {
-		grid-column: 1;
-		grid-row: auto;
-		margin-top: var(--space-medium);
-	}
-
-	.progress-counter .leaderboard > .leaderboard-total {
-		grid-column: 1;
-		grid-row: auto;
-		justify-self: center;
-		width: min(100%, 14rem);
-	}
+.progress-counter .leaderboard {
+	min-width: 0;
 }

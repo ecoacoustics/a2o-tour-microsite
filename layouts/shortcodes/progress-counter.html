@@ -1,6 +1,6 @@
-{{- $verifyURL := .Get "verify-url" | default "/verify/" -}}
 {{- $campaign := .Get "campaign" -}}
+{{- $leaderboardSize := .Get "leaderboard-size" -}}
 {{ partial "progress-counter.html" (dict
     "campaign" $campaign
-    "verifyURL" $verifyURL
+    "leaderboardSize" $leaderboardSize
 ) }}
