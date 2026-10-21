@@ -73,9 +73,7 @@
         text-align: center;
     }
 
-    .page-back {
-        color: var(--color-surface);
-    }
+
 
     .site-information-eyebrow {
         margin: 0;
@@ -85,6 +83,13 @@
         font-style: italic;
         font-weight: 500;
         line-height: 2rem;
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 0.15em;
+            text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
+        }
     }
 
     .site-information-hero-description {
@@ -102,15 +107,31 @@
 .page-back {
     position: absolute;
     grid-column: fullbleed;
-    top: 3rem;
+    top: 1rem;
     left: 5rem;
+    right: var(--space-medium);
     display: flex;
-    align-items: center;
-    gap: var(--space-xsmall);
+    flex-wrap: wrap;
+    column-gap: var(--space-small);
+    row-gap: var(--space-xxsmall);
+
     color: var(--color-text-strong);
-    font-size: var(--font-size-large);
+    font-size: 1.2rem;
     line-height: 2rem;
     text-decoration: none;
+    color: var(--color-surface);
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xsmall);
+        color: var(--color-surface);
+        white-space: nowrap;
+    }
+
+    a + a::before {
+        content: "|";
+    }
 
     @media (max-width: 64em) {
         left: 2rem;
@@ -118,6 +139,14 @@
 
     @media (max-width: 36em) {
         left: var(--space-medium);
+
+        a + a::before {
+            display: none;
+        }
+
+        a + a {
+            margin-left: calc(32px + var(--space-xsmall));
+        }
     }
 
     sl-icon {
