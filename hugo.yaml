@@ -235,9 +235,13 @@ params:
         content:
           image: "images/sites/daintree/daintree.jpg"
           species:
+            - name: "Victoria's Riflebird"
+              description: "Iconic rainforest bird-of-paradise. Voice is not as showy as its plumage."
+              image: "images/species/Victorias-Riflebird.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/492310/media.mp3?end_offset=2665&start_offset=2645"
             - name: "Buff-breasted Paradise-Kingfisher"
               description: "A bright, long-tailed kingfisher that breeds in North Queensland rainforests and migrates to New Guinea for the winter."
-
               image: "images/species/Buff-breasted-Paradise-Kingfisher.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/491051/media.mp3?end_offset=1585&start_offset=1565"
@@ -246,16 +250,21 @@ params:
               image: "images/species/Wompoo-Fruit-Dove.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/492563/media.mp3?end_offset=5875&start_offset=5855"
+            - name: "Orange-footed Scrubfowl"
+              description: "A dark, chicken-sized mound-builder that incubates its eggs in huge heaps of soil and leaf litter and gives loud, gurgling cackles, often at night."
+              image: "images/species/Orange-footed-Scrubfowl.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/488324/media.mp3?end_offset=2815&start_offset=2795"
             - name: "Spotted Catbird"
               description: "A large rainforest species with highly unusual cat-like calls."
               image: "images/species/Spotted-Catbird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/490212/media.mp3?end_offset=565&start_offset=545"
-            - name: "Victoria's Riflebird"
-              description: "Iconic rainforest bird-of-paradise. Voice is not as showy as its plumage."
-              image: "images/species/Victorias-Riflebird.jpg"
+            - name: "Sulphur-crested Cockatoo"
+              description: "A large white cockatoo with a yellow crest that gathers in noisy flocks and gives harsh, far-carrying screeches."
+              image: "images/species/Sulphur-crested-Cockatoo.jpg"
               examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/492310/media.mp3?end_offset=2665&start_offset=2645"
+                - url: "https://api.acousticobservatory.org/audio_recordings/1877393/media.mp3?end_offset=5515&start_offset=5495"
       - campaign: "Mount Barney"
         latitude: -28.234639
         longitude: 152.641407
@@ -264,42 +273,50 @@ params:
         content:
           image: "images/sites/mtbarney/mtbarney.jpg"
           species:
-            - name: "Glossy-black Cockatoo"
-              description: "A dark, quiet cockatoo that specializes in she-oak seeds, with males showing red tail panels and females yellow markings."
-              image: "images/species/Glossy-black-Cockatoo.jpg"
-              examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/1421163/media.mp3?end_offset=4645&start_offset=4625"
             - name: "Koala"
               description: "A mostly nocturnal, tree-dwelling marsupial that rests for long periods, feeds on eucalypt leaves, and communicates with deep bellows."
               image: "images/species/Koala.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/508757/media.mp3?end_offset=55&start_offset=35"
+            - name: "Glossy-black Cockatoo"
+              description: "A dark, quiet cockatoo that specialises in she-oak seeds, with males showing red tail panels and females yellow markings."
+              image: "images/species/Glossy-black-Cockatoo.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1421163/media.mp3?end_offset=4645&start_offset=4625"
+            - name: "Great Barred Frog"
+              description: "A large, dark-barred frog of rainforest and wet forest streams whose deep, guttural 'wark' calls carry along creek lines at night."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1872603/media.mp3?end_offset=3055&start_offset=3035"
             - name: "Spotted Quail-thrush"
               description: "A cryptic, ground-dwelling bird of dry forest that forages through leaf litter and is more often heard than seen."
               image: "images/species/Spotted-Quail-thrush.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1417075/media.mp3?end_offset=4435&start_offset=4415"
-            - name: "Scarlet Myzomela"
-              description: "A tiny honeyeater whose bright-red males visit flowering trees for nectar and insects and sing a tuneful, tinkling song."
-              image: "images/species/Scarlet-Myzomela.jpg"
-              examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/1420677/media.mp3?end_offset=4135&start_offset=4115"
-            - name: "White-throated Nightjar"
-              description: "A nocturnal aerial hunter with mottled camouflage and a white throat patch, known for a bubbling song at dusk and dawn."
-              image: "images/species/White-throated-Nightjar.jpg"
-              examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/511298/media.mp3?end_offset=5095&start_offset=5075"
             - name: "Sugar Glider"
               description: "A small nocturnal glider that sails between trees on furry membranes, feeds on sap and nectar, and gives yapping calls."
               image: "images/species/sugar-glider.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1873028/media.mp3?end_offset=4675&start_offset=4655"
+            - name: "White-throated Nightjar"
+              description: "A nocturnal aerial hunter with mottled camouflage and a white throat patch, known for a bubbling song at dusk and dawn."
+              image: "images/species/White-throated-Nightjar.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/511298/media.mp3?end_offset=5095&start_offset=5075"
+            - name: "Scarlet Myzomela"
+              description: "A tiny honeyeater whose bright-red males visit flowering trees for nectar and insects and sing a tuneful, tinkling song."
+              image: "images/species/Scarlet-Myzomela.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1420677/media.mp3?end_offset=4135&start_offset=4115"
             - name: "Southern Boobook"
               description: "Australia's smallest and most widespread owl, best known for its familiar two-note 'boo-book' call at night."
               image: "images/species/Southern-Boobook.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1412817/media.mp3?end_offset=1225&start_offset=1205"
             - name: "Grey Shrike-thrush"
               description: "A plain grey songbird of forest and woodland with one of the richest, most melodious songs in the bush."
               image: "images/species/Grey-Shrike-thrush.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1420901/media.mp3?end_offset=3445&start_offset=3425"
       - campaign: "Bowra Station"
         latitude: -27.981830
         longitude: 145.611615
@@ -318,29 +335,40 @@ params:
               image: "images/species/Budgerigar.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/457814/media.mp3?end_offset=445&start_offset=425"
-            - name: "Crested Bellbird"
-              description: "A grey woodland bird with a black crest and breast whose bell-like call carries across open scrub."
-              image: "images/species/Crested-Bellbird.jpg"
+            - name: "Red Tree Frog"
+              description: "A small, reddish-brown tree frog of inland and northern Australia that gathers at temporary pools after rain and calls with a long, buzzing 'waaa'."
               examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/1406387/media.mp3?end_offset=45295&start_offset=45275"
-            - name: "Brown Treecreeper"
-              description: "A social treecreeper that spirals up rough trunks and probes bark and leaf litter for insects in small groups."
-              image: "images/species/Brown-Treecreeper.jpg"
+                - url: "https://api.acousticobservatory.org/audio_recordings/1681043/media.mp3?end_offset=1165&start_offset=1145"
+            - name: "Rainbow Bee-eater"
+              description: "A slender, brilliantly coloured bird that catches bees and dragonflies on the wing and gives a constant, rolling 'prrrp' call."
+              image: "images/species/Rainbow-Bee-eater.jpg"
               examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/7213/media.mp3?end_offset=4195&start_offset=4175"
-            - name: "Cockatiel"
-              description: "A nomadic cockatoo with an expressive crest and long tail that moves between water and seed-rich country in pairs or flocks."
-              image: "images/species/Cockatiel.jpg"
-              examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/7213/media.mp3?end_offset=4165&start_offset=4145"
+                - url: "https://api.acousticobservatory.org/audio_recordings/1406327/media.mp3?end_offset=3505&start_offset=3485"
             - name: "Spotted Nightjar"
               description: "A heavily mottled, ground-roosting nightjar that hunts flying insects after dark and calls with an ascending series of notes."
               image: "images/species/Spotted-Nightjar.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/7315/media.mp3?end_offset=6125&start_offset=6105"
-            - name: "Rainbow Bee-eater"
-              description: "A slender, brilliantly coloured bird that catches bees and dragonflies on the wing and gives a constant, rolling 'prrrp' call."
-              image: "images/species/Rainbow-Bee-eater.jpg"
+            - name: "Crested Bellbird"
+              description: "A grey woodland bird with a black crest and breast whose bell-like call carries across open scrub."
+              image: "images/species/Crested-Bellbird.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1406387/media.mp3?end_offset=45295&start_offset=45275"
+            - name: "Cockatiel"
+              description: "A nomadic cockatoo with an expressive crest and long tail that moves between water and seed-rich country in pairs or flocks."
+              image: "images/species/Cockatiel.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/7213/media.mp3?end_offset=4165&start_offset=4145"
+            - name: "Brown Treecreeper"
+              description: "A social treecreeper that spirals up rough trunks and probes bark and leaf litter for insects in small groups."
+              image: "images/species/Brown-Treecreeper.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/7213/media.mp3?end_offset=4195&start_offset=4175"
+            - name: "Magpie-lark"
+              description: "A familiar black-and-white bird of open country that builds mud nests and is known for its piping 'pee-o-wit' duets."
+              image: "images/species/Magpie-lark.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1672831/media.mp3?end_offset=705&start_offset=685"
       - campaign: "Monjebup Reserve"
         latitude: -34.243607
         longitude: 118.560849
@@ -354,6 +382,20 @@ params:
               image: "images/species/Western-Whipbird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/156490/media.mp3?end_offset=55&start_offset=35"
+            - name: "Baudin's or Carnaby's Black Cockatoo"
+              description: "Two endangered white-tailed black cockatoos of south-western Australia that look and sound alike, with wailing 'wy-lah' contact calls."
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/351141/media.mp3?end_offset=4345&start_offset=4325"
+            - name: "Western Banjo Frog"
+              description: "A large burrowing frog of the south-west whose single, resonant 'bonk' call sounds like a plucked banjo string."
+              image: "images/species/Western-Banjo-Frog.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/157583/media.mp3?end_offset=2635&start_offset=2615"
+            - name: "Western Whistler"
+              description: "A robust whistler of south-western woodland and heath, closely related to the Golden Whistler, with a rich song that ends in a whip-crack."
+              image: "images/species/Western-Whistler.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1217666/media.mp3?end_offset=5275&start_offset=5255"
             - name: "Weebill"
               description: "Australia's smallest bird, a pale, short-billed canopy forager that moves through eucalypts in busy groups with a loud, cheerful song."
               image: "images/species/Weebill.jpg"
@@ -364,6 +406,21 @@ params:
               image: "images/species/Stubble-Quail.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/344510/media.mp3?end_offset=7135&start_offset=7115"
+            - name: "Red Wattlebird"
+              description: "A large, noisy honeyeater with red wattles on its cheeks that feeds on nectar and gives harsh, coughing calls."
+              image: "images/species/Red-Wattlebird.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1216258/media.mp3?end_offset=3625&start_offset=3605"
+            - name: "Grey Fantail"
+              description: "A restless little flycatcher that fans its tail as it darts after insects and sings a sweet, high-pitched, tumbling song."
+              image: "images/species/Grey-Fantail.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/162074/media.mp3?end_offset=385&start_offset=365"
+            - name: "Australian Magpie"
+              description: "A familiar black-and-white songbird of open country, famous for its rich, flute-like carolling at dawn."
+              image: "images/species/Australian-Magpie.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/342276/media.mp3?end_offset=5095&start_offset=5075"
       - campaign: "Marshmead"
         latitude: -37.486020
         longitude: 149.831509
@@ -372,31 +429,51 @@ params:
         content:
           image: "images/sites/marshmead/marshmead.jpg"
           species:
-            - name: "Bell Miner"
-              description: "A colonial green honeyeater whose constant, tinkling bell-like calls ring through the forest understorey."
-              image: "images/species/Bell-Miner.jpg"
-              examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/1208936/media.mp3?end_offset=6985&start_offset=6965"
             - name: "Superb Lyrebird"
               description: "A large ground-dwelling songbird famous for its elaborate song, which mimics many other forest species."
               image: "images/species/Superb-Lyrebird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1209384/media.mp3?end_offset=4975&start_offset=4955"
-            - name: "Wonga Pigeon"
-              description: "A plump grey-and-white pigeon of the forest floor that repeats a loud, monotonous call for long periods."
-              image: "images/species/Wonga-Pigeon.jpg"
+            - name: "Yellow-bellied Glider"
+              description: "A nocturnal glider of tall eucalypt forest that feeds on sap and nectar and is known for its loud, gurgling shrieks."
+              image: "images/species/yellow-bellied-glider.jpeg"
               examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/1209912/media.mp3?end_offset=3715&start_offset=3695"
+                - url: "https://api.acousticobservatory.org/audio_recordings/1209740/media.mp3?end_offset=7165&start_offset=7145"
+            - name: "Gang-gang Cockatoo"
+              description: "An endangered small grey cockatoo, the males with a scarlet head and wispy crest, whose call sounds like a creaking gate."
+              image: "images/species/Gang-gang-Cockatoo.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1214136/media.mp3?end_offset=2395&start_offset=2375"
+            - name: "Southern Brown Tree Frog"
+              description: "A small brown tree frog of south-eastern Australia that calls through the cooler months with a long series of rising 'creee' notes."
+              image: "images/species/Southern-Brown-Tree-Frog.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1213850/media.mp3?end_offset=2665&start_offset=2645"
             - name: "Yellow-tailed Black-Cockatoo"
               description: "A large black cockatoo with yellow cheek and tail panels that feeds on seeds and wood-boring grubs and gives a far-carrying, wailing call."
               image: "images/species/Yellow-tailed-Black-Cockatoo.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1214877/media.mp3?end_offset=5485&start_offset=5465"
-            - name: "Yellow-bellied Glider"
-              description: "A nocturnal glider of tall eucalypt forest that feeds on sap and nectar and is known for its loud, gurgling shrieks."
-              image: "images/species/Yellow-bellied-Glider.jpg"
+            - name: "Bell Miner"
+              description: "A colonial green honeyeater whose constant, tinkling bell-like calls ring through the forest understorey."
+              image: "images/species/Bell-Miner.jpg"
               examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/1209740/media.mp3?end_offset=7165&start_offset=7145"
+                - url: "https://api.acousticobservatory.org/audio_recordings/1208936/media.mp3?end_offset=6985&start_offset=6965"
+            - name: "Wonga Pigeon"
+              description: "A plump grey-and-white pigeon of the forest floor that repeats a loud, monotonous call for long periods."
+              image: "images/species/Wonga-Pigeon.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1209912/media.mp3?end_offset=3715&start_offset=3695"
+            - name: "Common Eastern Froglet"
+              description: "A tiny ground frog of damp places across south-eastern Australia whose chirping 'crick-crick-crick' can be heard almost year-round."
+              image: "images/species/Common-Eastern-Froglet.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1214232/media.mp3?end_offset=895&start_offset=875"
+            - name: "Pied Currawong"
+              description: "A large black-and-white bird with piercing yellow eyes that gives loud, ringing 'curra-wong' calls through the forest."
+              image: "images/species/Pied-Currawong.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1208548/media.mp3?end_offset=5335&start_offset=5315"
       - campaign: "Binya"
         latitude: -34.219819
         longitude: 146.267081
@@ -410,26 +487,46 @@ params:
               image: "images/species/Painted-Honeyeater.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1452067/media.mp3?end_offset=745&start_offset=725"
-            - name: "Horsfield's Bronze Cuckoo"
-              description: "A small bronze-green cuckoo that lays its eggs in other birds' nests and gives a descending, whistled call."
-              image: "images/species/Horsfields-Bronze-Cuckoo.jpg"
-              examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/1240530/media.mp3?end_offset=4375&start_offset=4355"
-            - name: "Red-capped Robin"
-              description: "A small dry-woodland robin; males have a bright red cap and breast and sing a rapid, insect-like trill."
-              image: "images/species/Red-capped-Robin.jpg"
-              examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/1243187/media.mp3?end_offset=685&start_offset=665"
-            - name: "Striped Honeyeater"
-              description: "A streaky grey-and-white honeyeater of inland woodland that builds a hanging nest and sings rich, rollicking phrases."
-              image: "images/species/Striped-Honeyeater.jpg"
-              examples:
-                - url: "https://api.acousticobservatory.org/audio_recordings/670669/media.mp3?end_offset=5275&start_offset=5255"
             - name: "Tawny Frogmouth"
               description: "A nocturnal, owl-like bird that roosts by day disguised as a broken branch and gives a low, repeated 'oom' call at night."
               image: "images/species/Tawny-Frogmouth.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/667535/media.mp3?end_offset=1345&start_offset=1325"
+            - name: "Peron's Tree Frog"
+              description: "A climbing tree frog with emerald flecks and cross-shaped pupils whose call is a long, cackling laugh."
+              image: "images/species/Perons-Tree-Frog.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/676597/media.mp3?end_offset=3925&start_offset=3905"
+            - name: "Red-capped Robin"
+              description: "A small dry-woodland robin; males have a bright red cap and breast and sing a rapid, insect-like trill."
+              image: "images/species/Red-capped-Robin.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1243187/media.mp3?end_offset=685&start_offset=665"
+            - name: "Spotted Marsh Frog"
+              description: "A spotted ground frog of inland swamps, dams and flooded paddocks whose call is a rapid, knocking 'uk-uk-uk'."
+              image: "images/species/Spotted-Marsh-Frog.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/672530/media.mp3?end_offset=1375&start_offset=1355"
+            - name: "Horsfield's Bronze Cuckoo"
+              description: "A small bronze-green cuckoo that lays its eggs in other birds' nests and gives a descending, whistled call."
+              image: "images/species/Horsfields-Bronze-Cuckoo.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/1240530/media.mp3?end_offset=4375&start_offset=4355"
+            - name: "Rufous Whistler"
+              description: "A woodland songbird whose males have a rufous belly and black breast band and sing loud, ringing phrases through spring and summer."
+              image: "images/species/Rufous-Whistler.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/684979/media.mp3?end_offset=3445&start_offset=3425"
+            - name: "Plains Froglet"
+              description: "A tiny froglet of inland floodplains and grassy wetlands that calls with short, high-pitched beeps from flooded ground."
+              image: "images/species/Plains-Froglet.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/670677/media.mp3?end_offset=4885&start_offset=4865"
+            - name: "Striped Honeyeater"
+              description: "A streaky grey-and-white honeyeater of inland woodland that builds a hanging nest and sings rich, rollicking phrases."
+              image: "images/species/Striped-Honeyeater.jpg"
+              examples:
+                - url: "https://api.acousticobservatory.org/audio_recordings/670669/media.mp3?end_offset=5275&start_offset=5255"
   style:
     xsmallBreakPoint: 425px
     smallBreakPoint: 768px
