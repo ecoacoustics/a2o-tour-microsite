@@ -148,7 +148,7 @@
     const verifyURL = {{ $verifyURL | jsonify | safeJS }};
 
     if (verifyButton && !(await api.getUserProfile())) {
-        verifyButton.textContent = "Log In to Verify Calls";
+        verifyButton.textContent = "Log In and Verify Calls";
         verifyButton.href = `/login?redirect=${encodeURIComponent(verifyURL)}`;
     }
 

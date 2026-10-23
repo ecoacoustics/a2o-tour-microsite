@@ -146,7 +146,7 @@ body {
         display: grid;
         grid-template-columns: subgrid;
         align-content: start;
-        background: var(--color-surface-alt);
+        background: var(--color-surface);
 
         & > * {
             grid-column: fullbleed;
