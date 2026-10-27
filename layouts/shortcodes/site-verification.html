@@ -1,6 +1,6 @@
 {{- $campaign := .Get "campaign" | default .Page.Params.campaign -}}
 {{- if not $campaign -}}
-    {{- errorf "site-verification requires a campaign parameter or campaign front matter" -}}
+{{- errorf "site-verification requires a campaign parameter or campaign front matter" -}}
 {{- end -}}
 {{- $id := printf "verification-grid-%s" ($campaign | urlize) -}}
 {{- $sitePage := .Page.Parent -}}
@@ -11,21 +11,55 @@
 </a>
 <oe-verification-grid data-campaign="{{ $campaign }}" id="{{ $id }}" grid-size="1" loading-timeout="60">
     <template>
+        <style>
+            oe-media-controls {
+                --oe-background-color: transparent;
+                --oe-box-shadow: none;
+                --oe-panel-color: var(--color-card);
+                --oe-font-color: var(--color-text);
+                --oe-font-color-lighter: transparent;
+
+                & [slot="play-icon"],
+                & [slot="pause-icon"] {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0;
+                    color: var(--color-text);
+                    font-size: var(--font-size-small);
+                    font-weight: 500;
+                    inline-size: 6em;
+                    justify-content: flex-start;
+
+                    & sl-icon {
+                        font-size: var(--font-size-large);
+                        padding: var(--space-xsmall);
+                    }
+                }
+            }
+        </style>
         <div class="tile-spacing">
             <oe-subject-tag></oe-subject-tag>
-            <oe-media-controls for="spectrogram"></oe-media-controls>
+            <oe-media-controls for="spectrogram">
+                <span slot="play-icon">
+                    <sl-icon name="play-circle-fill" aria-hidden="true"></sl-icon>
+                    Play
+                </span>
+                <span slot="pause-icon">
+                    <sl-icon name="pause-circle-fill" aria-hidden="true"></sl-icon>
+                    Pause
+                </span>
+            </oe-media-controls>
         </div>
         <oe-axes>
             <oe-indicator>
-                <oe-spectrogram
-                    id="spectrogram"
-                    color-map="grayscale"
-                ></oe-spectrogram>
+                <oe-spectrogram id="spectrogram" color-map="grayscale"></oe-spectrogram>
             </oe-indicator>
         </oe-axes>
-        <div class="tile-block" data-decision-meter style="display: flex; visibility: hidden; align-items: center; justify-content: center; gap: 0.5rem;">
+        <div class="tile-block" data-decision-meter
+            style="display: flex; visibility: hidden; align-items: center; justify-content: center; gap: 0.5rem;">
             <span style="font-size: 0.8rem;">Your Decision:</span>
-            <oe-task-meter aria-hidden="true" style="width: 3em !important; min-width: 3em !important; flex: 0 0 3em; margin: 0;"></oe-task-meter>
+            <oe-task-meter aria-hidden="true"
+                style="width: 3em !important; min-width: 3em !important; flex: 0 0 3em; margin: 0;"></oe-task-meter>
         </div>
     </template>
     <oe-verification verified="true" shortcut="y">Yes</oe-verification>
