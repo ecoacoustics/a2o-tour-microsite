@@ -1,0 +1,2 @@
+{{- $campaign := .Get 0 | default (.Get "campaign") -}}
+{{ partial "end-of-verification.html" (dict "campaign" $campaign) }}

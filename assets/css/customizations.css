@@ -18,7 +18,7 @@
     --color-on-accent: #000;
     --color-white: #fff;
     /* --color-hero-fade: #224119; riflebird */
-	--color-hero-fade: #443e33;
+    --color-hero-fade: #443e33;
     --color-map-ink: #243238;
     --color-map-marker: #c7623d;
     --color-map-marker-active: #f2b66f;
@@ -111,6 +111,10 @@ body > main {
     margin-bottom: var(--space-small);
     color: var(--color-surface);
     font-size: var(--font-size-medium);
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 #verify-page > * {
@@ -126,16 +130,32 @@ body > main {
 }
 
 #verify-page oe-verification-grid[grid-size="1"] {
-    height: 40rem;
-}
+    --verification-grid-available-height: calc(
+        100dvh - var(--space-xlarge) - 2rem - var(--space-small)
+    );
 
+    height: min(56rem, var(--verification-grid-available-height));
+    min-height: min(40rem, var(--verification-grid-available-height));
+    max-height: min(56rem, var(--verification-grid-available-height));
+
+    /* Consider this alternative:
+    height: 66dvh;
+    
+    // Disable the max-height restriction in theme, no longer required.
+    max-height: none;
+    */
+
+    /* Allow the verification grid to expand when a message overlay is present */
+    &[data-message-overlay] {
+        max-height: none !important;
+        height: auto;
+    }
+}
 .acknowledgement-of-country {
     max-width: 71rem;
     text-align: center;
     margin-top: var(--space-medium);
 }
-
-
 
 body {
     --micro-heading-font: var(--font-heading);
@@ -146,7 +166,7 @@ body {
         display: grid;
         grid-template-columns: subgrid;
         align-content: start;
-        background: var(--color-surface-alt);
+        background: var(--color-surface);
 
         & > * {
             grid-column: fullbleed;

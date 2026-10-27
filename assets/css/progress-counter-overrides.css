@@ -46,6 +46,7 @@
 	font-style: italic;
 	font-weight: 500;
 	line-height: 2rem;
+	margin-left: 1.2rem;
 }
 
 /* Echo the design system's large serif stat numerals. */
@@ -107,4 +108,5 @@
 
 .progress-counter .leaderboard {
 	min-width: 0;
+
 }
