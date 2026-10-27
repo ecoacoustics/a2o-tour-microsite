@@ -36,9 +36,23 @@
                     }
                 }
             }
+
+            .top-line {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding-bottom: var(--space-small);
+
+                &> :last-child {
+                    margin-inline-start: auto;
+                }
+            }
         </style>
-        <div class="tile-spacing">
+        <div class="top-line">
             <oe-subject-tag></oe-subject-tag>
+            <span>
+                <oe-task-meter style="width: 1.6em"></oe-task-meter>
+            </span>
             <oe-media-controls for="spectrogram">
                 <span slot="play-icon">
                     <sl-icon name="play-circle-fill" aria-hidden="true"></sl-icon>
@@ -55,12 +69,6 @@
                 <oe-spectrogram id="spectrogram" color-map="grayscale"></oe-spectrogram>
             </oe-indicator>
         </oe-axes>
-        <div class="tile-block" data-decision-meter
-            style="display: flex; visibility: hidden; align-items: center; justify-content: center; gap: 0.5rem;">
-            <span style="font-size: 0.8rem;">Your Decision:</span>
-            <oe-task-meter aria-hidden="true"
-                style="width: 3em !important; min-width: 3em !important; flex: 0 0 3em; margin: 0;"></oe-task-meter>
-        </div>
     </template>
     <oe-verification verified="true" shortcut="y">Yes</oe-verification>
     <oe-verification verified="false" shortcut="n">No</oe-verification>
@@ -70,37 +78,3 @@
         {{ partial "end-of-verification.html" (dict "campaign" $campaign) }}
     </div>
 </oe-verification-grid>
-
-<script>
-    const verificationGrid = document.getElementById("{{ $id }}");
-
-    const getDecisionMeter = () => {
-        const tile = verificationGrid.shadowRoot?.querySelector("oe-verification-grid-tile");
-        return tile?.shadowRoot?.querySelector("[data-decision-meter]");
-    };
-
-    const hideDecisionMeter = () => {
-        getDecisionMeter()?.style.setProperty("visibility", "hidden");
-    };
-
-    const syncDecisionMeter = () => {
-        const subject = verificationGrid.subjects?.[verificationGrid.viewHeadIndex ?? 0];
-        const decisionMeter = getDecisionMeter();
-
-        if (decisionMeter) {
-            decisionMeter.style.visibility = subject?.verification !== undefined ? "visible" : "hidden";
-        }
-    };
-
-    verificationGrid?.addEventListener("grid-loaded", syncDecisionMeter);
-    verificationGrid?.addEventListener("decision-made", hideDecisionMeter);
-    verificationGrid?.addEventListener("click", (event) => {
-        const navigated = event.composedPath().some((target) =>
-            target instanceof Element && target.matches(".previous-page-button, .next-page-button")
-        );
-
-        if (navigated) {
-            hideDecisionMeter();
-        }
-    });
-</script>
