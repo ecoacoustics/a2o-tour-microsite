@@ -17,7 +17,10 @@
         </div>
         <oe-axes>
             <oe-indicator>
-                <oe-spectrogram id="spectrogram" color-map="grayscale"></oe-spectrogram>
+                <oe-spectrogram
+                    id="spectrogram"
+                    color-map="grayscale"
+                ></oe-spectrogram>
             </oe-indicator>
         </oe-axes>
         <div class="tile-block" data-decision-meter style="display: flex; visibility: hidden; align-items: center; justify-content: center; gap: 0.5rem;">
@@ -29,9 +32,9 @@
     <oe-verification verified="false" shortcut="n">No</oe-verification>
     <oe-verification verified="unsure" shortcut="u">Unsure</oe-verification>
     <oe-data-source slot="data-source" for="{{ $id }}" allow-downloads="false"></oe-data-source>
-    <template slot="subjects-exhausted">
+    <div slot="subjects-exhausted">
         {{ partial "end-of-verification.html" (dict "campaign" $campaign) }}
-    </template>
+    </div>
 </oe-verification-grid>
 
 <script>

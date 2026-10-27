@@ -126,7 +126,13 @@ body > main {
 }
 
 #verify-page oe-verification-grid[grid-size="1"] {
-    height: 40rem;
+    --verification-grid-available-height: calc(
+        100dvh - var(--space-xlarge) - 2rem - var(--space-small)
+    );
+
+    height: min(56rem, var(--verification-grid-available-height));
+    min-height: min(40rem, var(--verification-grid-available-height));
+    max-height: min(56rem, var(--verification-grid-available-height));
 }
 
 .acknowledgement-of-country {
