@@ -1,197 +1,200 @@
 .map-callout,
 .site-card {
-	overflow: hidden;
-	padding: var(--space-medium);
-	border: 0;
-	border-radius: var(--radius-card);
-	background: var(--color-card);
+    overflow: hidden;
+    padding: var(--space-medium);
+    border: 0;
+    border-radius: var(--radius-card);
+    background: var(--color-card);
 
-	.site-info-image {
-		width: 100%;
-		height: 10.5rem;
-		object-fit: cover;
-	}
+    .site-info-image {
+        width: 100%;
+        height: 10.5rem;
+        object-fit: cover;
+    }
 }
 
 .site-info-visual {
-	.site-info-title {
-		margin: var(--space-small) 0 0;
-		color: var(--color-text-strong);
-		font-size: var(--font-size-medium);
-		font-weight: 700;
-		line-height: 1.5;
-	}
+    .site-info-title {
+        margin: var(--space-small) 0 0;
+        color: var(--color-text-strong);
+        font-size: var(--font-size-medium);
+        font-weight: 700;
+        line-height: 1.5;
+    }
 }
 
 .site-info-text {
-	margin: var(--space-xsmall) 0;
-	color: var(--color-text);
-	font-size: var(--font-size-small);
-	font-weight: 500;
-	line-height: 1.25rem;
+    margin: var(--space-xsmall) 0;
+    color: var(--color-text);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    line-height: 1.25rem;
 }
 
 .site-info-content {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .site-info-link {
-	--sl-color-primary-600: var(--color-text);
-	--sl-color-primary-500: var(--color-text);
-	--sl-color-neutral-0: var(--color-on-dark);
-	align-self: flex-end;
-	margin: var(--space-xsmall) 0 0;
+    --sl-color-primary-600: var(--color-text);
+    --sl-color-primary-500: var(--color-text);
+    --sl-color-neutral-0: var(--color-on-dark);
+    align-self: flex-end;
+    margin: var(--space-xsmall) 0 0;
 }
 
 #home-page > .site-cards,
 #image-credits-page > .site-cards {
-	display: grid;
-	grid-template-columns: subgrid;
-	grid-column: fullbleed;
-	margin: 0;
-	padding: var(--section-padding) 0;
-	background: var(--color-surface-alt);
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: fullbleed;
+    margin: 0;
+    padding: var(--section-padding) 0;
+    background: var(--color-surface-alt);
 }
 
 .site-cards {
-	& > * {
-		grid-column: main;
-	}
+    & > * {
+        grid-column: main;
+    }
 
-	& > h1,
-	& > h2 {
-		margin-bottom: var(--space-xsmall);
-		line-height: 2.75rem;
-		color: var(--color-text-strong);
-		text-align: center;
-	}
+    & > h1,
+    & > h2 {
+        margin-bottom: var(--space-xsmall);
+        line-height: 2.75rem;
+        color: var(--color-text-strong);
+        text-align: center;
+    }
 }
 
 .site-cards-intro {
-	margin-bottom: var(--space-xlarge);
-	color: var(--color-text);
-	font-size: var(--font-size-medium);
-	line-height: 1.5rem;
-	text-align: center;
+    margin-bottom: var(--space-xlarge);
+    color: var(--color-text);
+    font-size: var(--font-size-medium);
+    line-height: 1.5rem;
+    text-align: center;
 }
 
 .site-info-spectrogram {
-	.site-info-spectrogram-view {
-		--min-height: 1.5rem;
-		--oe-background-color: var(--color-card);
+    .site-info-spectrogram-view {
+        --min-height: 1.5rem;
+        --oe-background-color: var(--color-card);
 
-		display: block;
-		width: 100%;
-		height: 2.5rem;
-		margin-top: 0.375rem;
-		mix-blend-mode: hard-light;
+        display: block;
+        width: 100%;
+        height: 2.5rem;
+        margin-top: 0.375rem;
+        mix-blend-mode: hard-light;
 
-		&::part(canvas) {
-			width: 100%;
-			height: 100%;
-		}
-	}
+        &::part(canvas) {
+            width: 100%;
+            height: 100%;
+        }
+    }
 
-	.site-info-spectrogram-player {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: var(--space-xsmall);
-		margin-top: var(--space-medium);
+    .site-info-spectrogram-player {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-xsmall);
+        margin-top: var(--space-medium);
 
-		oe-media-controls {
-			--oe-background-color: transparent;
-			--oe-box-shadow: none;
-			--oe-panel-color: var(--color-card);
-			--oe-font-color: var(--color-text);
-			--oe-font-color-lighter: transparent;
-		}
+        oe-media-controls {
+            --oe-background-color: transparent;
+            --oe-box-shadow: none;
+            --oe-panel-color: var(--color-card);
+            --oe-font-color: var(--color-text);
+            --oe-font-color-lighter: transparent;
+        }
 
-		.site-info-spectrogram-action {
-			display: inline-flex;
-			align-items: center;
-			gap: var(--space-xsmall);
-			color: var(--color-text);
-			font-size: var(--font-size-small);
-			font-weight: 500;
+        .site-info-spectrogram-action {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xsmall);
+            color: var(--color-text);
+            font-size: var(--font-size-small);
+            font-weight: 500;
 
-			sl-icon {
-				font-size: var(--font-size-large);
-			}
-		}
+            sl-icon {
+                font-size: var(--font-size-large);
+            }
+        }
 
-		.site-info-spectrogram-label {
-			display: inline-flex;
-			align-items: center;
-			gap: var(--space-xxsmall);
-			color: var(--color-text);
-			font-size: var(--font-size-xsmall);
-			line-height: 1rem;
-			text-align: right;
+        .site-info-spectrogram-label {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xxsmall);
+            color: var(--color-text);
+            font-size: var(--font-size-xsmall);
+            line-height: 1rem;
+            text-align: right;
 
-			.site-info-species-control {
-				display: inline-flex;
-				padding: 0;
-				border: 0;
-				background: none;
-				color: inherit;
-				cursor: pointer;
+            .site-info-species-control {
+                display: inline-flex;
+                padding: 0;
+                border: 0;
+                background: none;
+                color: inherit;
+                cursor: pointer;
 
-				sl-icon {
-					font-size: var(--font-size-medium);
-				}
-			}
-		}
-	}
+                sl-icon {
+                    font-size: var(--font-size-medium);
+                }
+            }
+        }
+    }
 }
 
 .image-credit .site-info-text {
-	display: flex;
-	flex-wrap: wrap;
-	column-gap: 0.4em;
-	font-size: var(--font-size-xsmall);
-	line-height: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.4em;
+    font-size: var(--font-size-xsmall);
+    line-height: 1rem;
 
-	span + span::before {
-		margin-right: 0.4em;
-		content: "·";
-	}
+    span + span::before {
+        margin-right: 0.4em;
+        content: "·";
+    }
 }
 
 .cards-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--card-width)), var(--card-width)));
-	justify-content: center;
-	gap: var(--space-large);
-	justify-self: center;
-	width: min(100%, var(--content-width));
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(min(100%, var(--card-width)), var(--card-width))
+    );
+    justify-content: center;
+    gap: var(--space-large);
+    justify-self: center;
+    width: min(100%, var(--content-width));
 }
 
 .site-card {
-	display: flex;
-	flex-direction: column;
-	min-width: 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
 
-	.site-info {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-	}
+    .site-info {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
 
-	.site-info-content {
-		flex: 1;
-	}
+    .site-info-content {
+        flex: 1;
+    }
 
-	.site-info-text {
-		flex: 1;
-	}
+    .site-info-text {
+        flex: 1;
+    }
 
-	.site-info-link {
-		margin-top: var(--space-xsmall);
-	}
+    .site-info-link {
+        margin-top: var(--space-xsmall);
+    }
 
-	.site-info-spectrogram-view {
-		height: 5rem;
-	}
+    .site-info-spectrogram-view {
+        height: 5rem;
+    }
 }

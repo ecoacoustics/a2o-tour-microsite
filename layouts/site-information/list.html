@@ -12,15 +12,20 @@
 {{- $verifyURL := printf "%sverify/" .page -}}
 {{- $heroDescription := index (split (trim $.Params.banner_description "\n") "\n\n") 0 -}}
 <section class="site-information-hero fullbleed" data-site="{{ $.Params.site_name | urlize }}"{{ with $banner }} style="background-image: url('{{ . }}');"{{ end }}>
-    <a class="page-back" href="/">
-        <sl-icon name="arrow-left" aria-hidden="true"></sl-icon>
-        <span>Ecoacoustic Tour of Australia</span>
-    </a>
+    <div class="page-back">
+        <a href="/">
+            <sl-icon name="arrow-left" aria-hidden="true"></sl-icon>
+            <span>More locations</span>
+        </a>
+        <a href="https://www.calldetective.org">
+            <span>More Call Detective projects</span>
+        </a>
+    </div>
     <div class="site-information-hero-content">
-        <p class="site-information-eyebrow">{{ site.Title }}</p>
+        <p class="site-information-eyebrow"><a href="/">{{ site.Title }}</a></p>
         <h1>{{ .campaign }}</h1>
         <div class="site-information-hero-description">{{ $heroDescription | markdownify }}</div>
-        <sl-button href="{{ $verifyURL }}" variant="primary" pill>Verify Calls</sl-button>
+        <sl-button id="site-information-verify-button" href="{{ $verifyURL }}" variant="primary" pill>Verify Calls</sl-button>
     </div>
 </section>
 
@@ -61,9 +66,8 @@
             {{ end }}
         </div>
         <div class="site-information-why-progress">
-            {{ partial "site-information-progress-counter.html" (dict
+            {{ partial "progress-counter.html" (dict
                 "campaign" .campaign
-                "verifyURL" $verifyURL
             ) }}
         </div>
     </div>
@@ -139,6 +143,15 @@
 </section>
 
 <script type="module">
+    const api = await workbenchApi();
+    const verifyButton = document.getElementById("site-information-verify-button");
+    const verifyURL = {{ $verifyURL | jsonify | safeJS }};
+
+    if (verifyButton && !(await api.getUserProfile())) {
+        verifyButton.textContent = "Log In and Verify Calls";
+        verifyButton.href = `/login?redirect=${encodeURIComponent(verifyURL)}`;
+    }
+
     const referrers = globalThis.siteParams?.referrers ?? {};
     const storageKey = "a2o-tour-referrer";
     const queryReferrer = new URLSearchParams(window.location.search).get("ref");

@@ -1,6 +1,1 @@
-{{- $verifyURL := .Get "verify-url" | default "/verify/" -}}
-{{- $campaign := .Get "campaign" -}}
-{{ partial "progress-counter.html" (dict
-    "campaign" $campaign
-    "verifyURL" $verifyURL
-) }}
+{{ partial "progress-counter.html" .Params }}

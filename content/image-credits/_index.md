@@ -9,7 +9,7 @@ credits:
     image: images/singing_honeyeater_banner.jpg
     h: 80%
 
-  # Daintree Rainforest Observatory
+  # Daintree Rainforest
   - title: Buff-breasted Paradise-Kingfisher
     author: Rob Solic
     source: https://www.birdlifephotography.org.au/

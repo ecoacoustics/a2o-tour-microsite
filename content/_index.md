@@ -15,4 +15,8 @@ title="<span class='home-hero-eyebrow'>Australian Acoustic Observatory</span><sp
 {{% map id="tour-map" preview-callout-only=false %}}
 {{< /section >}}
 
+{{< section class="home-progress-section" >}}
+{{< progress-counter >}}
+{{< /section >}}
+
 {{< site-cards >}}
