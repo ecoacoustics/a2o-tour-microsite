@@ -18,7 +18,7 @@
     --color-on-accent: #000;
     --color-white: #fff;
     /* --color-hero-fade: #224119; riflebird */
-	--color-hero-fade: #443e33;
+    --color-hero-fade: #443e33;
     --color-map-ink: #243238;
     --color-map-marker: #c7623d;
     --color-map-marker-active: #f2b66f;
@@ -111,6 +111,10 @@ body > main {
     margin-bottom: var(--space-small);
     color: var(--color-surface);
     font-size: var(--font-size-medium);
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 #verify-page > * {
@@ -140,8 +144,6 @@ body > main {
     text-align: center;
     margin-top: var(--space-medium);
 }
-
-
 
 body {
     --micro-heading-font: var(--font-heading);
