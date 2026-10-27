@@ -137,8 +137,20 @@ body > main {
     height: min(56rem, var(--verification-grid-available-height));
     min-height: min(40rem, var(--verification-grid-available-height));
     max-height: min(56rem, var(--verification-grid-available-height));
-}
 
+    /* Consider this alternative:
+    height: 66dvh;
+    
+    // Disable the max-height restriction in theme, no longer required.
+    max-height: none;
+    */
+
+    /* Allow the verification grid to expand when a message overlay is present */
+    &[data-message-overlay] {
+        max-height: none !important;
+        height: auto;
+    }
+}
 .acknowledgement-of-country {
     max-width: 71rem;
     text-align: center;
