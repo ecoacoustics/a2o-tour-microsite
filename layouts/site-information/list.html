@@ -25,7 +25,7 @@
         <p class="site-information-eyebrow"><a href="/">{{ site.Title }}</a></p>
         <h1>{{ .campaign }}</h1>
         <div class="site-information-hero-description">{{ $heroDescription | markdownify }}</div>
-        <sl-button id="site-information-verify-button" href="{{ $verifyURL }}" variant="primary" pill>Verify Calls</sl-button>
+        <sl-button class="button" id="site-information-verify-button" href="{{ $verifyURL }}" variant="primary" pill>Verify Calls</sl-button>
     </div>
 </section>
 
@@ -73,8 +73,8 @@
     </div>
 </section>
 
-<section class="site-information-projects fullbleed">
-    <div class="site-information-projects-inner">
+<section class="site-information-species fullbleed">
+    <div class="site-information-species-inner">
         <h2>Contribute Your Verifications</h2>
         <p>Here’s a set of available projects you can contribute to with your verifications.</p>
         <div class="cards-grid">
@@ -103,15 +103,17 @@
                     <div class="site-info">
                         <div class="site-info-visual">
                             {{ with $speciesImage }}<img class="site-info-image" src="{{ . }}" alt="{{ $speciesImageAlt }}" loading="lazy">{{ end }}
-                            <h3 class="site-info-title">{{ .name }}</h3>
+                            <div class="site-info-title-row">
+                                <h3 class="site-info-title">{{ .name }}</h3>
+                                {{- $focusTagIDs := delimit .tag_ids "," -}}
+                                {{- $speciesVerifyURL := printf "%sverify/?species=%s&focus=%s" $site.page (.name | urlize) $focusTagIDs -}}
+                                <sl-button href="{{ $speciesVerifyURL }}" class="button" variant="primary" pill>
+                                    Verify Calls<sl-icon name="arrow-right" aria-hidden="true"></sl-icon>
+                                </sl-button>
+                            </div>
                         </div>
                         <div class="site-info-content">
                             
-                            {{- $focusTagIDs := delimit .tag_ids "," -}}
-                            {{- $speciesVerifyURL := printf "%sverify/?species=%s&focus=%s" $site.page (.name | urlize) $focusTagIDs -}}
-                            <a href="{{ $speciesVerifyURL }}" class="site-info-verify-link">
-                            Verify Species
-                            </a>
 
                             <p class="site-info-text">{{ .description }}</p>
                             {{ with $audio }}
@@ -141,6 +143,8 @@
                                     </div>
                                 </div>
                             {{ end }}
+
+
                         </div>
                     </div>
                 </article>

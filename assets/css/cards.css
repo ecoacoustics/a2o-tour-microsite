@@ -36,12 +36,17 @@
     flex-direction: column;
 }
 
-.site-info-link {
+.site-info-content > sl-button.button {
     --sl-color-primary-600: var(--color-text);
     --sl-color-primary-500: var(--color-text);
     --sl-color-neutral-0: var(--color-on-dark);
     align-self: flex-end;
     margin: var(--space-xsmall) 0 0;
+
+    &::part(base) {
+        height: 2.25rem;
+        padding: 0 var(--space-small);
+    }
 }
 
 #home-page > .site-cards,

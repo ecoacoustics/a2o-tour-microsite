@@ -5,6 +5,24 @@
 @import "./progress-counter-overrides.css";
 @import "./site-information.css";
 
+sl-button.button {
+    &::part(base) {
+        align-items: center;
+        height: 3rem;
+        min-height: 0;
+        padding: 0 var(--space-large);
+        font-family: var(--font-body);
+        font-size: var(--font-size-small);
+        font-weight: 500;
+        letter-spacing: 0.1px;
+        line-height: 1.25rem;
+    }
+
+    &::part(label) {
+        padding: 0;
+    }
+}
+
 :root {
     --color-surface: #f7f4e5;
     --color-surface-alt: #e0e0d4;

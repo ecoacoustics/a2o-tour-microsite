@@ -1,6 +1,6 @@
 .site-information-hero,
 .site-information-why,
-.site-information-projects,
+.site-information-species,
 .site-information-initiative {
     --micro-heading-color: var(--color-text-strong);
     --micro-font-color: var(--color-text);
@@ -52,7 +52,7 @@
         padding-top: 8.5rem;
     }
 
-    sl-button {
+    sl-button.button {
         margin-top: var(--space-medium);
         --sl-color-primary-600: var(--color-accent);
         --sl-color-primary-500: var(--color-accent);
@@ -267,11 +267,11 @@
     }
 }
 
-.site-information-projects {
+.site-information-species {
     padding: var(--section-padding) 0;
     background: var(--color-surface-alt);
 
-    .site-information-projects-inner {
+    .site-information-species-inner {
         grid-column: main;
         display: flex;
         flex-direction: column;
@@ -299,6 +299,30 @@
 
         .sponsor-logo {
             margin-inline: 0;
+        }
+    }
+}
+
+
+.site-information-species .site-info-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-small);
+
+    .site-info-title {
+        min-width: 0;
+    }
+
+    & > sl-button.button {
+        flex: 0 0 auto;
+        --sl-color-primary-600: var(--color-accent);
+        --sl-color-primary-500: var(--color-accent);
+        --sl-color-neutral-0: var(--color-on-accent);
+
+        &::part(base) {
+            height: 2.25rem;
+            padding: 0 var(--space-small);
         }
     }
 }
@@ -341,27 +365,3 @@
     }
 }
 
-.oe-hero sl-button,
-.site-information-hero sl-button,
-.site-info-link {
-    &::part(base) {
-        align-items: center;
-        height: 3rem;
-        min-height: 0;
-        padding: 0 var(--space-large);
-        font-family: var(--font-body);
-        font-size: var(--font-size-small);
-        font-weight: 500;
-        letter-spacing: 0.1px;
-        line-height: 1.25rem;
-    }
-
-    &::part(label) {
-        padding: 0;
-    }
-}
-
-sl-button.site-info-link::part(base) {
-    height: 2.25rem;
-    padding: 0 var(--space-small);
-}
