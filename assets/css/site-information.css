@@ -327,41 +327,6 @@
     }
 }
 
-.site-information-initiative {
-    grid-template-columns: none;
-    justify-items: center;
-    padding: 3rem 0 var(--space-xlarge);
-    background: var(--color-surface-alt);
-    text-align: center;
 
-    @media (max-width: 48em) {
-        padding-block: var(--space-large);
-    }
 
-    h2 {
-        font-size: var(--font-size-large);
-        line-height: 2rem;
-
-        a {
-            color: inherit;
-            text-decoration: underline;
-            text-underline-offset: 0.12em;
-        }
-    }
-}
-
-#extra-footer-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-medium);
-    margin: 0;
-    padding: var(--space-medium) var(--micro-gutter-size) var(--space-xlarge);
-    background: var(--color-surface-alt);
-
-    .oe-footer-row {
-        margin: 0;
-        padding: 0;
-    }
-}
 

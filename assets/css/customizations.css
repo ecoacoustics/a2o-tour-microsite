@@ -169,11 +169,77 @@ body > main {
         height: auto;
     }
 }
-.acknowledgement-of-country {
-    max-width: 71rem;
+.footer-acknowledgement {
     text-align: center;
     margin-top: var(--space-medium);
+    background: var(--color-surface-alt);
+    background: rgb(144, 165, 142);
+    color: var(--color-surface);
+    margin: auto 0;
+    padding: var(--space-medium) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .acknowledgement-content {
+        max-width: 61rem;
+        padding: 1rem 3rem;
+        font-size: var(--font-size-medium);
+        text-align: center;
+    }
 }
+
+#extra-footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-medium);
+    margin: 0;
+    padding: var(--space-medium) var(--micro-gutter-size) var(--space-xlarge);
+    /* background: var(--color-surface-alt); */
+
+    .oe-footer-row {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+
+
+.call-detective-initiative {
+
+    --micro-heading-color: var(--color-text-strong);
+    --micro-font-color: var(--color-text);
+    grid-column: fullbleed;
+    display: grid;
+    grid-template-columns: none;
+    margin: 0;
+    color: var(--micro-font-color);
+    padding-bottom: 0.6rem;
+
+    h2 {
+        line-height: 2.75rem;
+        color: var(--micro-heading-color);
+        margin: 0;
+        font-size: var(--font-size-small);
+        line-height: 1rem;
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 0.12em;
+        }
+    }
+
+    justify-items: center;
+    text-align: center;
+
+    @media (max-width: 48em) {
+        padding-block: var(--space-large);
+    }
+
+}
+
+
 
 body {
     --micro-heading-font: var(--font-heading);
@@ -184,6 +250,7 @@ body {
         display: grid;
         grid-template-columns: subgrid;
         align-content: start;
+        background: var(--color-surface-alt);
         background: var(--color-surface);
 
         & > * {
@@ -217,7 +284,6 @@ body {
 
             &:nth-child(2)::before {
                 margin-right: var(--space-xsmall);
-                content: "·";
             }
 
             li,
