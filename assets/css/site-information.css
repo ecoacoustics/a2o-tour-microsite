@@ -306,12 +306,14 @@
 
 .site-information-species .site-info-title-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: var(--space-small);
+    margin-top: var(--space-small);
 
     .site-info-title {
         min-width: 0;
+        margin: 0;
     }
 
     & > sl-button.button {
@@ -321,8 +323,9 @@
         --sl-color-neutral-0: var(--color-on-accent);
 
         &::part(base) {
-            height: 2.25rem;
-            padding: 0 var(--space-small);
+            height: 1.75rem;
+            padding: 0 var(--space-xsmall);
+            font-size: var(--font-size-xsmall);
         }
     }
 }
