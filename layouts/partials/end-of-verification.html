@@ -16,11 +16,9 @@
         {{- $orderedSites = $orderedSites | append $site -}}
     {{- end -}}
 {{- end -}}
-{{- $otherSites := after 1 $orderedSites -}}
 
 <style>
 .end-of-verification-container {
-
     box-sizing: border-box;
     align-self: start;
     position: relative;
@@ -68,10 +66,6 @@
 
     .end-of-verification-card:hover {
         box-shadow: inset 0 0 28px rgba(0, 200, 0, 0.1);
-    }
-
-    .end-of-verification-image {
-        display: block;
     }
 
     .end-of-verification-image {
@@ -128,11 +122,6 @@
         aspect-ratio: auto;
     }
 
-    .end-of-verification-image {
-        height: calc(var(--card-width) * 0.21);
-        aspect-ratio: auto;
-    }
-
     .end-of-verification-title {
         font-size: var(--font-size-xsmall);
     }
@@ -153,9 +142,6 @@
             width: 100%;
         }
 
-        .end-of-verification-title {
-            font-size: 10px;
-        }
     }
 
 }
@@ -188,7 +174,7 @@
         <p class="end-of-verification-intro" id="end-of-verification-site-intro">Or continue to a different location.</p>
         <div class="cards-grid end-of-verification-grid">
             {{- range $site := $orderedSites -}}
-                <a class="end-of-verification-card  end-of-verification-site-card" href="{{ $site.page }}">
+                <a class="end-of-verification-card end-of-verification-site-card" href="{{ $site.page }}" data-campaign="{{ $site.campaign }}">
                         {{- with $site.content.image -}}
                             {{- with resources.Get . -}}
                                 <img class="end-of-verification-image" src="{{ (.Fill "600x300 center webp").RelPermalink }}" alt="{{ $site.campaign }} field site" loading="lazy">
@@ -212,28 +198,57 @@
     const locationSection = container?.querySelector(".choose-a-location");
     const locationIntro = container?.querySelector("#end-of-verification-site-intro");
     const title = container?.querySelector("h2");
+    const currentSiteCard = [...(locationSection?.querySelectorAll(".end-of-verification-site-card") ?? [])]
+        .find((card) => card.dataset.campaign === campaign);
 
-    const balanceCards = () => {
-        container.querySelectorAll(".end-of-verification-grid").forEach((grid) => {
-            const cards = [...grid.querySelectorAll(".end-of-verification-card")];
-            const cardWidth = cards[0]?.getBoundingClientRect().width ?? 0;
+    const balanceGrid = (grid, availableWidth) => {
+        const cards = [...grid.querySelectorAll(".end-of-verification-card")];
+        const cardWidth = cards[0]?.getBoundingClientRect().width ?? 0;
 
-            if (!cards.length || !cardWidth) {
-                return;
+        if (!cards.length || !cardWidth) {
+            return;
+        }
+
+        const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
+        const maximumColumns = Math.max(
+            1,
+            Math.floor((availableWidth + gap) / (cardWidth + gap)),
+        );
+        const rowCount = Math.ceil(cards.length / maximumColumns);
+        const columnCount = Math.ceil(cards.length / rowCount);
+        const balancedWidth = `${columnCount * cardWidth + (columnCount - 1) * gap}px`;
+
+        if (grid.style.width !== balancedWidth) {
+            grid.style.width = balancedWidth;
+        }
+    };
+
+    // Observe each grid's parent rather than the grid or the whole container,
+    // and only react to inline-size changes. Setting the grid's width changes
+    // its height (and therefore the parent's height) but not the parent's
+    // inline size, so our own writes never re-trigger the callback.
+    const observeGrids = () => {
+        const lastInlineSize = new WeakMap();
+        const observer = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const parent = entry.target;
+                const inlineSize = entry.contentBoxSize?.[0]?.inlineSize ?? entry.contentRect.width;
+
+                if (lastInlineSize.get(parent) === inlineSize) {
+                    continue;
+                }
+                lastInlineSize.set(parent, inlineSize);
+
+                parent.querySelectorAll(":scope > .end-of-verification-grid").forEach((grid) => {
+                    balanceGrid(grid, inlineSize);
+                });
             }
+        });
 
-            const gridStyles = getComputedStyle(grid);
-            const gap = parseFloat(gridStyles.columnGap) || 0;
-            const availableWidth = grid.parentElement?.clientWidth ?? grid.clientWidth;
-            const maximumColumns = Math.max(
-                1,
-                Math.floor((availableWidth + gap) / (cardWidth + gap)),
-            );
-            const rowCount = Math.ceil(cards.length / maximumColumns);
-            const columnCount = Math.ceil(cards.length / rowCount);
-            const balancedWidth = columnCount * cardWidth + (columnCount - 1) * gap;
-
-            grid.style.width = `${balancedWidth}px`;
+        container.querySelectorAll(".end-of-verification-grid").forEach((grid) => {
+            if (grid.parentElement) {
+                observer.observe(grid.parentElement);
+            }
         });
     };
 
@@ -253,10 +268,10 @@
 
         if (locationIntro) {
             locationIntro.textContent =
-                `or continue to a different location.`;
+                `Or continue to a different location.`;
         }
 
-        locationSection.querySelector(".end-of-verification-site-card")?.remove();
+        currentSiteCard?.remove();
 
         speciesSection.querySelectorAll("[data-species-slug]").forEach((card) => {
             if (card.dataset.speciesSlug === speciesSlug) {
@@ -275,12 +290,14 @@
             locationIntro.textContent = "Choose another location to keep going.";
         }
 
-        locationSection
-            .querySelector(".end-of-verification-site-card .site-completed-status")
+        currentSiteCard
+            ?.querySelector(".site-completed-status")
             ?.classList.replace("incomplete", "complete");
     }
 
-    balanceCards();
-    new ResizeObserver(balanceCards).observe(container);
+    // ResizeObserver delivers an initial notification on observe(), so no
+    // separate first call is needed. This also handles the slot content
+    // going from display:none to visible when the grid becomes exhausted.
+    observeGrids();
 })();
 </script>
