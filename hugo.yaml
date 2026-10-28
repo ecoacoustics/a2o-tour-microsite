@@ -63,16 +63,16 @@ params:
       tag_ids:
         # Buff-breasted Paradise-Kingfisher 27015
         - 27014 # scientific
-        - 27015 # common
+        # - 27015 # common
         # Wompoo Fruit Dove 27145
         - 27144 # scientific
-        - 27145 # common
+        # - 27145 # common
         # Spotted Catbird 27126
         - 27125 # scientific
-        - 27126 # common
+        # - 27126 # common
         # Victoria's Riflebird 27220
         - 27219 # scientific
-        - 27220 # common
+        # - 27220 # common
       filters:
         filter:
           audio_events.id:
@@ -95,25 +95,25 @@ params:
       tag_ids:
         # Pink Cockatoo 156
         - 27646 # scientific
-        - 156 # common
+        # - 156 # common
         # Budgerigar 242
         - 26721 # scientific
-        - 242 # common
+        # - 242 # common
         # Crested Bellbird 164
         - 26679 # scientific
-        - 164 # common
+        # - 164 # common
         # Spotted Nightjar 144
         - 26768 # scientific
-        - 144 # common
+        # - 144 # common
         # Cockatiel 205
         - 26865 # scientific
-        - 205 # common
+        # - 205 # common
         # Brown Treecreeper 191
         - 26707 # scientific
-        - 191 # common
+        # - 191 # common
         # Rainbow Bee-eater 53
         - 26672 # scientific
-        - 53 # common
+        # - 53 # common
       filters:
         filter:
           audio_events.id:
@@ -145,27 +145,27 @@ params:
       tag_ids:
         # Glossy-black Cockatoo 26969
         - 26967 # scientific
-        - 26969 # common
+        # - 26969 # common
         # Koala 109
         - 113 # scientific
-        - 109 # common
+        # - 109 # common
         # Spotted Quail-thrush 26812
         - 26811 # scientific
-        - 26812 # common
+        # - 26812 # common
         # Scarlet Myzomela 26632
         - 26631 # scientific
-        - 26632 # common
+        # - 26632 # common
         # White-throated Nightjar 135
         - 26648 # scientific
-        - 135 # common
+        # - 135 # common
         # Sugar Glider (no common-name tag)
         - 27658 # scientific
         # Southern Boobook 107
         - 103 # scientific
-        - 107 # common
+        # - 107 # common
         # Grey Shrike-thrush 16
         - 26639 # scientific
-        - 16 # common
+        # - 16 # common
       filters:
         filter:
           audio_events.id:
@@ -200,13 +200,13 @@ params:
       tag_ids:
         # Western Whipbird 27089
         - 27088 # scientific
-        - 27089 # common
+        # - 27089 # common
         # Weebill 181
         - 26798 # scientific
-        - 181 # common
+        # - 181 # common
         # Stubble Quail 26810
         - 26809 # scientific
-        - 26810 # common
+        # - 26810 # common
       filters:
         filter:
           audio_events.id:
@@ -228,16 +228,16 @@ params:
         - 27663 # scientific
         # Bell Miner 26758
         - 26757 # scientific
-        - 26758 # common
+        # - 26758 # common
         # Superb Lyrebird 132
         - 26747 # scientific
-        - 132 # common
+        # - 132 # common
         # Wonga Pigeon 27052
         - 27051 # scientific
-        - 27052 # common
+        # - 27052 # common
         # Yellow-tailed Black-Cockatoo 76
         - 27654 # scientific
-        - 76 # common
+        # - 76 # common
       filters:
         filter:
           audio_events.id:
@@ -263,19 +263,19 @@ params:
       tag_ids:
         # Painted Honeyeater 27331
         - 27330 # scientific
-        - 27331 # common
+        # - 27331 # common
         # Horsfield's Bronze-cuckoo 211
         - 26737 # scientific
-        - 211 # common
+        # - 211 # common
         # Red-capped Robin 168
         - 26769 # scientific
-        - 168 # common
+        # - 168 # common
         # Striped Honeyeater 60
         - 26956 # scientific
-        - 60 # common
+        # - 60 # common
         # Tawny Frogmouth 136
         - 26642 # scientific
-        - 136 # common
+        # - 136 # common
       filters:
         filter:
           audio_events.id:
