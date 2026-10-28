@@ -106,6 +106,13 @@
                             <h3 class="site-info-title">{{ .name }}</h3>
                         </div>
                         <div class="site-info-content">
+                            
+                            {{- $focusTagIDs := delimit .tag_ids "," -}}
+                            {{- $speciesVerifyURL := printf "%sverify/?species=%s&focus=%s" $site.page (.name | urlize) $focusTagIDs -}}
+                            <a href="{{ $speciesVerifyURL }}" class="site-info-verify-link">
+                            Verify Species
+                            </a>
+
                             <p class="site-info-text">{{ .description }}</p>
                             {{ with $audio }}
                                 <div class="site-info-spectrogram">
