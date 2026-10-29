@@ -52,7 +52,7 @@
         padding-top: 8.5rem;
     }
 
-    sl-button.button {
+    sl-button.a2o-tour-inline-button {
         margin-top: var(--space-medium);
         --sl-color-primary-600: var(--color-accent);
         --sl-color-primary-500: var(--color-accent);
@@ -316,17 +316,8 @@
         margin: 0;
     }
 
-    & > sl-button.button {
-        flex: 0 0 auto;
-        --sl-color-primary-600: var(--color-accent);
-        --sl-color-primary-500: var(--color-accent);
-        --sl-color-neutral-0: var(--color-on-accent);
-
-        &::part(base) {
-            height: 1.75rem;
-            padding: 0 var(--space-xsmall);
-            font-size: var(--font-size-xsmall);
-        }
+    & > sl-button.a2o-tour-inline-button {
+        margin-top: 0;
     }
 }
 

@@ -5,7 +5,7 @@
 @import "./progress-counter-overrides.css";
 @import "./site-information.css";
 
-sl-button.button {
+sl-button.a2o-tour-inline-button {
     &::part(base) {
         align-items: center;
         height: 3rem;
@@ -167,28 +167,6 @@ body > main {
     &[data-message-overlay] {
         max-height: none !important;
         height: auto;
-    }
-}
-.footer-acknowledgement {
-    text-align: center;
-    margin-top: var(--space-medium);
-    background: var(--color-surface-alt);
-    background: rgb(39	69	52);
-    color: var(--color-surface);
-    margin: auto 0;
-    grid-column: fullbleed;
-    display: grid;
-    grid-template-columns: subgrid;
-    margin: 0;
-    padding: 0;
-
-    .acknowledgement-content {
-        grid-column: main;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 2rem 3rem;
-        font-size: var(--micro-font-size-xsmall);
-        text-align: center;
     }
 }
 

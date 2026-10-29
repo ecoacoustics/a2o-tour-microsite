@@ -36,7 +36,9 @@
     flex-direction: column;
 }
 
-.site-info-content > sl-button.button {
+/* TODO: rename 'site-card' to a more general a2o-tour-card */
+.site-card sl-button.a2o-tour-inline-button,
+.map-callout sl-button.a2o-tour-inline-button {
     --sl-color-primary-600: var(--color-text);
     --sl-color-primary-500: var(--color-text);
     --sl-color-neutral-0: var(--color-on-dark);

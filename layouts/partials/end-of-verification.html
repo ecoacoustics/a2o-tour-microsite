@@ -8,7 +8,8 @@
 {{- $currentSite := index $currentSites 0 -}}
 {{- $speciesNames := dict -}}
 {{- range $species := $currentSite.content.species -}}
-    {{- $speciesNames = merge $speciesNames (dict ($species.name | urlize) $species.name) -}}
+    {{- $focusValue := delimit ($species.tag_ids | default slice) "," -}}
+    {{- $speciesNames = merge $speciesNames (dict $focusValue $species.name) -}}
 {{- end -}}
 {{- $orderedSites := slice $currentSite -}}
 {{- range $site := $sites -}}
@@ -105,6 +106,7 @@
 
         display: flex;
         flex-wrap: wrap;
+        flex-wrap: wrap balance;
         justify-content: center;
         gap: var(--end-of-verification-grid-gap);
         width: 100%;
@@ -156,10 +158,9 @@
     <p class="end-of-verification-intro">Choose another species from <a href="{{ $currentSite.page }}">{{ $campaign }}</a>.</p>
         <div class="cards-grid end-of-verification-grid">
             {{- range $species := $currentSite.content.species -}}
-                {{- $speciesSlug := $species.name | urlize -}}
-                {{- $focusTagIDs := delimit ($species.tag_ids | default slice) "," -}}
-                {{- $speciesVerifyURL := printf "%sverify/?species=%s&focus=%s" $currentSite.page $speciesSlug $focusTagIDs -}}
-                <a href="{{ $speciesVerifyURL }}" class="end-of-verification-card end-of-verification-species-card" data-species-slug="{{ $speciesSlug }}">
+                {{- $focusValue := delimit ($species.tag_ids | default slice) "," -}}
+                {{- $speciesVerifyURL := printf "%sverify/?focus=%s" $currentSite.page $focusValue -}}
+                <a href="{{ $speciesVerifyURL }}" class="end-of-verification-card end-of-verification-species-card" data-focus-value="{{ $focusValue }}">
                         {{- with $species.image -}}
                             {{- with resources.Get . -}}
                                 <img class="end-of-verification-image" src="{{ (.Fill "600x300 center webp").RelPermalink }}" alt="{{ $species.name }}" loading="lazy">
@@ -189,68 +190,30 @@
 </section>
 
 <script>
-(() => {
-    const speciesSlug = new URLSearchParams(window.location.search).get("species");
-    const speciesName = {{ $speciesNames | jsonify | safeJS }}[speciesSlug];
-    const container = document.querySelector(".end-of-verification-container");
+    // map of species tag IDs to species names
+    {{/*  const speciesNames = {{ $speciesNames | jsonify | safeJS }};  */}}
     const campaign = {{ $campaign | jsonify | safeJS }};
+</script>
+
+<script type="module">
+(() => {
+    const focusValue = new URLSearchParams(window.location.search).get("focus");
+    const targetIds = focusValue
+        ? focusValue.split(",").map(Number).filter(Number.isInteger)
+        : [];
+
+    const speciesName = globalThis.siteParams.map.sites.flatMap(s => s.content.species).find(sp => sp.tag_ids.length === targetIds.length && targetIds.every(id => sp.tag_ids.includes(id)))?.name;
+
+
+
+    {{/*  const speciesName = speciesNames[focusValue];  */}}
+    const container = document.querySelector(".end-of-verification-container");
     const speciesSection = container?.querySelector(".choose-a-species");
     const locationSection = container?.querySelector(".choose-a-location");
     const locationIntro = container?.querySelector("#end-of-verification-site-intro");
     const title = container?.querySelector("h2");
     const currentSiteCard = [...(locationSection?.querySelectorAll(".end-of-verification-site-card") ?? [])]
         .find((card) => card.dataset.campaign === campaign);
-
-    const balanceGrid = (grid, availableWidth) => {
-        const cards = [...grid.querySelectorAll(".end-of-verification-card")];
-        const cardWidth = cards[0]?.getBoundingClientRect().width ?? 0;
-
-        if (!cards.length || !cardWidth) {
-            return;
-        }
-
-        const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
-        const maximumColumns = Math.max(
-            1,
-            Math.floor((availableWidth + gap) / (cardWidth + gap)),
-        );
-        const rowCount = Math.ceil(cards.length / maximumColumns);
-        const columnCount = Math.ceil(cards.length / rowCount);
-        const balancedWidth = `${columnCount * cardWidth + (columnCount - 1) * gap}px`;
-
-        if (grid.style.width !== balancedWidth) {
-            grid.style.width = balancedWidth;
-        }
-    };
-
-    // Observe each grid's parent rather than the grid or the whole container,
-    // and only react to inline-size changes. Setting the grid's width changes
-    // its height (and therefore the parent's height) but not the parent's
-    // inline size, so our own writes never re-trigger the callback.
-    const observeGrids = () => {
-        const lastInlineSize = new WeakMap();
-        const observer = new ResizeObserver((entries) => {
-            for (const entry of entries) {
-                const parent = entry.target;
-                const inlineSize = entry.contentBoxSize?.[0]?.inlineSize ?? entry.contentRect.width;
-
-                if (lastInlineSize.get(parent) === inlineSize) {
-                    continue;
-                }
-                lastInlineSize.set(parent, inlineSize);
-
-                parent.querySelectorAll(":scope > .end-of-verification-grid").forEach((grid) => {
-                    balanceGrid(grid, inlineSize);
-                });
-            }
-        });
-
-        container.querySelectorAll(".end-of-verification-grid").forEach((grid) => {
-            if (grid.parentElement) {
-                observer.observe(grid.parentElement);
-            }
-        });
-    };
 
     if (!container) {
         return;
@@ -273,8 +236,8 @@
 
         currentSiteCard?.remove();
 
-        speciesSection.querySelectorAll("[data-species-slug]").forEach((card) => {
-            if (card.dataset.speciesSlug === speciesSlug) {
+        speciesSection.querySelectorAll("[data-focus-value]").forEach((card) => {
+            if (card.dataset.focusValue === focusValue) {
                 card.remove();
             }
         });
@@ -295,9 +258,5 @@
             ?.classList.replace("incomplete", "complete");
     }
 
-    // ResizeObserver delivers an initial notification on observe(), so no
-    // separate first call is needed. This also handles the slot content
-    // going from display:none to visible when the grid becomes exhausted.
-    observeGrids();
 })();
 </script>

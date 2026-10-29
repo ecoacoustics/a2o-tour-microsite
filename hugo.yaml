@@ -492,7 +492,7 @@ params:
             - name: "Yellow-bellied Glider"
               description: "A nocturnal glider of tall eucalypt forest that feeds on sap and nectar and is known for its loud, gurgling shrieks."
               tag_ids: [27663]
-              image: "images/species/Yellow-bellied-Glider.jpg"
+              image: "images/sites/marshmead/marshmead.jpg" # TODO: replace placeholder
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1209740/media.mp3?end_offset=7165&start_offset=7145"
       - campaign: "Binya"
