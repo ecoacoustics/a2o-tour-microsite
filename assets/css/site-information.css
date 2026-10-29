@@ -1,3 +1,13 @@
+html:has(#contribute-your-verifications) {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:has(#contribute-your-verifications) {
+        scroll-behavior: auto;
+    }
+}
+
 .site-information-hero,
 .site-information-why,
 .site-information-species,
@@ -320,7 +330,6 @@
         margin-top: 0;
     }
 }
-
 
 
 
