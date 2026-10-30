@@ -5,6 +5,24 @@
 @import "./progress-counter-overrides.css";
 @import "./site-information.css";
 
+sl-button.a2o-tour-inline-button {
+    &::part(base) {
+        align-items: center;
+        height: 3rem;
+        min-height: 0;
+        padding: 0 var(--space-large);
+        font-family: var(--font-body);
+        font-size: var(--font-size-small);
+        font-weight: 500;
+        letter-spacing: 0.1px;
+        line-height: 1.25rem;
+    }
+
+    &::part(label) {
+        padding: 0;
+    }
+}
+
 :root {
     --color-surface: #f7f4e5;
     --color-surface-alt: #e0e0d4;
@@ -149,24 +167,6 @@ body > main {
     &[data-message-overlay] {
         max-height: none !important;
         height: auto;
-    }
-}
-.footer-acknowledgement {
-    text-align: center;
-    margin-top: var(--space-medium);
-    background: var(--color-surface-alt);
-    background: rgb(144, 165, 142);
-    color: var(--color-surface);
-    margin: auto 0;
-    padding: var(--space-medium) 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .acknowledgement-content {
-        max-width: 61rem;
-        padding: 1rem 3rem;
-        font-size: var(--font-size-medium);
-        text-align: center;
     }
 }
 

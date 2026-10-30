@@ -25,7 +25,7 @@
         <p class="site-information-eyebrow"><a href="/">{{ site.Title }}</a></p>
         <h1>{{ .campaign }}</h1>
         <div class="site-information-hero-description">{{ $heroDescription | markdownify }}</div>
-        <sl-button id="site-information-verify-button" href="{{ $verifyURL }}" variant="primary" pill>Verify Calls</sl-button>
+        <sl-button class="a2o-tour-inline-button" id="site-information-verify-button" href="#contribute-your-verifications" variant="primary" pill><span class="verify-link-label">Verify Calls</span></sl-button>
     </div>
 </section>
 
@@ -73,10 +73,10 @@
     </div>
 </section>
 
-<section class="site-information-projects fullbleed">
-    <div class="site-information-projects-inner">
+<section id="contribute-your-verifications" class="site-information-species fullbleed">
+    <div class="site-information-species-inner">
         <h2>Contribute Your Verifications</h2>
-        <p>Here’s a set of available projects you can contribute to with your verifications.</p>
+        <p>Google's Perch AI detected calls for these species. Can you help us verify the name matches the sound for each species? You can see some examples below.</p>
         <div class="cards-grid">
             {{ range .content.species }}
                 {{ $audio := "" }}
@@ -84,28 +84,29 @@
                     {{ $audio = .url }}
                 {{ end }}
                 {{ $spectrogramID := printf "site-species-%s-%s" ($.Params.site_name | urlize) (.name | urlize) }}
+                {{ $speciesName := .name }}
                 {{ $speciesImage := "" }}
-                {{ $speciesImageAlt := .name }}
                 {{ with .image }}
                     {{ with resources.Get . }}
                         {{ $speciesImage = (.Fill "600x400 center webp").RelPermalink }}
                     {{ end }}
                 {{ end }}
-                {{ if not $speciesImage }}
-                    {{ with $site.content.image }}
-                        {{ with resources.Get . }}
-                            {{ $speciesImage = (.Fill "600x400 center webp").RelPermalink }}
-                            {{ $speciesImageAlt = printf "%s habitat" $site.campaign }}
-                        {{ end }}
-                    {{ end }}
-                {{ end }}
                 <article class="site-card">
                     <div class="site-info">
                         <div class="site-info-visual">
-                            {{ with $speciesImage }}<img class="site-info-image" src="{{ . }}" alt="{{ $speciesImageAlt }}" loading="lazy">{{ end }}
-                            <h3 class="site-info-title">{{ .name }}</h3>
+                            {{ with $speciesImage }}<img class="site-info-image" src="{{ . }}" alt="{{ $speciesName }}" loading="lazy">{{ end }}
+                            <div class="site-info-title-row">
+                                <h3 class="site-info-title">{{ .name }}</h3>
+                                {{- $focusTagIDs := delimit .tag_ids "," -}}
+                                {{- $speciesVerifyURL := printf "%sverify/?focus=%s" $site.page $focusTagIDs -}}
+                                <sl-button href="{{ $speciesVerifyURL }}" class="a2o-tour-inline-button species-card-verify-button" variant="primary" pill>
+                                    <span class="verify-button-label">Verify Calls</span><sl-icon name="arrow-right" aria-hidden="true"></sl-icon>
+                                </sl-button>
+                            </div>
                         </div>
                         <div class="site-info-content">
+                            
+
                             <p class="site-info-text">{{ .description }}</p>
                             {{ with $audio }}
                                 <div class="site-info-spectrogram">
@@ -134,6 +135,8 @@
                                     </div>
                                 </div>
                             {{ end }}
+
+
                         </div>
                     </div>
                 </article>
@@ -144,12 +147,17 @@
 
 <script type="module">
     const api = await workbenchApi();
-    const verifyButton = document.getElementById("site-information-verify-button");
-    const verifyURL = {{ $verifyURL | jsonify | safeJS }};
+    const verifyText = document.querySelectorAll(".verify-button-label");
+    const speciesCardVerifyButtons = document.querySelectorAll(".species-card-verify-button");
 
-    if (verifyButton && !(await api.getUserProfile())) {
-        verifyButton.textContent = "Log In and Verify Calls";
-        verifyButton.href = `/login?redirect=${encodeURIComponent(verifyURL)}`;
+    if (!(await api.getUserProfile())) {
+        verifyText.forEach((element) => {
+            element.textContent = "Log In & Verify";
+        });
+
+        speciesCardVerifyButtons.forEach((button) => {
+            button.querySelector('sl-icon[name="arrow-right"]')?.remove();
+        });
     }
 
     const referrers = globalThis.siteParams?.referrers ?? {};

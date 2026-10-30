@@ -5,7 +5,13 @@
 {{- if not $currentSites -}}
     {{- errorf "end-of-verification campaign %q is not configured in params.map.sites" $campaign -}}
 {{- end -}}
-{{- $orderedSites := slice (index $currentSites 0) -}}
+{{- $currentSite := index $currentSites 0 -}}
+{{- $speciesNames := dict -}}
+{{- range $species := $currentSite.content.species -}}
+    {{- $focusValue := delimit ($species.tag_ids | default slice) "," -}}
+    {{- $speciesNames = merge $speciesNames (dict $focusValue $species.name) -}}
+{{- end -}}
+{{- $orderedSites := slice $currentSite -}}
 {{- range $site := $sites -}}
     {{- if ne $site.campaign $campaign -}}
         {{- $orderedSites = $orderedSites | append $site -}}
@@ -13,18 +19,7 @@
 {{- end -}}
 
 <style>
-.end-of-verification-grid {
-    --end-of-verification-card-width: calc(var(--card-width) / 2);
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--end-of-verification-card-width)), var(--end-of-verification-card-width)));
-    justify-content: center;
-    gap: var(--space-large);
-    justify-self: center;
-    width: min(100%, var(--content-width));
-}
-
-.end-of-verification {
+.end-of-verification-container {
     box-sizing: border-box;
     align-self: start;
     position: relative;
@@ -35,97 +30,233 @@
     color: var(--color-text-strong);
     font-size: var(--font-size-medium);
     text-align: center;
-}
 
-.end-of-verification > h2 {
-    margin: 0 0 var(--space-xsmall);
-    color: var(--color-text-strong);
-}
+    .end-of-verification-subsection {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0;
+        padding-top:0.3em;
+    }
 
-.end-of-verification-intro {
-    margin: 0 0 var(--space-large);
-}
-
-.end-of-verification-card {
-    box-sizing: border-box;
-    overflow: hidden;
-    padding: calc(var(--space-medium) / 2);
-    border-radius: var(--radius-card);
-    background: var(--color-card);
-}
-
-.end-of-verification-image-link {
-    display: block;
-}
-
-.end-of-verification-image {
-    display: block;
-    width: 100%;
-    height: 5.25rem;
-    border-radius: var(--radius-callout);
-    object-fit: cover;
-}
-
-.end-of-verification-title {
-    margin: calc(var(--space-small) / 2) 0 0;
-    font-size: var(--font-size-medium);
-}
-
-.end-of-verification-title a {
-    color: var(--color-text-strong);
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
-}
-
-.end-of-verification-complete {
-    margin: calc(var(--space-xsmall) / 2) 0 0;
-    color: var(--color-text);
-    font-size: var(--font-size-small);
-    font-weight: 700;
-}
-
-@media (max-width: 48em) {
-    .end-of-verification-grid {
-        grid-template-columns: repeat(2, minmax(0, min(8rem, calc((100% - var(--space-small)) / 2))));
-        gap: var(--space-small);
+    .end-of-verification-intro {
+        margin: 1rem auto 1rem auto;
     }
 
     .end-of-verification-card {
-        min-width: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        padding: calc(var(--space-medium) / 2);
+        border-radius: var(--radius-card);
+        background: var(--color-card);
+    }
+
+    .site-completed-status.incomplete {
+        display: none;
+    }
+
+    .site-completed-status.complete {
+        margin: var(--space-xsmall) 0 0;
+        color: var(--color-accent);
+        font-size: var(--font-size-xsmall);
+        font-weight: 700;
+    }
+
+    .site-completed-status.complete::before {
+        content: "✓ Complete";
+    }
+
+    .end-of-verification-card:hover {
+        box-shadow: inset 0 0 28px rgba(0, 200, 0, 0.1);
+    }
+
+    .end-of-verification-image {
+        display: block;
+        width: 100%;
+        height: 5.25rem;
+        border-radius: var(--radius-callout);
+        object-fit: cover;
+    }
+
+    .end-of-verification-title {
+        margin: calc(var(--space-small) / 2) 0 0;
+        font-size: var(--font-size-medium);
+    }
+
+    @media (max-width: 48em) {
+
+        .end-of-verification-card {
+            min-width: 0;
+            padding: calc(var(--space-medium) / 4);
+        }
+
+        .end-of-verification-image {
+            height: auto;
+            aspect-ratio: 2 / 1;
+        }
+
+        .end-of-verification-title {
+            font-size: var(--font-size-small);
+            overflow-wrap: anywhere;
+        }
+    }
+
+    .end-of-verification-grid {
+        --end-of-verification-card-width: calc(var(--card-width) * 0.3);
+        --end-of-verification-grid-gap: var(--space-medium);
+
+        display: flex;
+        flex-wrap: wrap;
+        flex-wrap: wrap balance;
+        justify-content: center;
+        gap: var(--end-of-verification-grid-gap);
+        width: 100%;
+        margin-inline: auto;
+    }
+
+    .end-of-verification-card {
+        flex: 0 0 var(--end-of-verification-card-width);
+        width: var(--end-of-verification-card-width);
         padding: calc(var(--space-medium) / 4);
     }
 
     .end-of-verification-image {
-        height: auto;
-        aspect-ratio: 2 / 1;
+        height: calc(var(--card-width) * 0.21);
+        aspect-ratio: auto;
     }
 
     .end-of-verification-title {
-        font-size: var(--font-size-small);
-        overflow-wrap: anywhere;
+        font-size: var(--font-size-xsmall);
     }
+
+    h2 {
+        font-size: var(--font-size-large);
+    }
+
+    .end-of-verification-intro a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+    }
+
+    @media (max-width: 48em) {
+        .end-of-verification-grid {
+            --end-of-verification-grid-gap: var(--space-small);
+            width: 100%;
+        }
+
+    }
+
 }
+
 </style>
 
-<section class="end-of-verification" aria-labelledby="end-of-verification-title">
-    <h2 id="end-of-verification-title">You’ve completed {{ $campaign }}!</h2>
-    <p class="end-of-verification-intro">Choose another location to keep going.</p>
-    <div class="cards-grid end-of-verification-grid">
-        {{- range $site := $orderedSites -}}
-            {{- $isCurrent := eq $site.campaign $campaign -}}
-            <article class="end-of-verification-card{{ if $isCurrent }} end-of-verification-card-current{{ end }}">
-                <a class="end-of-verification-image-link" href="{{ $site.page }}">
-                    {{- with $site.content.image -}}
-                        {{- with resources.Get . -}}
-                            <img class="end-of-verification-image" src="{{ (.Fill "600x300 center webp").RelPermalink }}" alt="{{ $site.campaign }} field site" loading="lazy">
+
+
+<section class="end-of-verification-container" hidden aria-labelledby="end-of-verification-title">
+    <h2 id="end-of-verification-species-title"></h2>
+    <section class="choose-a-species end-of-verification-subsection">
+    <p class="end-of-verification-intro">Choose another species from <a href="{{ $currentSite.page }}">{{ $campaign }}</a>.</p>
+        <div class="cards-grid end-of-verification-grid">
+            {{- range $species := $currentSite.content.species -}}
+                {{- $focusValue := delimit ($species.tag_ids | default slice) "," -}}
+                {{- $speciesVerifyURL := printf "%sverify/?focus=%s" $currentSite.page $focusValue -}}
+                <a href="{{ $speciesVerifyURL }}" class="end-of-verification-card end-of-verification-species-card" data-focus-value="{{ $focusValue }}">
+                        {{- with $species.image -}}
+                            {{- with resources.Get . -}}
+                                <img class="end-of-verification-image" src="{{ (.Fill "600x300 center webp").RelPermalink }}" alt="{{ $species.name }}" loading="lazy">
+                            {{- end -}}
                         {{- end -}}
-                    {{- end -}}
+                    <h3 class="end-of-verification-title">{{ $species.name }}</h3>
                 </a>
-                <h3 class="end-of-verification-title"><a href="{{ $site.page }}">{{ $site.campaign }}</a></h3>
-                {{- if $isCurrent }}
-                    <p class="end-of-verification-complete"><span aria-hidden="true">✓</span> Complete</p>
-                {{- end }}
-            </article>
-        {{- end }}
-    </div>
+            {{- end }}
+        </div>
+    </section>
+    <section class="choose-a-location end-of-verification-subsection">
+        <p class="end-of-verification-intro" id="end-of-verification-site-intro">Or continue to a different location.</p>
+        <div class="cards-grid end-of-verification-grid">
+            {{- range $site := $orderedSites -}}
+                <a class="end-of-verification-card end-of-verification-site-card" href="{{ $site.page }}" data-campaign="{{ $site.campaign }}">
+                        {{- with $site.content.image -}}
+                            {{- with resources.Get . -}}
+                                <img class="end-of-verification-image" src="{{ (.Fill "600x300 center webp").RelPermalink }}" alt="{{ $site.campaign }} field site" loading="lazy">
+                            {{- end -}}
+                        {{- end -}}
+                    <h3 class="end-of-verification-title">{{ $site.campaign }}</h3>
+                    <h4 class="site-completed-status incomplete"></h4>
+                </a>
+            {{- end }}
+        </div>
+    </section>
 </section>
+
+<script>
+    // map of species tag IDs to species names
+    {{/*  const speciesNames = {{ $speciesNames | jsonify | safeJS }};  */}}
+    const campaign = {{ $campaign | jsonify | safeJS }};
+</script>
+
+<script type="module">
+(() => {
+    const focusValue = new URLSearchParams(window.location.search).get("focus");
+    const targetIds = focusValue
+        ? focusValue.split(",").map(Number).filter(Number.isInteger)
+        : [];
+
+    const speciesName = globalThis.siteParams.map.sites.flatMap(s => s.content.species).find(sp => sp.tag_ids.length === targetIds.length && targetIds.every(id => sp.tag_ids.includes(id)))?.name;
+
+
+
+    {{/*  const speciesName = speciesNames[focusValue];  */}}
+    const container = document.querySelector(".end-of-verification-container");
+    const speciesSection = container?.querySelector(".choose-a-species");
+    const locationSection = container?.querySelector(".choose-a-location");
+    const locationIntro = container?.querySelector("#end-of-verification-site-intro");
+    const title = container?.querySelector("h2");
+    const currentSiteCard = [...(locationSection?.querySelectorAll(".end-of-verification-site-card") ?? [])]
+        .find((card) => card.dataset.campaign === campaign);
+
+    if (!container) {
+        return;
+    }
+
+    container.hidden = false;
+
+    if (speciesName) {
+        speciesSection.hidden = false;
+        locationSection.hidden = false;
+
+        if (title) {
+            title.textContent = `You’ve completed ${speciesName} at ${campaign}.`;
+        }
+
+        if (locationIntro) {
+            locationIntro.textContent =
+                `Or continue to a different location.`;
+        }
+
+        currentSiteCard?.remove();
+
+        speciesSection.querySelectorAll("[data-focus-value]").forEach((card) => {
+            if (card.dataset.focusValue === focusValue) {
+                card.remove();
+            }
+        });
+    } else {
+        speciesSection.hidden = true;
+        locationSection.hidden = false;
+
+        if (title) {
+            title.textContent = `You’ve completed ${campaign}!`;
+        }
+
+        if (locationIntro) {
+            locationIntro.textContent = "Choose another location to keep going.";
+        }
+
+        currentSiteCard
+            ?.querySelector(".site-completed-status")
+            ?.classList.replace("incomplete", "complete");
+    }
+
+})();
+</script>

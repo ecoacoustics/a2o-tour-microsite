@@ -63,16 +63,16 @@ params:
       tag_ids:
         # Buff-breasted Paradise-Kingfisher 27015
         - 27014 # scientific
-        - 27015 # common
+        # - 27015 # common
         # Wompoo Fruit Dove 27145
         - 27144 # scientific
-        - 27145 # common
+        # - 27145 # common
         # Spotted Catbird 27126
         - 27125 # scientific
-        - 27126 # common
+        # - 27126 # common
         # Victoria's Riflebird 27220
         - 27219 # scientific
-        - 27220 # common
+        # - 27220 # common
       filters:
         filter:
           audio_events.id:
@@ -95,25 +95,25 @@ params:
       tag_ids:
         # Pink Cockatoo 156
         - 27646 # scientific
-        - 156 # common
+        # - 156 # common
         # Budgerigar 242
         - 26721 # scientific
-        - 242 # common
+        # - 242 # common
         # Crested Bellbird 164
         - 26679 # scientific
-        - 164 # common
+        # - 164 # common
         # Spotted Nightjar 144
         - 26768 # scientific
-        - 144 # common
+        # - 144 # common
         # Cockatiel 205
         - 26865 # scientific
-        - 205 # common
+        # - 205 # common
         # Brown Treecreeper 191
         - 26707 # scientific
-        - 191 # common
+        # - 191 # common
         # Rainbow Bee-eater 53
         - 26672 # scientific
-        - 53 # common
+        # - 53 # common
       filters:
         filter:
           audio_events.id:
@@ -145,27 +145,27 @@ params:
       tag_ids:
         # Glossy-black Cockatoo 26969
         - 26967 # scientific
-        - 26969 # common
+        # - 26969 # common
         # Koala 109
         - 113 # scientific
-        - 109 # common
+        # - 109 # common
         # Spotted Quail-thrush 26812
         - 26811 # scientific
-        - 26812 # common
+        # - 26812 # common
         # Scarlet Myzomela 26632
         - 26631 # scientific
-        - 26632 # common
+        # - 26632 # common
         # White-throated Nightjar 135
         - 26648 # scientific
-        - 135 # common
+        # - 135 # common
         # Sugar Glider (no common-name tag)
         - 27658 # scientific
         # Southern Boobook 107
         - 103 # scientific
-        - 107 # common
+        # - 107 # common
         # Grey Shrike-thrush 16
         - 26639 # scientific
-        - 16 # common
+        # - 16 # common
       filters:
         filter:
           audio_events.id:
@@ -200,13 +200,13 @@ params:
       tag_ids:
         # Western Whipbird 27089
         - 27088 # scientific
-        - 27089 # common
+        # - 27089 # common
         # Weebill 181
         - 26798 # scientific
-        - 181 # common
+        # - 181 # common
         # Stubble Quail 26810
         - 26809 # scientific
-        - 26810 # common
+        # - 26810 # common
       filters:
         filter:
           audio_events.id:
@@ -228,16 +228,16 @@ params:
         - 27663 # scientific
         # Bell Miner 26758
         - 26757 # scientific
-        - 26758 # common
+        # - 26758 # common
         # Superb Lyrebird 132
         - 26747 # scientific
-        - 132 # common
+        # - 132 # common
         # Wonga Pigeon 27052
         - 27051 # scientific
-        - 27052 # common
+        # - 27052 # common
         # Yellow-tailed Black-Cockatoo 76
         - 27654 # scientific
-        - 76 # common
+        # - 76 # common
       filters:
         filter:
           audio_events.id:
@@ -263,19 +263,19 @@ params:
       tag_ids:
         # Painted Honeyeater 27331
         - 27330 # scientific
-        - 27331 # common
+        # - 27331 # common
         # Horsfield's Bronze-cuckoo 211
         - 26737 # scientific
-        - 211 # common
+        # - 211 # common
         # Red-capped Robin 168
         - 26769 # scientific
-        - 168 # common
+        # - 168 # common
         # Striped Honeyeater 60
         - 26956 # scientific
-        - 60 # common
+        # - 60 # common
         # Tawny Frogmouth 136
         - 26642 # scientific
-        - 136 # common
+        # - 136 # common
       filters:
         filter:
           audio_events.id:
@@ -309,22 +309,25 @@ params:
           species:
             - name: "Buff-breasted Paradise-Kingfisher"
               description: "A bright, long-tailed kingfisher that breeds in North Queensland rainforests and migrates to New Guinea for the winter."
-
+              tag_ids: [27014]
               image: "images/species/Buff-breasted-Paradise-Kingfisher.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/491051/media.mp3?end_offset=1585&start_offset=1565"
             - name: "Wompoo Fruit Dove"
               description: "A large fruit dove that feeds quietly in the canopy. Known for its 'Wompoo!' call."
+              tag_ids: [27144]
               image: "images/species/Wompoo-Fruit-Dove.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/492563/media.mp3?end_offset=5875&start_offset=5855"
             - name: "Spotted Catbird"
               description: "A large rainforest species with highly unusual cat-like calls."
+              tag_ids: [27125]
               image: "images/species/Spotted-Catbird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/490212/media.mp3?end_offset=565&start_offset=545"
             - name: "Victoria's Riflebird"
               description: "Iconic rainforest bird-of-paradise. Voice is not as showy as its plumage."
+              tag_ids: [27219]
               image: "images/species/Victorias-Riflebird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/492310/media.mp3?end_offset=2665&start_offset=2645"
@@ -338,39 +341,47 @@ params:
           species:
             - name: "Glossy-black Cockatoo"
               description: "A dark, quiet cockatoo that specializes in she-oak seeds, with males showing red tail panels and females yellow markings."
+              tag_ids: [26967]
               image: "images/species/Glossy-black-Cockatoo.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1421163/media.mp3?end_offset=4645&start_offset=4625"
             - name: "Koala"
               description: "A mostly nocturnal, tree-dwelling marsupial that rests for long periods, feeds on eucalypt leaves, and communicates with deep bellows."
+              tag_ids: [113]
               image: "images/species/Koala.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/508757/media.mp3?end_offset=55&start_offset=35"
             - name: "Spotted Quail-thrush"
               description: "A cryptic, ground-dwelling bird of dry forest that forages through leaf litter and is more often heard than seen."
+              tag_ids: [26811]
               image: "images/species/Spotted-Quail-thrush.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1417075/media.mp3?end_offset=4435&start_offset=4415"
             - name: "Scarlet Myzomela"
               description: "A tiny honeyeater whose bright-red males visit flowering trees for nectar and insects and sing a tuneful, tinkling song."
+              tag_ids: [26631]
               image: "images/species/Scarlet-Myzomela.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1420677/media.mp3?end_offset=4135&start_offset=4115"
             - name: "White-throated Nightjar"
               description: "A nocturnal aerial hunter with mottled camouflage and a white throat patch, known for a bubbling song at dusk and dawn."
+              tag_ids: [26648]
               image: "images/species/White-throated-Nightjar.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/511298/media.mp3?end_offset=5095&start_offset=5075"
             - name: "Sugar Glider"
               description: "A small nocturnal glider that sails between trees on furry membranes, feeds on sap and nectar, and gives yapping calls."
+              tag_ids: [27658]
               image: "images/species/sugar-glider.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1873028/media.mp3?end_offset=4675&start_offset=4655"
             - name: "Southern Boobook"
               description: "Australia's smallest and most widespread owl, best known for its familiar two-note 'boo-book' call at night."
+              tag_ids: [103]
               image: "images/species/Southern-Boobook.jpg"
             - name: "Grey Shrike-thrush"
               description: "A plain grey songbird of forest and woodland with one of the richest, most melodious songs in the bush."
+              tag_ids: [26639]
               image: "images/species/Grey-Shrike-thrush.jpg"
       - campaign: "Bowra Station"
         latitude: -27.981830
@@ -382,36 +393,43 @@ params:
           species:
             - name: "Pink Cockatoo"
               description: "A striking white-and-pink cockatoo with a raised red-and-yellow crest that usually travels in pairs or small groups."
+              tag_ids: [27646]
               image: "images/species/Pink-Cockatoo.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1540597/media.mp3?end_offset=145&start_offset=125"
             - name: "Budgerigar"
               description: "A small green-and-yellow parrot that travels in nomadic flocks, feeds on grass seeds, and gives frequent chattering contact calls."
+              tag_ids: [26721]
               image: "images/species/Budgerigar.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/457814/media.mp3?end_offset=445&start_offset=425"
             - name: "Crested Bellbird"
               description: "A grey woodland bird with a black crest and breast whose bell-like call carries across open scrub."
+              tag_ids: [26679]
               image: "images/species/Crested-Bellbird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1406387/media.mp3?end_offset=45295&start_offset=45275"
             - name: "Brown Treecreeper"
               description: "A social treecreeper that spirals up rough trunks and probes bark and leaf litter for insects in small groups."
+              tag_ids: [26707]
               image: "images/species/Brown-Treecreeper.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/7213/media.mp3?end_offset=4195&start_offset=4175"
             - name: "Cockatiel"
               description: "A nomadic cockatoo with an expressive crest and long tail that moves between water and seed-rich country in pairs or flocks."
+              tag_ids: [26865]
               image: "images/species/Cockatiel.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/7213/media.mp3?end_offset=4165&start_offset=4145"
             - name: "Spotted Nightjar"
               description: "A heavily mottled, ground-roosting nightjar that hunts flying insects after dark and calls with an ascending series of notes."
+              tag_ids: [26768]
               image: "images/species/Spotted-Nightjar.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/7315/media.mp3?end_offset=6125&start_offset=6105"
             - name: "Rainbow Bee-eater"
               description: "A slender, brilliantly coloured bird that catches bees and dragonflies on the wing and gives a constant, rolling 'prrrp' call."
+              tag_ids: [26672]
               image: "images/species/Rainbow-Bee-eater.jpg"
       - campaign: "Monjebup Reserve"
         latitude: -34.243607
@@ -423,16 +441,19 @@ params:
           species:
             - name: "Western Whipbird"
               description: "A shy, olive-grey bird of dense mallee and heath that is far more often heard than seen, with pairs singing a duet of scratchy whistles."
+              tag_ids: [27088]
               image: "images/species/Western-Whipbird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/156490/media.mp3?end_offset=55&start_offset=35"
             - name: "Weebill"
               description: "Australia's smallest bird, a pale, short-billed canopy forager that moves through eucalypts in busy groups with a loud, cheerful song."
+              tag_ids: [26798]
               image: "images/species/Weebill.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/344871/media.mp3?end_offset=4825&start_offset=4805"
             - name: "Stubble Quail"
               description: "A cryptic, ground-dwelling quail of grassland and crops, usually detected by its far-carrying, repeated whistled call."
+              tag_ids: [26809]
               image: "images/species/Stubble-Quail.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/344510/media.mp3?end_offset=7135&start_offset=7115"
@@ -446,27 +467,32 @@ params:
           species:
             - name: "Bell Miner"
               description: "A colonial green honeyeater whose constant, tinkling bell-like calls ring through the forest understorey."
+              tag_ids: [26757]
               image: "images/species/Bell-Miner.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1208936/media.mp3?end_offset=6985&start_offset=6965"
             - name: "Superb Lyrebird"
               description: "A large ground-dwelling songbird famous for its elaborate song, which mimics many other forest species."
+              tag_ids: [26747]
               image: "images/species/Superb-Lyrebird.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1209384/media.mp3?end_offset=4975&start_offset=4955"
             - name: "Wonga Pigeon"
               description: "A plump grey-and-white pigeon of the forest floor that repeats a loud, monotonous call for long periods."
+              tag_ids: [27051]
               image: "images/species/Wonga-Pigeon.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1209912/media.mp3?end_offset=3715&start_offset=3695"
             - name: "Yellow-tailed Black-Cockatoo"
               description: "A large black cockatoo with yellow cheek and tail panels that feeds on seeds and wood-boring grubs and gives a far-carrying, wailing call."
+              tag_ids: [27654]
               image: "images/species/Yellow-tailed-Black-Cockatoo.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1214877/media.mp3?end_offset=5485&start_offset=5465"
             - name: "Yellow-bellied Glider"
               description: "A nocturnal glider of tall eucalypt forest that feeds on sap and nectar and is known for its loud, gurgling shrieks."
-              image: "images/species/Yellow-bellied-Glider.jpg"
+              tag_ids: [27663]
+              image: "images/sites/marshmead/marshmead.jpg" # TODO: replace placeholder
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1209740/media.mp3?end_offset=7165&start_offset=7145"
       - campaign: "Binya"
@@ -479,26 +505,31 @@ params:
           species:
             - name: "Painted Honeyeater"
               description: "A nomadic black-and-white honeyeater with yellow wing edges that specialises in mistletoe fruit."
+              tag_ids: [27330]
               image: "images/species/Painted-Honeyeater.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1452067/media.mp3?end_offset=745&start_offset=725"
             - name: "Horsfield's Bronze Cuckoo"
               description: "A small bronze-green cuckoo that lays its eggs in other birds' nests and gives a descending, whistled call."
+              tag_ids: [26737]
               image: "images/species/Horsfields-Bronze-Cuckoo.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1240530/media.mp3?end_offset=4375&start_offset=4355"
             - name: "Red-capped Robin"
               description: "A small dry-woodland robin; males have a bright red cap and breast and sing a rapid, insect-like trill."
+              tag_ids: [26769]
               image: "images/species/Red-capped-Robin.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1243187/media.mp3?end_offset=685&start_offset=665"
             - name: "Striped Honeyeater"
               description: "A streaky grey-and-white honeyeater of inland woodland that builds a hanging nest and sings rich, rollicking phrases."
+              tag_ids: [26956]
               image: "images/species/Striped-Honeyeater.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/670669/media.mp3?end_offset=5275&start_offset=5255"
             - name: "Tawny Frogmouth"
               description: "A nocturnal, owl-like bird that roosts by day disguised as a broken branch and gives a low, repeated 'oom' call at night."
+              tag_ids: [26642]
               image: "images/species/Tawny-Frogmouth.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/667535/media.mp3?end_offset=1345&start_offset=1325"

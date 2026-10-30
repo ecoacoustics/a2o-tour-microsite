@@ -1,6 +1,17 @@
+html:has(#contribute-your-verifications) {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:has(#contribute-your-verifications) {
+        scroll-behavior: auto;
+    }
+}
+
 .site-information-hero,
 .site-information-why,
-.site-information-projects {
+.site-information-species,
+.site-information-initiative {
     --micro-heading-color: var(--color-text-strong);
     --micro-font-color: var(--color-text);
     grid-column: fullbleed;
@@ -51,7 +62,7 @@
         padding-top: 8.5rem;
     }
 
-    sl-button {
+    sl-button.a2o-tour-inline-button {
         margin-top: var(--space-medium);
         --sl-color-primary-600: var(--color-accent);
         --sl-color-primary-500: var(--color-accent);
@@ -266,11 +277,11 @@
     }
 }
 
-.site-information-projects {
+.site-information-species {
     padding: var(--section-padding) 0;
     background: var(--color-surface-alt);
 
-    .site-information-projects-inner {
+    .site-information-species-inner {
         grid-column: main;
         display: flex;
         flex-direction: column;
@@ -302,27 +313,23 @@
     }
 }
 
-.oe-hero sl-button,
-.site-information-hero sl-button,
-.site-info-link {
-    &::part(base) {
-        align-items: center;
-        height: 3rem;
-        min-height: 0;
-        padding: 0 var(--space-large);
-        font-family: var(--font-body);
-        font-size: var(--font-size-small);
-        font-weight: 500;
-        letter-spacing: 0.1px;
-        line-height: 1.25rem;
+
+.site-information-species .site-info-title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-small);
+    margin-top: var(--space-small);
+
+    .site-info-title {
+        min-width: 0;
+        margin: 0;
     }
 
-    &::part(label) {
-        padding: 0;
+    & > sl-button.a2o-tour-inline-button {
+        margin-top: 0;
     }
 }
 
-sl-button.site-info-link::part(base) {
-    height: 2.25rem;
-    padding: 0 var(--space-small);
-}
+
+
