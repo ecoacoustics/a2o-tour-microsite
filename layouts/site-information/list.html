@@ -22,7 +22,7 @@
         </a>
     </div>
     <div class="site-information-hero-content">
-        <p class="site-information-eyebrow"><a href="/">{{ site.Title }}</a></p>
+        <p class="site-information-eyebrow">{{ site.Title }}</p>
         <h1>{{ .campaign }}</h1>
         <div class="site-information-hero-description">{{ $heroDescription | markdownify }}</div>
         <sl-button class="a2o-tour-inline-button" id="site-information-verify-button" href="#contribute-your-verifications" variant="primary" pill><span class="verify-link-label">Verify Calls</span></sl-button>
@@ -160,25 +160,6 @@
         });
     }
 
-    const referrers = globalThis.siteParams?.referrers ?? {};
-    const storageKey = "a2o-tour-referrer";
-    const queryReferrer = new URLSearchParams(window.location.search).get("ref");
-
-    if (queryReferrer !== null) {
-        if (Object.hasOwn(referrers, queryReferrer)) {
-            sessionStorage.setItem(storageKey, queryReferrer);
-        } else {
-            sessionStorage.removeItem(storageKey);
-        }
-    }
-
-    const referrer = referrers[sessionStorage.getItem(storageKey)];
-    const backLink = document.querySelector(".site-information-hero .page-back");
-    if (referrer && backLink) {
-        backLink.href = referrer.url;
-        backLink.querySelector("span").textContent = `Back to ${referrer.name}`;
-        backLink.addEventListener("click", () => sessionStorage.removeItem(storageKey), { once: true });
-    }
 </script>
 
 {{ end }}
