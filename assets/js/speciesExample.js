@@ -1,59 +1,91 @@
 /**
- * Component that displays a species example link which calls up a dialog with that species' details and examples.
- * 
- * The shadow DOM contains a clickable link with an avatar and label that opens the species dialog.
- * The dialog appended to `document.body` displays the species' full-size image, name, description, and example players.
- * The dialog is not part of the shadow DOM. This allows it to share styling with the rest of the document.
- * 
- * Component constructor initializes the shadow DOM and sets up the link and avatar elements.
- * 
- * connectedCallback runs when the component is added to the document's DOM. It is used to subscribe to the grid context and 
- * update the species selection. It specifies the receiveTileContext callback to handle context updates. receiveTileContext 
- * is called when the grid context updates. It receives the current tile and an unsubscribe function.
- * 
- * receiveTileContext calls updateSpecies which looks up the species record by tag ID and calls setSpecies to update the component's display.
- * data is passed to the component as follows:
- * - a script element with some ID on the document (outside the component) contains the species data in JSON format
- * - the component has a data attribute specifying that script element's ID, e.g., `data-species-data-id="species-data"`
- * - when initializing the data, the component accesses the script element by its ID and textContent and parses the JSON content to populate `#speciesData`
- * 
- * note: an alternative approach would have been for the component to dispatch a data request event when it connects, and have a javascript 
- * listener elsewhere in the document respond with the species data.
- * 
- * The shadow DOM contains the link and avatar, while the dialog is appended to the document body. A click event listener triggers the 
- * openDialog method to display the species dialog.
- * 
- * openDialog first creates (or reuses) the dialog dom element and all its child elements, 
- * then populates them with the current species' details and example spectrogram players.
- * 
+ *  Provides functionality for displaying species examples in a dialog.
+ *  There are two parts:
+ *  1. The `openSpeciesDialog` function for displaying species examples in a dialog.
+ *     This accepts species data for the relevant species and updates the relevant elements of the
+ *     dialog accordingly. These dom elements already exist on the page. 
+ *     The function does not create the dialog or its contents.
+ *  2. The `A2OTourSpeciesExample` custom element that triggers the dialog
+ *     This custom element listens for context updates from the grid. When the button is 
+ *     clicked, it calls the openSpeciesDialog function with the relevant species data.
+ *     It's aware of all the species and receives a tag id from the grid context updates, and uses
+ *     that to look up the corresponding species record.
  */
 
 
 
 const GRID_TILE_CONTEXT = "oe-grid-tile-context";
-let dialogSequence = 0;
+
+/**
+ * Populate and display the page-defined dialog for a selected species.
+ * @param {string} dialogID ID of the dialog in the verification page.
+ * @param {object} species Species data to display.
+ */
+function openSpeciesDialog(dialogID, species) {
+  const dialog = dialogID ? document.getElementById(dialogID) : null;
+  if (!(dialog instanceof HTMLDialogElement)) {
+    throw new Error(`Species example dialog was not found: ${dialogID}`);
+  }
+
+  const largeImage = dialog.querySelector("[data-species-dialog-image]");
+  const title = dialog.querySelector("[data-species-dialog-title]");
+  const description = dialog.querySelector("[data-species-dialog-description]");
+  const examples = dialog.querySelector("[data-species-dialog-examples]");
+  const exampleTemplate = dialog.querySelector("[data-species-example-template]");
+  const closeButton = dialog.querySelector(".a2otour-species-dialog-close");
+
+  closeButton.onclick = () => dialog.close();
+  dialog.onclose = () => {
+    if (!dialog.open) {
+      examples.replaceChildren();
+    }
+  };
+  dialog.onclick = (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  };
+
+  title.textContent = species.name;
+  description.textContent = species.description || "";
+  description.hidden = !species.description;
+
+  const imageURL = species.image_url;
+  if (imageURL && largeImage.getAttribute("src") !== imageURL) {
+    largeImage.setAttribute("src", imageURL);
+  }
+
+  examples.replaceChildren();
+  species.examples.forEach(({ url, label }, index) => {
+    const item = exampleTemplate.content.firstElementChild?.cloneNode(true);
+    const exampleLabel = item.querySelector("[data-example-label]");
+    const spectrogram = item.querySelector("oe-spectrogram");
+    const controls = item.querySelector("oe-media-controls");
+    exampleLabel.textContent = label ?? "";
+    exampleLabel.hidden = label === null;
+    const spectrogramID = `${dialog.id}-spectrogram-${index + 1}`;
+    spectrogram.id = spectrogramID;
+    spectrogram.setAttribute("src", url);
+    controls.setAttribute("for", spectrogramID);
+    examples.append(item);
+  });
+
+  if (!dialog.open) {
+    dialog.showModal();
+  }
+}
 
 class A2OTourSpeciesExample extends HTMLElement {
   // Elements inside this component's shadow root.
-  #link; // Clickable element that opens the examples dialog.
-  #avatar; // Circular frame that crops the thumbnail.
+  #trigger; // Button that opens the examples dialog.
   #image; // Thumbnail image displayed inside the avatar.
-  #label; // "Examples" text displayed beside the avatar.
 
   // Species records and current selection.
   #speciesData = []; // Species data.
-  #species; // Species record matching the grid's current tag ID.
-
-  // Dialog elements appended to document.body.
-  #dialog; // Native modal dialog containing the species card.
-  #largeImage; // Full-size species image shown in the dialog.
-  #title; // Species name heading shown in the dialog.
-  #description; // Species description shown in the dialog.
-  #examples; // Container for the dialog's example players.
+  #currentSpeciesData; // Species record matching the grid's current tag ID.
 
   // Grid subscription cleanup.
   #unsubscribe; // Function that stops context updates when disconnected.
-  #dialogID = `a2otour-species-dialog-${++dialogSequence}`;
 
   /** Track grid context updates and select the species for the active tile.
    * This is an arrow function assigned to a field to ensure the correct `this` context when called by the grid.
@@ -64,7 +96,7 @@ class A2OTourSpeciesExample extends HTMLElement {
       this.#unsubscribe = unsubscribe;
     }
 
-    this.#updateSpecies(tile?.model?.tag?.id);
+    this.#updateSpecies(tile?.model?.subject.actual_tag?.id);
   };
 
   /** Create the component shadow-DOM its presentation. */
@@ -72,8 +104,8 @@ class A2OTourSpeciesExample extends HTMLElement {
     super();
 
     const shadowRoot = this.attachShadow({ mode: "open" });
-    const style = document.createElement("style");
-    style.textContent = `
+    shadowRoot.innerHTML = `
+      <style>
       :host {
         display: inline-flex;
         align-items: center;
@@ -85,16 +117,22 @@ class A2OTourSpeciesExample extends HTMLElement {
         display: none;
       }
 
-      a {
+      button {
         display: flex;
         align-items: center;
         gap: 0.375rem;
+        padding: 0;
+        border: 0;
+        background: none;
         color: inherit;
+        font: inherit;
         text-decoration: underline;
+        text-align: start;
         white-space: nowrap;
+        cursor: pointer;
       }
 
-      a:focus-visible {
+      button:focus-visible {
         outline: 2px solid currentColor;
         outline-offset: 2px;
       }
@@ -118,47 +156,31 @@ class A2OTourSpeciesExample extends HTMLElement {
         transform: scale(1.2);
       }
 
-      a:hover .avatar,
-      a:focus-visible .avatar,
+      button:hover .avatar,
+      button:focus-visible .avatar,
       :host(:hover) .avatar,
       :host(:focus-within) .avatar {
         border-color: var(--color-white, #fff);
         box-shadow: 0 0 0 1px var(--color-white, #fff);
       }
+      </style>
+      <button type="button" aria-haspopup="dialog">
+        <span class="avatar"><img alt=""></span>
+        <span>Examples</span>
+      </button>
     `;
 
-    this.#link = document.createElement("a");
-    this.#link.href = `#${this.#dialogID}`;
-    this.#link.setAttribute("role", "button");
-    this.#link.setAttribute("aria-haspopup", "dialog");
-    this.#link.addEventListener("click", (event) => {
-      event.preventDefault();
-      this.#openDialog();
-    });
-    this.#link.addEventListener("keydown", (event) => {
-      if (event.key === " " && !event.repeat) {
-        event.preventDefault();
-        this.#link.click();
-      }
-    });
-
-    this.#image = document.createElement("img");
-    this.#image.alt = "";
-    this.#avatar = document.createElement("span");
-    this.#avatar.className = "avatar";
-    this.#avatar.append(this.#image);
-    this.#label = document.createElement("span");
-    this.#label.textContent = "Examples";
-    this.#link.append(this.#avatar, this.#label);
-    shadowRoot.append(style, this.#link);
+    this.#trigger = shadowRoot.querySelector("button");
+    this.#image = shadowRoot.querySelector("img");
+    this.#trigger.addEventListener("click", () => this.#openDialog());
     this.hidden = true;
   }
 
   /** Called when the component is added to the DOM
    * Initializes the component by loading species data and subscribing to the verification grid context.
    */
-  connectedCallback() {
-    this.#loadSpeciesData();
+   connectedCallback() {
+     this.#loadSpeciesData();
 
     const request = new Event("context-request", {
       bubbles: true,
@@ -173,15 +195,10 @@ class A2OTourSpeciesExample extends HTMLElement {
     this.dispatchEvent(request);
   }
 
-  /** Called when the component is removed from the DOM
-   * Releases the grid subscription and removes the page-level dialog.
-   */
+  /** Called when the component is removed from the DOM to release the grid subscription. */
   disconnectedCallback() {
     this.#unsubscribe?.();
     this.#unsubscribe = undefined;
-    this.#closeDialog();
-    this.#dialog?.remove();
-    this.#dialog = undefined;
   }
 
   /** Parse the species data payload. 
@@ -267,191 +284,33 @@ class A2OTourSpeciesExample extends HTMLElement {
 
   /** Update the trigger for the selected species, hiding it when unavailable. */
   #setSpecies(species) {
-    if (species !== this.#species && this.#dialog?.open) {
-      this.#closeDialog();
-    }
-
-    this.#species = species;
+    this.#currentSpeciesData = species;
     const imageURL = species?.thumbnail_url;
     if (!imageURL) {
       this.#image.removeAttribute("src");
-      this.#link.hidden = true;
+      this.#trigger.hidden = true;
       this.hidden = true;
       return;
     }
 
-    this.#link.setAttribute(
+    this.#trigger.setAttribute(
       "aria-label",
       `Show examples for ${species.name || "species"}`,
     );
     if (this.#image.getAttribute("src") !== imageURL) {
       this.#image.setAttribute("src", imageURL);
     }
-    this.#link.hidden = false;
+    this.#trigger.hidden = false;
     this.hidden = false;
   }
 
-  /** Create the dialog on demand, populate it, and display it. */
+  /** Pass the selected species to the page-level dialog. */
   #openDialog() {
-    if (!this.#species) {
+    if (!this.#currentSpeciesData) {
       return;
     }
 
-    this.#ensureDialog();
-    this.#renderDialog();
-    this.#dialog.showModal();
-  }
-
-  /** Build the dialog structure once and attach it outside the grid's shadow DOM. */
-  #ensureDialog() {
-    if (this.#dialog) {
-      return;
-    }
-
-    const dialog = document.createElement("dialog");
-    dialog.id = this.#dialogID;
-    dialog.className = "a2otour-species-dialog";
-    dialog.setAttribute("aria-labelledby", `${this.#dialogID}-title`);
-
-    const card = document.createElement("article");
-    card.className = "species-verification-example-card";
-
-    const closeButton = document.createElement("button");
-    closeButton.type = "button";
-    closeButton.className = "a2otour-species-dialog-close";
-    closeButton.setAttribute("aria-label", "Close species details");
-    closeButton.textContent = "";
-    closeButton.addEventListener("click", () => this.#closeDialog());
-
-    const info = document.createElement("div");
-    info.className = "site-info";
-
-    const visual = document.createElement("div");
-    visual.className = "site-info-visual";
-
-    this.#largeImage = document.createElement("img");
-    this.#largeImage.className = "site-info-image";
-    this.#largeImage.alt = "";
-    this.#largeImage.addEventListener("error", () => {
-      console.error(`Failed to load species image: ${this.#largeImage.src}`);
-      this.#largeImage.hidden = true;
-    });
-
-    this.#title = document.createElement("h2");
-    this.#title.className = "site-info-title";
-    this.#title.id = `${this.#dialogID}-title`;
-
-    visual.append(this.#largeImage, this.#title);
-
-    const content = document.createElement("div");
-    content.className = "site-info-content";
-
-    this.#description = document.createElement("p");
-    this.#description.className = "site-info-text";
-
-    this.#examples = document.createElement("div");
-    this.#examples.className = "a2otour-species-examples";
-
-    content.append(this.#description, this.#examples);
-    info.append(visual, content);
-    card.append(closeButton, info);
-    dialog.append(card);
-    dialog.addEventListener("cancel", () => this.#clearExamples());
-    dialog.addEventListener("click", (event) => {
-      if (event.target === dialog) {
-        this.#closeDialog();
-      }
-    });
-
-    // append outside the shadow DOM
-    document.body.append(dialog);
-    this.#dialog = dialog;
-  }
-
-  /** Populate the dialog with the selected species and its configured examples. */
-  #renderDialog() {
-    const species = this.#species;
-    this.#title.textContent = species.name || "Species";
-    this.#description.textContent = species.description || "";
-    this.#description.hidden = !species.description;
-
-    const imageURL = species.image_url || species.thumbnail_url;
-    this.#largeImage.hidden = !imageURL;
-    if (imageURL && this.#largeImage.getAttribute("src") !== imageURL) {
-      this.#largeImage.setAttribute("src", imageURL);
-    }
-
-    this.#clearExamples();
-    species.examples.forEach(({ url, label }, index) => {
-      this.#examples.append(this.#createExample(url, label, index));
-    });
-  }
-
-  /** Create one labeled spectrogram and its matching playback controls. */
-  #createExample(url, label, index) {
-    const item = document.createElement("div");
-    item.className = "a2otour-species-example-item";
-
-    const spectrogramContainer = document.createElement("div");
-    spectrogramContainer.className = "site-info-spectrogram";
-
-    if (label !== null) {
-      const exampleLabel = document.createElement("p");
-      exampleLabel.className = "site-info-text a2otour-species-example-label";
-      exampleLabel.textContent = label;
-      item.append(exampleLabel);
-    }
-
-    const spectrogramID = `${this.#dialogID}-spectrogram-${index + 1}`;
-    const spectrogram = document.createElement("oe-spectrogram");
-    spectrogram.id = spectrogramID;
-    spectrogram.className = "site-info-spectrogram-view";
-    spectrogram.setAttribute("src", url);
-    spectrogram.setAttribute("scaling", "stretch");
-    spectrogram.setAttribute("color-map", "grayscale");
-    spectrogram.setAttribute("window-size", "512");
-    spectrogram.setAttribute("window-function", "hamming");
-    spectrogram.setAttribute("brightness", "0.05");
-    spectrogram.setAttribute("contrast", "1.05");
-
-    const player = document.createElement("div");
-    player.className = "site-info-spectrogram-player";
-
-    const controls = document.createElement("oe-media-controls");
-    controls.setAttribute("for", spectrogramID);
-    controls.append(
-      this.#createControlLabel("play-icon", "play-fill", "Play"),
-      this.#createControlLabel("pause-icon", "pause-fill", "Pause"),
-    );
-    player.append(controls);
-    spectrogramContainer.append(spectrogram, player);
-    item.append(spectrogramContainer);
-    return item;
-  }
-
-  /** Create a slotted icon-and-text label for a media-control state. */
-  #createControlLabel(slot, iconName, text) {
-    const label = document.createElement("span");
-    label.slot = slot;
-    label.className = "site-info-spectrogram-action";
-
-    const icon = document.createElement("sl-icon");
-    icon.setAttribute("name", iconName);
-    label.append(icon, document.createTextNode(text));
-    return label;
-  }
-
-  /** Remove mounted example players when the dialog closes or is refreshed. */
-  #clearExamples() {
-    this.#examples?.replaceChildren();
-  }
-
-  /** Close the dialog and remove its mounted example players. */
-  #closeDialog() {
-    if (this.#dialog?.open) {
-      this.#dialog.close();
-    }
-    this.#clearExamples();
+    openSpeciesDialog(this.dataset.speciesDialogId, this.#currentSpeciesData);
   }
 }
 

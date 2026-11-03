@@ -236,6 +236,7 @@
     position: relative;
     max-height: calc(100vh - 2rem);
     overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
 }
 
 .a2otour-species-dialog-close {
