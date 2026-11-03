@@ -1,8 +1,16 @@
+html:has(#contribute-your-verifications) {
+    scroll-behavior: smooth;
+}
 
+@media (prefers-reduced-motion: reduce) {
+    html:has(#contribute-your-verifications) {
+        scroll-behavior: auto;
+    }
+}
 
 .site-information-hero,
 .site-information-why,
-.site-information-projects,
+.site-information-species,
 .site-information-initiative {
     --micro-heading-color: var(--color-text-strong);
     --micro-font-color: var(--color-text);
@@ -54,7 +62,7 @@
         padding-top: 8.5rem;
     }
 
-    sl-button {
+    sl-button.a2o-tour-inline-button {
         margin-top: var(--space-medium);
         --sl-color-primary-600: var(--color-accent);
         --sl-color-primary-500: var(--color-accent);
@@ -73,10 +81,6 @@
         text-align: center;
     }
 
-    .page-back {
-        color: var(--color-surface);
-    }
-
     .site-information-eyebrow {
         margin: 0;
         color: var(--color-accent);
@@ -85,6 +89,17 @@
         font-style: italic;
         font-weight: 500;
         line-height: 2rem;
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 0.15em;
+            text-decoration-color: color-mix(
+                in srgb,
+                currentColor 55%,
+                transparent
+            );
+        }
     }
 
     .site-information-hero-description {
@@ -102,15 +117,35 @@
 .page-back {
     position: absolute;
     grid-column: fullbleed;
-    top: 3rem;
+    top: 1rem;
     left: 5rem;
+    right: var(--space-medium);
     display: flex;
-    align-items: center;
-    gap: var(--space-xsmall);
+    flex-wrap: wrap;
+    column-gap: var(--space-small);
+    row-gap: var(--space-xxsmall);
+
     color: var(--color-text-strong);
-    font-size: var(--font-size-large);
+    font-size: 1.2rem;
     line-height: 2rem;
     text-decoration: none;
+    color: var(--color-surface);
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xsmall);
+        color: var(--color-surface);
+        white-space: nowrap;
+    }
+
+    a + a::before {
+        content: "|";
+    }
+
+    & a:hover span {
+        text-decoration: underline;
+    }
 
     @media (max-width: 64em) {
         left: 2rem;
@@ -118,15 +153,19 @@
 
     @media (max-width: 36em) {
         left: var(--space-medium);
+
+        a + a::before {
+            display: none;
+        }
+
+        a + a {
+            margin-left: calc(32px + var(--space-xsmall));
+        }
     }
 
     sl-icon {
         color: var(--color-accent);
         font-size: 32px;
-    }
-
-    &:hover span {
-        text-decoration: underline;
     }
 }
 
@@ -238,11 +277,11 @@
     }
 }
 
-.site-information-projects {
+.site-information-species {
     padding: var(--section-padding) 0;
     background: var(--color-surface-alt);
 
-    .site-information-projects-inner {
+    .site-information-species-inner {
         grid-column: main;
         display: flex;
         flex-direction: column;
@@ -274,65 +313,23 @@
     }
 }
 
-.site-information-initiative {
-    grid-template-columns: none;
-    justify-items: center;
-    padding: 3rem 0 var(--space-xlarge);
-    background: var(--color-surface-alt);
-    text-align: center;
 
-    @media (max-width: 48em) {
-        padding-block: var(--space-large);
-    }
-
-    h2 {
-        font-size: var(--font-size-large);
-        line-height: 2rem;
-
-        a {
-            color: inherit;
-            text-decoration: underline;
-            text-underline-offset: 0.12em;
-        }
-    }
-}
-
-#extra-footer-content {
+.site-information-species .site-info-title-row {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-medium);
-    margin: 0;
-    padding: var(--space-medium) var(--micro-gutter-size) var(--space-xlarge);
-    background: var(--color-surface-alt);
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-small);
+    margin-top: var(--space-small);
 
-    .oe-footer-row {
+    .site-info-title {
+        min-width: 0;
         margin: 0;
-        padding: 0;
+    }
+
+    & > sl-button.a2o-tour-inline-button {
+        margin-top: 0;
     }
 }
 
-.oe-hero sl-button,
-.site-information-hero sl-button,
-.site-info-link {
-    &::part(base) {
-        align-items: center;
-        height: 3rem;
-        min-height: 0;
-        padding: 0 var(--space-large);
-        font-family: var(--font-body);
-        font-size: var(--font-size-small);
-        font-weight: 500;
-        letter-spacing: 0.1px;
-        line-height: 1.25rem;
-    }
 
-    &::part(label) {
-        padding: 0;
-    }
-}
 
-sl-button.site-info-link::part(base) {
-    height: 2.25rem;
-    padding: 0 var(--space-small);
-}

@@ -1,6 +1,6 @@
 {{- $campaign := .Get "campaign" | default .Page.Params.campaign -}}
 {{- if not $campaign -}}
-    {{- errorf "site-verification requires a campaign parameter or campaign front matter" -}}
+{{- errorf "site-verification requires a campaign parameter or campaign front matter" -}}
 {{- end -}}
 {{- $id := printf "verification-grid-%s" ($campaign | urlize) -}}
 {{- $sitePage := .Page.Parent -}}
@@ -10,8 +10,71 @@
     <span>Back to {{ $sitePage.Title }}</span>
 </a>
 <oe-verification-grid data-campaign="{{ $campaign }}" id="{{ $id }}" grid-size="1" loading-timeout="60">
+    <template>
+        <style>
+            oe-media-controls {
+                --oe-background-color: transparent;
+                --oe-box-shadow: none;
+                --oe-panel-color: var(--color-card);
+                --oe-font-color: var(--color-text);
+                --oe-font-color-lighter: transparent;
+
+                & [slot="play-icon"],
+                & [slot="pause-icon"] {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0;
+                    color: var(--color-text);
+                    font-size: var(--font-size-small);
+                    font-weight: 500;
+                    inline-size: 6em;
+                    justify-content: flex-start;
+
+                    & sl-icon {
+                        font-size: var(--font-size-large);
+                        padding: var(--space-xsmall);
+                    }
+                }
+            }
+
+            .top-line {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding-bottom: var(--space-small);
+
+                &> :last-child {
+                    margin-inline-start: auto;
+                }
+            }
+        </style>
+        <div class="top-line">
+            <oe-subject-tag></oe-subject-tag>
+            <span>
+                <oe-task-meter style="width: 1.6em"></oe-task-meter>
+            </span>
+            <oe-media-controls for="spectrogram">
+                <span slot="play-icon">
+                    <sl-icon name="play-circle-fill" aria-hidden="true"></sl-icon>
+                    Play
+                </span>
+                <span slot="pause-icon">
+                    <sl-icon name="pause-circle-fill" aria-hidden="true"></sl-icon>
+                    Pause
+                </span>
+            </oe-media-controls>
+        </div>
+        <oe-axes>
+            <oe-indicator>
+                <oe-spectrogram id="spectrogram" color-map="grayscale"></oe-spectrogram>
+            </oe-indicator>
+        </oe-axes>
+    </template>
     <oe-verification verified="true" shortcut="y">Yes</oe-verification>
     <oe-verification verified="false" shortcut="n">No</oe-verification>
     <oe-verification verified="unsure" shortcut="u">Unsure</oe-verification>
     <oe-data-source slot="data-source" for="{{ $id }}" allow-downloads="false"></oe-data-source>
+    <div slot="subjects-exhausted">
+        {{ partial "end-of-verification.html" (dict "campaign" $campaign) }}
+    </div>
 </oe-verification-grid>

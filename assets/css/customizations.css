@@ -5,6 +5,24 @@
 @import "./progress-counter-overrides.css";
 @import "./site-information.css";
 
+sl-button.a2o-tour-inline-button {
+    &::part(base) {
+        align-items: center;
+        height: 3rem;
+        min-height: 0;
+        padding: 0 var(--space-large);
+        font-family: var(--font-body);
+        font-size: var(--font-size-small);
+        font-weight: 500;
+        letter-spacing: 0.1px;
+        line-height: 1.25rem;
+    }
+
+    &::part(label) {
+        padding: 0;
+    }
+}
+
 :root {
     --color-surface: #f7f4e5;
     --color-surface-alt: #e0e0d4;
@@ -18,7 +36,7 @@
     --color-on-accent: #000;
     --color-white: #fff;
     /* --color-hero-fade: #224119; riflebird */
-	--color-hero-fade: #443e33;
+    --color-hero-fade: #443e33;
     --color-map-ink: #243238;
     --color-map-marker: #c7623d;
     --color-map-marker-active: #f2b66f;
@@ -111,6 +129,10 @@ body > main {
     margin-bottom: var(--space-small);
     color: var(--color-surface);
     font-size: var(--font-size-medium);
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 #verify-page > * {
@@ -126,13 +148,77 @@ body > main {
 }
 
 #verify-page oe-verification-grid[grid-size="1"] {
-    height: 40rem;
+    --verification-grid-available-height: calc(
+        100dvh - var(--space-xlarge) - 2rem - var(--space-small)
+    );
+
+    height: min(56rem, var(--verification-grid-available-height));
+    min-height: min(40rem, var(--verification-grid-available-height));
+    max-height: min(56rem, var(--verification-grid-available-height));
+
+    /* Consider this alternative:
+    height: 66dvh;
+    
+    // Disable the max-height restriction in theme, no longer required.
+    max-height: none;
+    */
+
+    /* Allow the verification grid to expand when a message overlay is present */
+    &[data-message-overlay] {
+        max-height: none !important;
+        height: auto;
+    }
 }
 
-.acknowledgement-of-country {
-    max-width: 71rem;
+#extra-footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-medium);
+    margin: 0;
+    padding: var(--space-medium) var(--micro-gutter-size) var(--space-xlarge);
+    /* background: var(--color-surface-alt); */
+
+    .oe-footer-row {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+
+
+.call-detective-initiative {
+
+    --micro-heading-color: var(--color-text-strong);
+    --micro-font-color: var(--color-text);
+    grid-column: fullbleed;
+    display: grid;
+    grid-template-columns: none;
+    margin: 0;
+    color: var(--micro-font-color);
+    padding-bottom: 0.6rem;
+
+    h2 {
+        line-height: 2.75rem;
+        color: var(--micro-heading-color);
+        margin: 0;
+        font-size: var(--font-size-small);
+        line-height: 1rem;
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 0.12em;
+        }
+    }
+
+    justify-items: center;
     text-align: center;
-    margin-top: var(--space-medium);
+
+    @media (max-width: 48em) {
+        padding-block: var(--space-large);
+    }
+
 }
 
 
@@ -147,6 +233,7 @@ body {
         grid-template-columns: subgrid;
         align-content: start;
         background: var(--color-surface-alt);
+        background: var(--color-surface);
 
         & > * {
             grid-column: fullbleed;
@@ -179,7 +266,6 @@ body {
 
             &:nth-child(2)::before {
                 margin-right: var(--space-xsmall);
-                content: "·";
             }
 
             li,

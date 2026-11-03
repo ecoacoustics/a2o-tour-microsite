@@ -1,7 +1,7 @@
 +++
-title = "Daintree Rainforest Observatory"
+title = "Daintree Rainforest"
 type = "site-information"
-site_name = "Daintree Rainforest Observatory"
+site_name = "Daintree Rainforest"
 aliases = ["/site-information/daintree/"]
 banner_description = """
 The Daintree Rainforest Observatory captures sound from one of Australia's richest tropical ecosystems.

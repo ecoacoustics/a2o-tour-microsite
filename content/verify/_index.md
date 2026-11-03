@@ -5,7 +5,7 @@ render = "never"
 list = "never"
 +++
 
-<oe-verification-grid data-campaign="Daintree Rainforest Observatory" id="verification-grid" grid-size="1">
+<oe-verification-grid data-campaign="Daintree Rainforest" id="verification-grid" grid-size="1">
     <!-- Insert a template element to give non-default attibutes to the spectrogram, example below. 
     https://oe-web-components.netlify.app/examples/create-verification-grid/ --> 
     <!-- <template>

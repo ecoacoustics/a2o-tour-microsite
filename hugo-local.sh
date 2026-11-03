@@ -5,7 +5,8 @@ set -a
 set +a
 
 if [ "${1:-}" = "server" ]; then
-	set -- "$@" -DEF --tlsAuto --disableFastRender --navigateToChanged --poll 700ms --ignoreCache --noHTTPCache
+	rm -rf "$(dirname "$0")/resources/_gen"
+	set -- "$@" -DEF --tlsAuto --disableFastRender --navigateToChanged --poll 700ms --ignoreCache --noHTTPCache --gc --renderToMemory
 fi
 
 exec hugo "$@"

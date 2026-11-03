@@ -1,6 +1,1 @@
-{{- $campaign := .Get "campaign" -}}
-{{- $leaderboardSize := .Get "leaderboard-size" -}}
-{{ partial "progress-counter.html" (dict
-    "campaign" $campaign
-    "leaderboardSize" $leaderboardSize
-) }}
+{{ partial "progress-counter.html" .Params }}
