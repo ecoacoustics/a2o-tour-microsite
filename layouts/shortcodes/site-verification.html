@@ -8,7 +8,6 @@
 
 
 
-/* render a js object with the species-examples for this campaign, to be used by the species example component */
 {{- $campaignSites := where site.Params.map.sites "campaign" $campaign -}}
 {{- if eq (len $campaignSites) 0 -}}
     {{- errorf "site-verification campaign %q is not configured in params.map.sites" $campaign -}}
@@ -30,22 +29,13 @@
     {{- else -}}
         {{- warnf "site-verification: species %q in campaign %q has no configured image" $species.name $campaign -}}
     {{- end -}}
-    {{- $exampleURLs := slice -}}
-    {{- range $index, $example := ($species.examples | default slice) -}}
-        {{- with $example.url -}}
-            {{- $exampleURLs = $exampleURLs | append (dict
-                "label" (printf "Example %d" (add $index 1))
-                "url" .
-            ) -}}
-        {{- end -}}
-    {{- end -}}
     {{- $speciesData = $speciesData | append (dict
         "name" $species.name
         "description" $species.description
         "tag_ids" ($species.tag_ids | default slice)
         "thumbnail_url" $thumbnailURL
         "image_url" $imageURL
-        "examples" $exampleURLs
+        "examples" ($species.examples | default slice)
     ) -}}
 {{- end -}}
 
@@ -100,7 +90,7 @@
         </style>
         <div class="top-line">
             <oe-subject-tag></oe-subject-tag>
-            {{/*  <a2otour-species-example data-species-data-id="{{ $speciesDataID }}"></a2otour-species-example>  */}}
+            <a2otour-species-example data-species-data-id="{{ $speciesDataID }}"></a2otour-species-example>
             <span>
                 <oe-task-meter style="width: 1.6em"></oe-task-meter>
             </span>

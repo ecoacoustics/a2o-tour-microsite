@@ -505,6 +505,8 @@ params:
               image: "images/species/Painted-Honeyeater.jpg"
               examples:
                 - url: "https://api.acousticobservatory.org/audio_recordings/1452067/media.mp3?end_offset=745&start_offset=725"
+                - url: "https://api.acousticobservatory.org/audio_recordings/1452067/media.mp3?end_offset=45&start_offset=25"
+                  label: "song" # this is a fake temporal example to test multiple examples
             - name: "Horsfield's Bronze Cuckoo"
               description: "A small bronze-green cuckoo that lays its eggs in other birds' nests and gives a descending, whistled call."
               tag_ids: [26737]

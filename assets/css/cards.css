@@ -208,10 +208,15 @@
     }
 }
 
+.species-verification-example-card .site-info-image {
+    height: auto;
+    aspect-ratio: 3 / 2;
+}
+
 /* species examples component on verificaton grid. styling Species Dialog */
 
 .a2otour-species-dialog {
-    width: min(40rem, calc(100vw - 2rem));
+    width: min(26rem, calc(100vw - 2rem));
     max-width: calc(100vw - 2rem);
     max-height: calc(100vh - 2rem);
     margin: auto;
@@ -254,6 +259,26 @@
 .a2otour-species-dialog-close:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 2px;
+}
+
+.a2otour-species-dialog-close::before,
+.a2otour-species-dialog-close::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.875rem;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    content: "";
+}
+
+.a2otour-species-dialog-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.a2otour-species-dialog-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .a2otour-species-examples {
