@@ -30,6 +30,16 @@ credits:
     source: https://www.birdlifephotography.org.au/
     license: All rights reserved
     image: images/species/Victorias-Riflebird.jpg
+  - title: Sulphur-crested Cockatoo
+    author: Austen Armstrong
+    source: https://www.inaturalist.org/observations/283066029
+    license: CC-BY
+    image: images/species/Sulphur-crested-Cockatoo.jpg
+  - title: Orange-footed Scrubfowl
+    author: Lek Khauv
+    source: https://www.inaturalist.org/observations/2357400
+    license: CC-BY
+    image: images/species/Orange-footed-Scrubfowl.jpg
 
   # Mount Barney
   - title: Glossy-black Cockatoo
@@ -109,6 +119,11 @@ credits:
     source: https://www.birdlifephotography.org.au/
     license: All rights reserved
     image: images/species/Rainbow-Bee-eater.jpg
+  - title: Magpie-lark
+    author: Thomas Mesaglio
+    source: https://www.inaturalist.org/observations/38822930
+    license: CC-BY
+    image: images/species/Magpie-lark.jpg
 
   # Monjebup Reserve
   - title: Western Whipbird
@@ -126,6 +141,31 @@ credits:
     source: https://www.birdlifephotography.org.au/
     license: All rights reserved
     image: images/species/Stubble-Quail.jpg
+  - title: Western Banjo Frog
+    author: Connor Margetts
+    source: https://www.inaturalist.org/observations/285940837
+    license: CC0
+    image: images/species/Western-Banjo-Frog.jpg
+  - title: Australian Magpie
+    author: Donald Davesne
+    source: https://www.inaturalist.org/observations/221578689
+    license: CC-BY
+    image: images/species/Australian-Magpie.jpg
+  - title: Grey Fantail
+    author: Adam Jackson
+    source: https://www.inaturalist.org/observations/193294151
+    license: CC0
+    image: images/species/Grey-Fantail.jpg
+  - title: Red Wattlebird
+    author: Donald Davesne
+    source: https://www.inaturalist.org/observations/208259579
+    license: CC-BY
+    image: images/species/Red-Wattlebird.jpg
+  - title: Western Whistler
+    author: Melissa Doherty
+    source: https://www.inaturalist.org/observations/149383521
+    license: CC0
+    image: images/species/Western-Whistler.jpg
 
   # Marshmead
   - title: Bell Miner
@@ -152,6 +192,26 @@ credits:
     author: David White
     source: https://www.inaturalist.org/photos/60158566
     image: images/species/yellow-bellied-glider.jpeg
+  - title: Southern Brown Tree Frog
+    author: unmotivated_frog
+    source: https://www.inaturalist.org/observations/325641717
+    license: CC-BY
+    image: images/species/Southern-Brown-Tree-Frog.jpg
+  - title: Common Eastern Froglet
+    author: Joshua S. Martin
+    source: https://www.inaturalist.org/observations/358622801
+    license: CC0
+    image: images/species/Common-Eastern-Froglet.jpg
+  - title: Pied Currawong
+    author: Russell Best
+    source: https://www.inaturalist.org/observations/47720023
+    license: CC-BY
+    image: images/species/Pied-Currawong.jpg
+  - title: Gang-gang Cockatoo
+    author: John Cull
+    source: https://www.inaturalist.org/observations/155288719
+    license: CC0
+    image: images/species/Gang-gang-Cockatoo.jpg
 
   # Binya
   - title: Painted Honeyeater
@@ -179,8 +239,28 @@ credits:
     source: https://www.birdlifephotography.org.au/
     license: All rights reserved
     image: images/species/Tawny-Frogmouth.jpg
+  - title: Spotted Marsh Frog
+    author: unmotivated_frog
+    source: https://www.inaturalist.org/observations/323150421
+    license: CC-BY
+    image: images/species/Spotted-Marsh-Frog.jpg
+  - title: Plains Froglet
+    author: Connor Margetts
+    source: https://www.inaturalist.org/observations/65314135
+    license: CC-BY
+    image: images/species/Plains-Froglet.jpg
+  - title: Peron's Tree Frog
+    author: Kerri-Lee Harris
+    source: https://www.inaturalist.org/observations/60294481
+    license: CC-BY
+    image: images/species/Perons-Tree-Frog.jpg
+  - title: Rufous Whistler
+    author: Adam Jackson
+    source: https://www.inaturalist.org/observations/368209035
+    license: CC0
+    image: images/species/Rufous-Whistler.jpg
 ---
 
 Many thanks to the photographers who provided the images for this website. We really appreciate it.
 
-Photographers retain copyright of their images. All bird photographs are from [BirdLife Photography](https://www.birdlifephotography.org.au/) and are used with permission; they may not be copied, edited or reused without the photographer's permission.
+Photographers retain copyright of their images. Photographs from [BirdLife Photography](https://www.birdlifephotography.org.au/) are used with permission; they may not be copied, edited or reused without the photographer's permission. Photographs from [iNaturalist](https://www.inaturalist.org/) are used under the Creative Commons licence shown with each image.
