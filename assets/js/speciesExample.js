@@ -16,6 +16,24 @@
 
 const GRID_TILE_CONTEXT = "oe-grid-tile-context";
 
+const dialogElements = new WeakMap();
+
+function getDialogElements(dialog) {
+  let elements = dialogElements.get(dialog);
+  if (!elements) {
+    elements = {
+      largeImage: dialog.querySelector("[data-species-dialog-image]"),
+      title: dialog.querySelector("[data-species-dialog-title]"),
+      description: dialog.querySelector("[data-species-dialog-description]"),
+      examples: dialog.querySelector("[data-species-dialog-examples]"),
+      exampleTemplate: dialog.querySelector("[data-species-example-template]"),
+      closeButton: dialog.querySelector(".a2otour-species-dialog-close"),
+    };
+    dialogElements.set(dialog, elements);
+  }
+  return elements;
+}
+
 /**
  * Populate and display the page-defined dialog for a selected species.
  * @param {string} dialogID ID of the dialog in the verification page.
@@ -27,12 +45,8 @@ function openSpeciesDialog(dialogID, species) {
     throw new Error(`Species example dialog was not found: ${dialogID}`);
   }
 
-  const largeImage = dialog.querySelector("[data-species-dialog-image]");
-  const title = dialog.querySelector("[data-species-dialog-title]");
-  const description = dialog.querySelector("[data-species-dialog-description]");
-  const examples = dialog.querySelector("[data-species-dialog-examples]");
-  const exampleTemplate = dialog.querySelector("[data-species-example-template]");
-  const closeButton = dialog.querySelector(".a2otour-species-dialog-close");
+  const { largeImage, title, description, examples, exampleTemplate, closeButton } =
+    getDialogElements(dialog);
 
   closeButton.onclick = () => dialog.close();
   dialog.onclose = () => {
