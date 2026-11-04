@@ -149,7 +149,7 @@ body > main {
 
 #verify-page oe-verification-grid[grid-size="1"] {
     --verification-grid-available-height: calc(
-        100dvh - var(--space-xlarge) - 2rem - var(--space-small)
+        100dvh - var(--space-xlarge) - 4rem - var(--space-small)
     );
 
     height: min(56rem, var(--verification-grid-available-height));

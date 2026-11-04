@@ -1,5 +1,6 @@
 .map-callout,
-.site-card {
+.site-card,
+.species-verification-example-card {
     overflow: hidden;
     padding: var(--space-medium);
     border: 0;
@@ -178,7 +179,8 @@
     width: min(100%, var(--content-width));
 }
 
-.site-card {
+.site-card,
+.species-verification-example-card {
     display: flex;
     flex-direction: column;
     min-width: 0;
@@ -204,4 +206,90 @@
     .site-info-spectrogram-view {
         height: 5rem;
     }
+}
+
+.species-verification-example-card .site-info-image {
+    height: auto;
+    aspect-ratio: 3 / 2;
+}
+
+/* species examples component on verificaton grid. styling Species Dialog */
+
+.a2otour-species-dialog {
+    width: min(26rem, calc(100vw - 2rem));
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+    margin: auto;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+}
+
+.a2otour-species-dialog::backdrop {
+    background: rgb(0 0 0 / 55%);
+    backdrop-filter: blur(2px);
+}
+
+.species-verification-example-card {
+    position: relative;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
+}
+
+.a2otour-species-dialog-close {
+    position: absolute;
+    top: var(--space-medium);
+    right: var(--space-medium);
+    z-index: 1;
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-card);
+    color: var(--color-text-strong);
+    font-size: var(--font-size-large);
+    cursor: pointer;
+}
+
+.a2otour-species-dialog-close:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.a2otour-species-dialog-close::before,
+.a2otour-species-dialog-close::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.875rem;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    content: "";
+}
+
+.a2otour-species-dialog-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.a2otour-species-dialog-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.a2otour-species-examples {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+    margin-top: var(--space-medium);
+}
+
+.a2otour-species-example-label {
+    margin-bottom: 0;
+    font-weight: 700;
 }

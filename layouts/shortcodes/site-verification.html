@@ -5,10 +5,102 @@
 {{- $id := printf "verification-grid-%s" ($campaign | urlize) -}}
 {{- $sitePage := .Page.Parent -}}
 
+
+
+
+{{- $campaignSites := where site.Params.map.sites "campaign" $campaign -}}
+{{- if eq (len $campaignSites) 0 -}}
+    {{- errorf "site-verification campaign %q is not configured in params.map.sites" $campaign -}}
+{{- end -}}
+{{- $campaignSite := index $campaignSites 0 -}}
+{{- $speciesDataID := printf "%s-species-data-%d" $id .Ordinal -}}
+{{- $dialogID := printf "%s-species-dialog" $speciesDataID -}}
+{{- $speciesData := slice -}}
+{{- range $species := $campaignSite.content.species -}}
+    {{- $thumbnailURL := "" -}}
+    {{- $imageURL := "" -}}
+    {{- with $species.image -}}
+        {{- $imagePath := . -}}
+        {{- with resources.Get $imagePath -}}
+            {{- $thumbnailURL = (.Fill "128x128 center webp").RelPermalink -}}
+            {{- $imageURL = (.Fill "600x400 center webp").RelPermalink -}}
+        {{- else -}}
+            {{- warnf "site-verification: image %q for species %q in campaign %q was not found in Hugo assets" $imagePath $species.name $campaign -}}
+        {{- end -}}
+    {{- else -}}
+        {{- warnf "site-verification: species %q in campaign %q has no configured image" $species.name $campaign -}}
+    {{- end -}}
+    {{- $speciesData = $speciesData | append (dict
+        "name" $species.name
+        "description" $species.description
+        "tag_ids" ($species.tag_ids | default slice)
+        "thumbnail_url" $thumbnailURL
+        "image_url" $imageURL
+        "examples" ($species.examples | default slice)
+    ) -}}
+{{- end -}}
+
+
+
 <a class="page-back" href="{{ $sitePage.RelPermalink }}">
     <sl-icon name="arrow-left" aria-hidden="true"></sl-icon>
     <span>Back to {{ $sitePage.Title }}</span>
 </a>
+<script type="application/json" id="{{ $speciesDataID }}">{{ $speciesData | jsonify | safeJS }}</script>
+<dialog
+    id="{{ $dialogID }}"
+    class="a2otour-species-dialog"
+    aria-labelledby="{{ $dialogID }}-title"
+>
+    <article class="species-verification-example-card">
+        <button
+            type="button"
+            class="a2otour-species-dialog-close"
+            aria-label="Close species details"
+        ></button>
+        <div class="site-info">
+            <div class="site-info-visual">
+                <img class="site-info-image" data-species-dialog-image alt="">
+                <h2 class="site-info-title" data-species-dialog-title id="{{ $dialogID }}-title"></h2>
+            </div>
+            <div class="site-info-content">
+                <p class="site-info-text" data-species-dialog-description></p>
+                <div class="a2otour-species-examples" data-species-dialog-examples></div>
+                <template data-species-example-template>
+                    <div class="a2otour-species-example-item">
+                        <p class="site-info-text a2otour-species-example-label" data-example-label></p>
+                        <div class="site-info-spectrogram">
+                            <oe-spectrogram
+                                class="site-info-spectrogram-view"
+                                scaling="stretch"
+                                color-map="grayscale"
+                                window-size="512"
+                                window-function="hamming"
+                                brightness="0.05"
+                                contrast="1.05"
+                            ></oe-spectrogram>
+                            <div class="site-info-spectrogram-player">
+                                <oe-media-controls>
+                                    <span slot="play-icon" class="site-info-spectrogram-action">
+                                        <sl-icon name="play-fill" aria-hidden="true"></sl-icon>
+                                        Play
+                                    </span>
+                                    <span slot="pause-icon" class="site-info-spectrogram-action">
+                                        <sl-icon name="pause-fill" aria-hidden="true"></sl-icon>
+                                        Pause
+                                    </span>
+                                </oe-media-controls>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </article>
+</dialog>
+{{- with resources.Get "js/speciesExample.js" | fingerprint }}
+<script src="{{ .RelPermalink }}" type="module" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}
 <oe-verification-grid data-campaign="{{ $campaign }}" id="{{ $id }}" grid-size="1" loading-timeout="60">
     <template>
         <style>
@@ -50,6 +142,10 @@
         </style>
         <div class="top-line">
             <oe-subject-tag></oe-subject-tag>
+            <a2otour-species-example
+                data-species-data-id="{{ $speciesDataID }}"
+                data-species-dialog-id="{{ $dialogID }}"
+            ></a2otour-species-example>
             <span>
                 <oe-task-meter style="width: 1.6em"></oe-task-meter>
             </span>
