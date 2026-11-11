@@ -1,21 +1,18 @@
 {{- $campaign := .campaign -}}
-{{- $mapParams := site.Params.map | default dict -}}
-{{- $sites := $mapParams.sites | default slice -}}
-{{- $currentSites := where $sites "campaign" $campaign -}}
-{{- if not $currentSites -}}
-    {{- errorf "end-of-verification campaign %q is not configured in params.map.sites" $campaign -}}
-{{- end -}}
-{{- $currentSite := index $currentSites 0 -}}
-{{- $speciesNames := dict -}}
-{{- range $species := $currentSite.content.species -}}
-    {{- $focusValue := delimit ($species.tag_ids | default slice) "," -}}
-    {{- $speciesNames = merge $speciesNames (dict $focusValue $species.name) -}}
-{{- end -}}
-{{- $orderedSites := slice $currentSite -}}
-{{- range $site := $sites -}}
-    {{- if ne $site.campaign $campaign -}}
-        {{- $orderedSites = $orderedSites | append $site -}}
+{{- $locationID := .locationID -}}
+{{- $currentSite := partial "a2o/location-by-id.html" (dict "locationID" $locationID "source" "end-of-verification") -}}
+{{- $sites := slice $currentSite -}}
+{{- range $id, $site := hugo.Data.locations -}}
+    {{- if ne $id $locationID -}}
+        {{- $sites = $sites | append $site -}}
     {{- end -}}
+{{- end -}}
+{{- $speciesLookup := slice -}}
+{{- range $species := $currentSite.content.species -}}
+    {{- $speciesLookup = $speciesLookup | append (dict
+        "name" $species.name
+        "tag_ids" ($species.tag_ids | default slice)
+    ) -}}
 {{- end -}}
 
 <style>
@@ -174,7 +171,7 @@
     <section class="choose-a-location end-of-verification-subsection">
         <p class="end-of-verification-intro" id="end-of-verification-site-intro">Or continue to a different location.</p>
         <div class="cards-grid end-of-verification-grid">
-            {{- range $site := $orderedSites -}}
+            {{- range $site := $sites -}}
                 <a class="end-of-verification-card end-of-verification-site-card" href="{{ $site.page }}" data-campaign="{{ $site.campaign }}">
                         {{- with $site.content.image -}}
                             {{- with resources.Get . -}}
@@ -189,24 +186,19 @@
     </section>
 </section>
 
-<script>
-    // map of species tag IDs to species names
-    {{/*  const speciesNames = {{ $speciesNames | jsonify | safeJS }};  */}}
-    const campaign = {{ $campaign | jsonify | safeJS }};
-</script>
-
 <script type="module">
 (() => {
+    const campaign = {{ $campaign | jsonify | safeJS }};
+    const speciesLookup = {{ $speciesLookup | jsonify | safeJS }};
     const focusValue = new URLSearchParams(window.location.search).get("focus");
     const targetIds = focusValue
         ? focusValue.split(",").map(Number).filter(Number.isInteger)
         : [];
 
-    const speciesName = globalThis.siteParams.map.sites.flatMap(s => s.content.species).find(sp => sp.tag_ids.length === targetIds.length && targetIds.every(id => sp.tag_ids.includes(id)))?.name;
-
-
-
-    {{/*  const speciesName = speciesNames[focusValue];  */}}
+    const speciesName = speciesLookup.find((species) =>
+        species.tag_ids.length === targetIds.length &&
+        targetIds.every((id) => species.tag_ids.includes(id))
+    )?.name;
     const container = document.querySelector(".end-of-verification-container");
     const speciesSection = container?.querySelector(".choose-a-species");
     const locationSection = container?.querySelector(".choose-a-location");

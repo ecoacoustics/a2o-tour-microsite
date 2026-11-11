@@ -1,5 +1,7 @@
-.map-callout,
-.site-card,
+.micro-map-callout,
+.micro-map-card,
+.species-card,
+.image-credit-card,
 .species-verification-example-card {
     overflow: hidden;
     padding: var(--space-medium);
@@ -37,9 +39,9 @@
     flex-direction: column;
 }
 
-/* TODO: rename 'site-card' to a more general a2o-tour-card */
-.site-card sl-button.a2o-tour-inline-button,
-.map-callout sl-button.a2o-tour-inline-button {
+.species-card sl-button.a2o-tour-inline-button,
+.micro-map-card sl-button.a2o-tour-inline-button,
+.micro-map-callout sl-button.a2o-tour-inline-button {
     --sl-color-primary-600: var(--color-text);
     --sl-color-primary-500: var(--color-text);
     --sl-color-neutral-0: var(--color-on-dark);
@@ -52,8 +54,12 @@
     }
 }
 
-#home-page > .site-cards,
-#image-credits-page > .site-cards {
+.micro-map-card .micro-map-card-content {
+    padding: 0;
+}
+
+#home-page > .micro-map-cards,
+#image-credits-page > .image-credits-cards {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: fullbleed;
@@ -62,13 +68,15 @@
     background: var(--color-surface-alt);
 }
 
-.site-cards {
+.image-credits-cards,
+.micro-map-cards {
     & > * {
         grid-column: main;
     }
 
     & > h1,
-    & > h2 {
+    & > h2,
+    & > .micro-map-cards-title {
         margin-bottom: var(--space-xsmall);
         line-height: 2.75rem;
         color: var(--color-text-strong);
@@ -76,7 +84,7 @@
     }
 }
 
-.site-cards-intro {
+.card-intro {
     margin-bottom: var(--space-xlarge);
     color: var(--color-text);
     font-size: var(--font-size-medium);
@@ -154,7 +162,7 @@
     }
 }
 
-.image-credit .site-info-text {
+.image-credit-card .site-info-text {
     display: flex;
     flex-wrap: wrap;
     column-gap: 0.4em;
@@ -167,7 +175,8 @@
     }
 }
 
-.cards-grid {
+.cards-grid,
+.micro-map-cards-grid {
     display: grid;
     grid-template-columns: repeat(
         auto-fill,
@@ -179,7 +188,9 @@
     width: min(100%, var(--content-width));
 }
 
-.site-card,
+.species-card,
+.image-credit-card,
+.micro-map-card,
 .species-verification-example-card {
     display: flex;
     flex-direction: column;

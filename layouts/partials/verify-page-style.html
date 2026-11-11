@@ -1,14 +1,14 @@
 {{- with .Params.verify_style -}}
   {{- . -}}
 {{- else -}}
-  {{- range where site.Params.map.sites "campaign" .Params.campaign -}}
-    {{- with .content.image -}}
+  {{- $locationPage := .Parent -}}
+  {{- $location := partial "a2o/location-by-id.html" (dict "locationID" $locationPage.Params.location_id "source" $locationPage.File.Path) -}}
+  {{- with $location.content.image -}}
       {{- with resources.Get . -}}
         background-image: url('{{ (.Fill "1600x500 center webp").RelPermalink }}');
         background-position: center top;
         background-size: cover;
         background-repeat: no-repeat;
       {{- end -}}
-    {{- end -}}
   {{- end -}}
 {{- end -}}

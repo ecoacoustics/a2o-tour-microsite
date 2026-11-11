@@ -1,12 +1,12 @@
 {{ define "main" }}
 <div id="image-credits-page" class="page">
-  <section class="site-cards" aria-labelledby="image-credits-title">
+  <section class="image-credits-cards" aria-labelledby="image-credits-title">
     <a class="page-back" href="/">
       <sl-icon name="arrow-left" aria-hidden="true"></sl-icon>
       <span>Ecoacoustic Tour of Australia</span>
     </a>
     <h1 id="image-credits-title">{{ .Title }}</h1>
-    {{ with .Content }}<div class="site-cards-intro">{{ . }}</div>{{ end }}
+    {{ with .Content }}<div class="card-intro">{{ . }}</div>{{ end }}
 
     <div class="cards-grid">
       {{- $licenseLinks := dict
@@ -16,7 +16,7 @@
       -}}
       {{ range $credit := .Params.credits }}
         {{ $image := resources.Get $credit.image }}
-        <article class="site-card image-credit">
+        <article class="image-credit-card">
           <div class="site-info">
             <div class="site-info-visual">
               {{ with $image }}

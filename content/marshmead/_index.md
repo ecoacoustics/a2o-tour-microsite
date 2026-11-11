@@ -2,6 +2,7 @@
 title = "Marshmead"
 type = "site-information"
 site_name = "Marshmead"
+location_id = "marshmead"
 aliases = ["/site-information/marshmead/"]
 banner_description = """
 Marshmead records the soundscape of tall coastal forest in far East Gippsland.
