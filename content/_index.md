@@ -19,4 +19,4 @@ title="<span class='home-hero-eyebrow'>Australian Acoustic Observatory</span><sp
 {{< progress-counter >}}
 {{< /section >}}
 
-{{< map-cards section="maps/a2otour" id="tour-map-cards" title="Recording locations" intro="Explore the diverse recording locations and help verify calls from each site." >}}
+{{< map-cards section="maps/a2otour" id="tour-map-cards" title="Recording locations" intro="Explore the diverse recording locations and help verify calls from each site." grid="fixed-width" />}}

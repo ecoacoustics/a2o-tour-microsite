@@ -174,12 +174,17 @@ html:has(#home-page) {
     .micro-map-callout {
         width: 19rem;
         max-width: 100%;
-        border-radius: var(--radius-callout);
-        box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
+
+        &::part(base) {
+            border-radius: var(--radius-callout);
+            box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
+        }
     }
 
     .micro-map-onboarding-callout {
         display: none;
+        border-radius: var(--radius-callout);
+        box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
     }
 
     .micro-map-callout-close {

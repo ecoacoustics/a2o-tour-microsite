@@ -1,19 +1,37 @@
-.micro-map-callout,
-.micro-map-card,
-.species-card,
-.image-credit-card,
+.micro-map-callout:not(sl-card),
 .species-verification-example-card {
     overflow: hidden;
     padding: var(--space-medium);
     border: 0;
     border-radius: var(--radius-card);
     background: var(--color-card);
+}
 
-    .site-info-image {
-        width: 100%;
-        height: 10.5rem;
-        object-fit: cover;
-    }
+.micro-map-callout::part(base),
+.micro-cards-fixed-width sl-card::part(base) {
+    overflow: hidden;
+    border: 0;
+    border-radius: var(--radius-card);
+    background: var(--color-card);
+    box-shadow: none;
+}
+
+.micro-cards-fixed-width sl-card::part(body) {
+    display: flex;
+    flex-direction: column;
+}
+
+.micro-cards-fixed-width sl-card::part(body),
+.micro-map-callout::part(body) {
+    padding: var(--space-medium);
+}
+
+.micro-map-callout .site-info-image,
+.micro-cards-fixed-width sl-card .site-info-image,
+.species-verification-example-card .site-info-image {
+    width: 100%;
+    height: 10.5rem;
+    object-fit: cover;
 }
 
 .site-info-visual {
@@ -39,8 +57,7 @@
     flex-direction: column;
 }
 
-.species-card sl-button.a2o-tour-inline-button,
-.micro-map-card sl-button.a2o-tour-inline-button,
+.micro-cards-fixed-width sl-card sl-button.a2o-tour-inline-button,
 .micro-map-callout sl-button.a2o-tour-inline-button {
     --sl-color-primary-600: var(--color-text);
     --sl-color-primary-500: var(--color-text);
@@ -52,10 +69,6 @@
         height: 2.25rem;
         padding: 0 var(--space-small);
     }
-}
-
-.micro-map-card .micro-map-card-content {
-    padding: 0;
 }
 
 #home-page > .micro-map-cards,
@@ -162,7 +175,7 @@
     }
 }
 
-.image-credit-card .site-info-text {
+.image-credit-meta {
     display: flex;
     flex-wrap: wrap;
     column-gap: 0.4em;
@@ -175,48 +188,29 @@
     }
 }
 
-.cards-grid,
-.micro-map-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(min(100%, var(--card-width)), var(--card-width))
-    );
-    justify-content: center;
-    gap: var(--space-large);
-    justify-self: center;
-    width: min(100%, var(--content-width));
-}
-
-.species-card,
-.image-credit-card,
-.micro-map-card,
 .species-verification-example-card {
     display: flex;
     flex-direction: column;
     min-width: 0;
+}
 
-    .site-info {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-    }
+.micro-cards-fixed-width sl-card .site-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
 
-    .site-info-content {
-        flex: 1;
-    }
+.micro-cards-fixed-width sl-card .site-info-content,
+.micro-cards-fixed-width sl-card .site-info-text {
+    flex: 1;
+}
 
-    .site-info-text {
-        flex: 1;
-    }
+.micro-cards-fixed-width sl-card .site-info-link {
+    margin-top: var(--space-xsmall);
+}
 
-    .site-info-link {
-        margin-top: var(--space-xsmall);
-    }
-
-    .site-info-spectrogram-view {
-        height: 5rem;
-    }
+.micro-cards-fixed-width sl-card .site-info-spectrogram-view {
+    height: 5rem;
 }
 
 .species-verification-example-card .site-info-image {

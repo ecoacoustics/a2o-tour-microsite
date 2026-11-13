@@ -153,7 +153,7 @@
     <h2 id="end-of-verification-species-title"></h2>
     <section class="choose-a-species end-of-verification-subsection">
     <p class="end-of-verification-intro">Choose another species from <a href="{{ $currentSite.page }}">{{ $campaign }}</a>.</p>
-        <div class="cards-grid end-of-verification-grid">
+        <div class="end-of-verification-grid">
             {{- range $species := $currentSite.content.species -}}
                 {{- $focusValue := delimit ($species.tag_ids | default slice) "," -}}
                 {{- $speciesVerifyURL := printf "%sverify/?focus=%s" $currentSite.page $focusValue -}}
@@ -170,7 +170,7 @@
     </section>
     <section class="choose-a-location end-of-verification-subsection">
         <p class="end-of-verification-intro" id="end-of-verification-site-intro">Or continue to a different location.</p>
-        <div class="cards-grid end-of-verification-grid">
+        <div class="end-of-verification-grid">
             {{- range $site := $sites -}}
                 <a class="end-of-verification-card end-of-verification-site-card" href="{{ $site.page }}" data-campaign="{{ $site.campaign }}">
                         {{- with $site.content.image -}}

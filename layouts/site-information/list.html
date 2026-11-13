@@ -78,7 +78,7 @@
     <div class="site-information-species-inner">
         <h2>Contribute Your Verifications</h2>
         <p>Google's Perch AI detected calls for these species. Can you help us verify the name matches the sound for each species? You can see some examples below.</p>
-        <div class="cards-grid">
+        <div class="micro-cards-fixed-width">
             {{ range .content.species }}
                 {{ $audio := "" }}
                 {{ range first 1 (.examples | default slice) }}
@@ -92,7 +92,7 @@
                         {{ $speciesImage = (.Fill "600x400 center webp").RelPermalink }}
                     {{ end }}
                 {{ end }}
-                <article class="species-card">
+                <sl-card>
                     <div class="site-info">
                         <div class="site-info-visual">
                             {{ with $speciesImage }}<img class="site-info-image" src="{{ . }}" alt="{{ $speciesName }}" loading="lazy">{{ end }}
@@ -140,7 +140,7 @@
 
                         </div>
                     </div>
-                </article>
+                </sl-card>
             {{ end }}
         </div>
     </div>
