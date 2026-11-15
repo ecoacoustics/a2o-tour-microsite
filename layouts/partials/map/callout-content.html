@@ -29,7 +29,7 @@
 {{- $clip := index $clips 0 | default dict -}}
 {{- $audio := $clip.url -}}
 {{- $audioLabel := $clip.name -}}
-{{- $spectrogramID := printf "%s-%s" $spectrogramPrefix ($location.campaign | urlize) -}}
+{{- $spectrogramID := printf "%s-%s" $spectrogramPrefix ($location.name | urlize) -}}
 {{- $image := "" -}}
 {{- with $location.content.image -}}
     {{- with resources.Get . -}}
@@ -39,8 +39,8 @@
 
 <div class="site-info">
     <div class="site-info-visual">
-        {{ with $image }}<img class="site-info-image" src="{{ . }}" alt="{{ $location.campaign }} field location">{{ end }}
-        <h3 class="site-info-title">{{ $location.campaign }}</h3>
+        {{ with $image }}<img class="site-info-image" src="{{ . }}" alt="{{ $location.name }} field location">{{ end }}
+        <h3 class="site-info-title">{{ $location.name }}</h3>
     </div>
 
     <div class="site-info-content">

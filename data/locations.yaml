@@ -1,6 +1,7 @@
 # Coordinates mirror the map marker pages for location-page map insets.
 daintree:
   campaign: 'Daintree Rainforest'
+  name: 'Daintree Rainforest'
   page: "/daintree/"
   latitude: -16.103236
   longitude: 145.452491
@@ -46,6 +47,7 @@ daintree:
           - url: "https://api.acousticobservatory.org/audio_recordings/1877393/media.mp3?end_offset=5515&start_offset=5495"
 mount-barney:
   campaign: 'Mount Barney'
+  name: 'Mount Barney'
   page: "/mount-barney/"
   latitude: -28.234639
   longitude: 152.641407
@@ -108,6 +110,7 @@ mount-barney:
         examples:
           - url: "https://api.acousticobservatory.org/audio_recordings/1420901/media.mp3?end_offset=3445&start_offset=3425"
 bowra:
+  name: 'Bowra Station'
   campaign: 'Bowra Station'
   page: "/bowra/"
   latitude: -27.981830
@@ -171,6 +174,7 @@ bowra:
         examples:
           - url: "https://api.acousticobservatory.org/audio_recordings/1672831/media.mp3?end_offset=705&start_offset=685"
 monjebup:
+  name: 'Monjebup Reserve'
   campaign: 'Monjebup Reserve'
   page: "/monjebup/"
   latitude: -34.243607
@@ -234,6 +238,7 @@ monjebup:
         examples:
           - url: "https://api.acousticobservatory.org/audio_recordings/342276/media.mp3?end_offset=5095&start_offset=5075"
 marshmead:
+  name: 'Marshmead'
   campaign: 'Marshmead'
   page: "/marshmead/"
   latitude: -37.486020
@@ -297,6 +302,7 @@ marshmead:
         examples:
           - url: "https://api.acousticobservatory.org/audio_recordings/1208548/media.mp3?end_offset=5335&start_offset=5315"
 binya:
+  name: 'Binya'
   campaign: 'Binya'
   page: "/binya/"
   latitude: -34.219819

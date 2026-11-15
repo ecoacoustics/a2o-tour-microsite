@@ -3,7 +3,6 @@ title = "Binya"
 type = "site-information"
 site_name = "Binya"
 location_id = "binya"
-aliases = ["/site-information/binya/"]
 banner_description = """
 Binya records the soundscape of dry inland woodland in the Riverina of New South Wales.
 

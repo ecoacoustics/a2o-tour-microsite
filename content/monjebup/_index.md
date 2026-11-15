@@ -3,7 +3,6 @@ title = "Monjebup Reserve"
 type = "site-information"
 site_name = "Monjebup Reserve"
 location_id = "monjebup"
-aliases = ["/site-information/monjebup/"]
 banner_description = """
 Monjebup Reserve records the soundscape of south-western Australia's mallee and heath.
 

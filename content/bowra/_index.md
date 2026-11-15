@@ -3,7 +3,6 @@ title = "Bowra Station"
 type = "site-information"
 site_name = "Bowra Station"
 location_id = "bowra"
-aliases = ["/site-information/bowra-station/"]
 banner_description = """
 Bowra Station records the distinctive soundscape of inland Queensland.
 

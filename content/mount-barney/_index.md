@@ -3,7 +3,6 @@ title = "Mount Barney"
 type = "site-information"
 site_name = "Mount Barney"
 location_id = "mount-barney"
-aliases = ["/site-information/mount-barney/"]
 banner_description = """
 Mount Barney supports a diverse mix of woodland and mountain species.
 
