@@ -171,7 +171,8 @@
     <section class="choose-a-location end-of-verification-subsection">
         <p class="end-of-verification-intro" id="end-of-verification-site-intro">Or continue to a different location.</p>
         <div class="end-of-verification-grid">
-            {{- range $location := $locationsSection.Sections.ByWeight -}}
+            {{- range $marker := $locationsSection.Pages.ByWeight -}}
+                {{- $location := partial "location/page.html" $marker -}}
                 <a class="end-of-verification-card end-of-verification-site-card" href="{{ $location.RelPermalink }}" data-campaign="{{ $location.Params.campaign }}">
                         {{- with $location.Params.image -}}
                             {{- with resources.Get . -}}

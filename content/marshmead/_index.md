@@ -1,12 +1,9 @@
 ---
 title: Marshmead
 type: site-information
-url: /marshmead/
+aliases:
+  - /site-information/marshmead/
 campaign: Marshmead
-weight: 5
-latitude: -37.486020
-longitude: 149.831509
-description: "Tall coastal forest in far East Gippsland, rich with nocturnal and forest-dwelling species."
 image: images/sites/marshmead/marshmead.jpg
 banner_description: |-
   Marshmead records the soundscape of tall coastal forest in far East Gippsland.

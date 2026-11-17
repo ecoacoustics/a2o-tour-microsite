@@ -1,5 +1,6 @@
 {{- $markerPage := .markerPage -}}
-{{- $location := $markerPage.Params -}}
+{{- $locationPage := partial "location/page.html" $markerPage -}}
+{{- $callout := $markerPage.Params.callout | default dict -}}
 {{- $spectrogramPrefix := "map-callout-spectrogram" -}}
 {{- if eq .view "card" -}}
     {{- $spectrogramPrefix = "location-card-spectrogram" -}}
@@ -9,14 +10,15 @@
     Shared A2O location content for map callouts and cards.
 
     The theme supplies the outer map-callout or location-card wrapper.
-    The location page supplies its own content. The view selects a unique
-    spectrogram ID prefix; the displayed content is shared.
+    The marker page supplies the description. The image, link and species default to the
+    marker's location page, and the marker can override them in its own front matter.
+    The view selects a unique spectrogram ID prefix; the displayed content is shared.
 */}}
 {{- $clips := slice -}}
-{{- with $location.audio -}}
+{{- with $callout.audio -}}
     {{- $clips = slice (dict "name" "" "url" .) -}}
 {{- else -}}
-    {{- range $location.species -}}
+    {{- range partial "location/species.html" $markerPage -}}
         {{- $species := . -}}
         {{- range first 1 ($species.examples | default slice) -}}
             {{- $clips = $clips | append (dict "name" $species.name "url" .url) -}}
@@ -28,11 +30,12 @@
 {{- $audioLabel := $clip.name -}}
 {{- $spectrogramID := printf "%s-%s" $spectrogramPrefix ($markerPage.Title | urlize) -}}
 {{- $image := "" -}}
-{{- with $location.image -}}
+{{- with $callout.image | default $locationPage.Params.image -}}
     {{- with resources.Get . -}}
         {{- $image = (.Fill "600x200 center webp").RelPermalink -}}
     {{- end -}}
 {{- end -}}
+{{- $link := $callout.link | default $locationPage.RelPermalink -}}
 
 <div class="site-info">
     <div class="site-info-visual">
@@ -41,7 +44,7 @@
     </div>
 
     <div class="site-info-content">
-        <p class="site-info-text">{{ $location.description }}</p>
+        <p class="site-info-text">{{ $callout.description }}</p>
         {{ if $audio }}
         <div class="site-info-spectrogram">
             <oe-spectrogram
@@ -82,6 +85,6 @@
             </div>
         </div>
         {{ end }}
-        <sl-button class="a2o-tour-inline-button" href="{{ $markerPage.RelPermalink }}" variant="primary" size="small" pill>Learn More</sl-button>
+        <sl-button class="a2o-tour-inline-button" href="{{ $link }}" variant="primary" size="small" pill>{{ $callout.link_text | default "Learn More" }}</sl-button>
     </div>
 </div>

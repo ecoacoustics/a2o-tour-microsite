@@ -1,8 +1,7 @@
 ---
-title: Verify Marshmead calls
+title: Verify Binya calls
 layout: verify
 type: verify
-url: /marshmead/verify/
 ---
 
 {{< site-verification >}}

@@ -1,0 +1,18 @@
+{{/*
+    Resolve a map marker page to the location page named in its `site_information_page` front matter.
+    Takes the marker page and returns the location page.
+
+    Markers (content/locations/*.md) and location pages (content/<location>/_index.md) are
+    separate content pages so each can have its own content. This is the one place the
+    marker points at its location page.
+*/}}
+{{- $marker := . -}}
+{{- $reference := $marker.Params.site_information_page -}}
+{{- if not $reference -}}
+    {{- errorf "map marker %q must define site_information_page" $marker.Path -}}
+{{- end -}}
+{{- $locationPage := site.GetPage $reference -}}
+{{- if not $locationPage -}}
+    {{- errorf "map marker %q site_information_page %q was not found" $marker.Path $reference -}}
+{{- end -}}
+{{- return $locationPage -}}

@@ -1,0 +1,13 @@
+{{/*
+    Species for a location. Takes a location page or a map marker page and returns a slice.
+
+    A page's own `species` front matter wins. Otherwise a marker uses the species of the
+    location page named by its `site_information_page`, so the callout and the location page share
+    one list unless the marker deliberately overrides it.
+*/}}
+{{- $page := . -}}
+{{- $species := $page.Params.species -}}
+{{- if and (not $species) $page.Params.site_information_page -}}
+    {{- $species = (partial "location/page.html" $page).Params.species -}}
+{{- end -}}
+{{- return ($species | default slice) -}}

@@ -1,5 +1,6 @@
 {{ define "main" }}
 {{- $location := .Params -}}
+{{- $marker := partial "location/marker.html" . -}}
 {{- $outline := resources.Get "images/maps/australia-coarse.svg" -}}
 {{- $banner := "" -}}
 {{- with $location.image -}}
@@ -44,8 +45,8 @@
                 {{ $east := 155.0 }}
                 {{ $north := -9.0 }}
                 {{ $south := -45.0 }}
-                {{ $latitude := float $location.latitude }}
-                {{ $longitude := float $location.longitude }}
+                {{ $latitude := float $marker.Params.latitude }}
+                {{ $longitude := float $marker.Params.longitude }}
                 {{ $x := mul (div (sub $longitude $west) (sub $east $west)) $width }}
                 {{ $y := mul (div (sub $north $latitude) (sub $north $south)) $height }}
                 <div class="site-information-map-canvas site-information-map-{{ $.Title | urlize }}">
