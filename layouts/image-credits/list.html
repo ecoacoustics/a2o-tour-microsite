@@ -5,8 +5,10 @@
       <sl-icon name="arrow-left" aria-hidden="true"></sl-icon>
       <span>Ecoacoustic Tour of Australia</span>
     </a>
-    <h1 id="image-credits-title">{{ .Title }}</h1>
-    {{ with .Content }}<div class="card-intro">{{ . }}</div>{{ end }}
+    <div class="micro-map-cards-header">
+      <h1 id="image-credits-title">{{ .Title }}</h1>
+      {{ .Content }}
+    </div>
 
     <div class="micro-cards-fixed-width">
       {{- $licenseLinks := dict

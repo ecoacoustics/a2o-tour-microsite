@@ -182,7 +182,7 @@ html:has(#home-page) {
     }
 
     .micro-map-onboarding-callout {
-        display: none;
+        /* Unused but left here in case we want to add map onboarding back in later */
         border-radius: var(--radius-callout);
         box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
     }

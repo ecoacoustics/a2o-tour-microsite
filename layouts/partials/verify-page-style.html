@@ -2,8 +2,7 @@
   {{- . -}}
 {{- else -}}
   {{- $locationPage := .Parent -}}
-  {{- $location := partial "a2o/location-by-id.html" (dict "locationID" $locationPage.Params.location_id "source" $locationPage.File.Path) -}}
-  {{- with $location.content.image -}}
+  {{- with $locationPage.Params.image -}}
       {{- with resources.Get . -}}
         background-image: url('{{ (.Fill "1600x500 center webp").RelPermalink }}');
         background-position: center top;

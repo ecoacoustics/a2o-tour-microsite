@@ -1,10 +1,14 @@
-.micro-map-callout:not(sl-card),
 .species-verification-example-card {
     overflow: hidden;
     padding: var(--space-medium);
     border: 0;
     border-radius: var(--radius-card);
     background: var(--color-card);
+}
+
+.micro-cards-fixed-width {
+    --card-width: 21rem;
+    gap: var(--space-large);
 }
 
 .micro-map-callout::part(base),
@@ -86,23 +90,24 @@
     & > * {
         grid-column: main;
     }
-
-    & > h1,
-    & > h2,
-    & > .micro-map-cards-title {
-        margin-bottom: var(--space-xsmall);
-        line-height: 2.75rem;
-        color: var(--color-text-strong);
-        text-align: center;
-    }
 }
 
-.card-intro {
+.micro-map-cards-header {
     margin-bottom: var(--space-xlarge);
     color: var(--color-text);
     font-size: var(--font-size-medium);
     line-height: 1.5rem;
-    text-align: center;
+
+    h1,
+    h2 {
+        margin-bottom: var(--space-xsmall);
+        line-height: 2.75rem;
+        color: var(--color-text-strong);
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
 }
 
 .site-info-spectrogram {

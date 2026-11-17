@@ -1,18 +1,14 @@
-{{- $campaign := .Get "campaign" | default .Page.Params.campaign -}}
+{{- $locationPage := .Page.Parent -}}
+{{- $location := $locationPage.Params -}}
+{{- $campaign := $location.campaign -}}
 {{- if not $campaign -}}
-{{- errorf "site-verification requires a campaign parameter or campaign front matter" -}}
+    {{- errorf "site-verification parent location %q must define a campaign key" $locationPage.File.Path -}}
 {{- end -}}
 {{- $id := printf "verification-grid-%s" ($campaign | urlize) -}}
-{{- $locationPage := .Page.Parent -}}
-{{- $locationID := $locationPage.Params.location_id -}}
-{{- $location := partial "a2o/location-by-id.html" (dict "locationID" $locationID "source" $locationPage.File.Path) -}}
-{{- if and $location (ne $location.campaign $campaign) -}}
-    {{- errorf "site-verification campaign %q does not match location_id %q (%q)" $campaign $locationID $location.campaign -}}
-{{- end -}}
 {{- $speciesDataID := printf "%s-species-data-%d" $id .Ordinal -}}
 {{- $dialogID := printf "%s-species-dialog" $speciesDataID -}}
 {{- $speciesData := slice -}}
-{{- range $species := $location.content.species -}}
+{{- range $species := $location.species -}}
     {{- $thumbnailURL := "" -}}
     {{- $imageURL := "" -}}
     {{- with $species.image -}}
@@ -167,6 +163,6 @@
     <oe-verification verified="unsure" shortcut="u">Unsure</oe-verification>
     <oe-data-source slot="data-source" for="{{ $id }}" allow-downloads="false"></oe-data-source>
     <div slot="subjects-exhausted">
-        {{ partial "end-of-verification.html" (dict "campaign" $campaign "locationID" $locationID) }}
+        {{ partial "end-of-verification.html" (dict "campaign" $campaign "locationPage" $locationPage) }}
     </div>
 </oe-verification-grid>

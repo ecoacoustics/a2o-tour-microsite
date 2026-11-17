@@ -1,14 +1,14 @@
 {{- $campaign := .campaign -}}
-{{- $locationID := .locationID -}}
-{{- $currentSite := partial "a2o/location-by-id.html" (dict "locationID" $locationID "source" "end-of-verification") -}}
-{{- $sites := slice $currentSite -}}
-{{- range $id, $site := hugo.Data.locations -}}
-    {{- if ne $id $locationID -}}
-        {{- $sites = $sites | append $site -}}
-    {{- end -}}
+{{- $currentLocation := .locationPage -}}
+{{- $locationsSection := site.GetPage "locations" -}}
+{{- if not $currentLocation -}}
+    {{- errorf "end-of-verification requires the current location page" -}}
+{{- end -}}
+{{- if not $locationsSection -}}
+    {{- errorf "end-of-verification requires the locations section" -}}
 {{- end -}}
 {{- $speciesLookup := slice -}}
-{{- range $species := $currentSite.content.species -}}
+{{- range $species := $currentLocation.Params.species -}}
     {{- $speciesLookup = $speciesLookup | append (dict
         "name" $species.name
         "tag_ids" ($species.tag_ids | default slice)
@@ -152,11 +152,11 @@
 <section class="end-of-verification-container" hidden aria-labelledby="end-of-verification-title">
     <h2 id="end-of-verification-species-title"></h2>
     <section class="choose-a-species end-of-verification-subsection">
-    <p class="end-of-verification-intro">Choose another species from <a href="{{ $currentSite.page }}">{{ $campaign }}</a>.</p>
+    <p class="end-of-verification-intro">Choose another species from <a href="{{ $currentLocation.RelPermalink }}">{{ $currentLocation.Title }}</a>.</p>
         <div class="end-of-verification-grid">
-            {{- range $species := $currentSite.content.species -}}
+            {{- range $species := $currentLocation.Params.species -}}
                 {{- $focusValue := delimit ($species.tag_ids | default slice) "," -}}
-                {{- $speciesVerifyURL := printf "%sverify/?focus=%s" $currentSite.page $focusValue -}}
+                {{- $speciesVerifyURL := printf "%sverify/?focus=%s" $currentLocation.RelPermalink $focusValue -}}
                 <a href="{{ $speciesVerifyURL }}" class="end-of-verification-card end-of-verification-species-card" data-focus-value="{{ $focusValue }}">
                         {{- with $species.image -}}
                             {{- with resources.Get . -}}
@@ -171,14 +171,14 @@
     <section class="choose-a-location end-of-verification-subsection">
         <p class="end-of-verification-intro" id="end-of-verification-site-intro">Or continue to a different location.</p>
         <div class="end-of-verification-grid">
-            {{- range $site := $sites -}}
-                <a class="end-of-verification-card end-of-verification-site-card" href="{{ $site.page }}" data-campaign="{{ $site.campaign }}">
-                        {{- with $site.content.image -}}
+            {{- range $location := $locationsSection.Sections.ByWeight -}}
+                <a class="end-of-verification-card end-of-verification-site-card" href="{{ $location.RelPermalink }}" data-campaign="{{ $location.Params.campaign }}">
+                        {{- with $location.Params.image -}}
                             {{- with resources.Get . -}}
-                                <img class="end-of-verification-image" src="{{ (.Fill "600x300 center webp").RelPermalink }}" alt="{{ $site.campaign }} field site" loading="lazy">
+                                <img class="end-of-verification-image" src="{{ (.Fill "600x300 center webp").RelPermalink }}" alt="{{ $location.Title }} recording location" loading="lazy">
                             {{- end -}}
                         {{- end -}}
-                    <h3 class="end-of-verification-title">{{ $site.campaign }}</h3>
+                    <h3 class="end-of-verification-title">{{ $location.Title }}</h3>
                     <h4 class="site-completed-status incomplete"></h4>
                 </a>
             {{- end }}
@@ -189,6 +189,7 @@
 <script type="module">
 (() => {
     const campaign = {{ $campaign | jsonify | safeJS }};
+    const locationName = {{ $currentLocation.Title | jsonify | safeJS }};
     const speciesLookup = {{ $speciesLookup | jsonify | safeJS }};
     const focusValue = new URLSearchParams(window.location.search).get("focus");
     const targetIds = focusValue
@@ -204,7 +205,7 @@
     const locationSection = container?.querySelector(".choose-a-location");
     const locationIntro = container?.querySelector("#end-of-verification-site-intro");
     const title = container?.querySelector("h2");
-    const currentSiteCard = [...(locationSection?.querySelectorAll(".end-of-verification-site-card") ?? [])]
+    const currentLocationCard = [...(locationSection?.querySelectorAll(".end-of-verification-site-card") ?? [])]
         .find((card) => card.dataset.campaign === campaign);
 
     if (!container) {
@@ -218,7 +219,7 @@
         locationSection.hidden = false;
 
         if (title) {
-            title.textContent = `You’ve completed ${speciesName} at ${campaign}.`;
+            title.textContent = `You’ve completed ${speciesName} at ${locationName}.`;
         }
 
         if (locationIntro) {
@@ -226,7 +227,7 @@
                 `Or continue to a different location.`;
         }
 
-        currentSiteCard?.remove();
+        currentLocationCard?.remove();
 
         speciesSection.querySelectorAll("[data-focus-value]").forEach((card) => {
             if (card.dataset.focusValue === focusValue) {
@@ -238,14 +239,14 @@
         locationSection.hidden = false;
 
         if (title) {
-            title.textContent = `You’ve completed ${campaign}!`;
+            title.textContent = `You’ve completed ${locationName}!`;
         }
 
         if (locationIntro) {
             locationIntro.textContent = "Choose another location to keep going.";
         }
 
-        currentSiteCard
+        currentLocationCard
             ?.querySelector(".site-completed-status")
             ?.classList.replace("incomplete", "complete");
     }
