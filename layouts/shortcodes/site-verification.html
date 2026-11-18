@@ -1,22 +1,14 @@
-{{- $campaign := .Get "campaign" | default .Page.Params.campaign -}}
+{{- $locationPage := .Page.Parent -}}
+{{- $location := $locationPage.Params -}}
+{{- $campaign := $location.campaign -}}
 {{- if not $campaign -}}
-{{- errorf "site-verification requires a campaign parameter or campaign front matter" -}}
+    {{- errorf "site-verification parent location %q must define a campaign key" $locationPage.File.Path -}}
 {{- end -}}
 {{- $id := printf "verification-grid-%s" ($campaign | urlize) -}}
-{{- $sitePage := .Page.Parent -}}
-
-
-
-
-{{- $campaignSites := where site.Params.map.sites "campaign" $campaign -}}
-{{- if eq (len $campaignSites) 0 -}}
-    {{- errorf "site-verification campaign %q is not configured in params.map.sites" $campaign -}}
-{{- end -}}
-{{- $campaignSite := index $campaignSites 0 -}}
 {{- $speciesDataID := printf "%s-species-data-%d" $id .Ordinal -}}
 {{- $dialogID := printf "%s-species-dialog" $speciesDataID -}}
 {{- $speciesData := slice -}}
-{{- range $species := $campaignSite.content.species -}}
+{{- range $species := $location.species -}}
     {{- $thumbnailURL := "" -}}
     {{- $imageURL := "" -}}
     {{- with $species.image -}}
@@ -42,9 +34,9 @@
 
 
 
-<a class="page-back" href="{{ $sitePage.RelPermalink }}">
+<a class="page-back" href="{{ $locationPage.RelPermalink }}">
     <sl-icon name="arrow-left" aria-hidden="true"></sl-icon>
-    <span>Back to {{ $sitePage.Title }}</span>
+    <span>Back to {{ $locationPage.Title }}</span>
 </a>
 <script type="application/json" id="{{ $speciesDataID }}">{{ $speciesData | jsonify | safeJS }}</script>
 <dialog
@@ -171,6 +163,6 @@
     <oe-verification verified="unsure" shortcut="u">Unsure</oe-verification>
     <oe-data-source slot="data-source" for="{{ $id }}" allow-downloads="false"></oe-data-source>
     <div slot="subjects-exhausted">
-        {{ partial "end-of-verification.html" (dict "campaign" $campaign) }}
+        {{ partial "end-of-verification.html" (dict "campaign" $campaign "locationPage" $locationPage) }}
     </div>
 </oe-verification-grid>

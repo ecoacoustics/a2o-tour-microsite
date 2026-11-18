@@ -12,11 +12,15 @@ title="<span class='home-hero-eyebrow'>Australian Acoustic Observatory</span><sp
 {{< section class="home-map-section" >}}
 <h2>Interactive Ecoacoustic Tour of Australia</h2>
 <p>Choose a location on the map to find out more about the field site.</p>
-{{% map id="tour-map" preview-callout-only=false %}}
+{{< map sections="locations" id="tour-map" >}}
 {{< /section >}}
 
 {{< section class="home-progress-section" >}}
 {{< progress-counter >}}
 {{< /section >}}
 
-{{< site-cards >}}
+{{< map-cards sections="locations" id="tour-map-cards" grid="fixed-width" >}}
+## Recording locations
+
+Explore the diverse recording locations and help verify calls from each site.
+{{< /map-cards >}}

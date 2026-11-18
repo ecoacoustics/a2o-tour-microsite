@@ -1,2 +1,3 @@
-{{- $campaign := .Get 0 | default (.Get "campaign") -}}
-{{ partial "end-of-verification.html" (dict "campaign" $campaign) }}
+{{- $locationPage := .Page.Parent -}}
+{{- $campaign := .Get 0 | default (.Get "campaign") | default $locationPage.Params.campaign -}}
+{{ partial "end-of-verification.html" (dict "campaign" $campaign "locationPage" $locationPage) }}

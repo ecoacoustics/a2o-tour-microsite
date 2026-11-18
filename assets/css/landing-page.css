@@ -141,7 +141,7 @@ html:has(#home-page) {
         text-align: center;
     }
 
-    .map {
+    .micro-map {
         max-width: var(--content-width);
         margin: 0 auto;
         padding: var(--space-medium);
@@ -158,31 +158,36 @@ html:has(#home-page) {
     }
 }
 
-.map {
-    --map-min-height: 39rem;
-    --map-min-height-mobile: 20rem;
+.micro-map {
+    --micro-map-min-height: 39rem;
+    --micro-map-min-height-mobile: 20rem;
     color: var(--color-map-ink);
 
-    .map-shell {
+    .micro-map-shell {
         border: 0;
     }
 
-    .map-leader-line {
+    .micro-map-leader-line {
         stroke: var(--color-white);
     }
 
-    .map-callout {
+    .micro-map-callout {
         width: 19rem;
         max-width: 100%;
+
+        &::part(base) {
+            border-radius: var(--radius-callout);
+            box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
+        }
+    }
+
+    .micro-map-onboarding-callout {
+        /* Unused but left here in case we want to add map onboarding back in later */
         border-radius: var(--radius-callout);
         box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
     }
 
-    .map-onboarding-callout {
-        display: none;
-    }
-
-    .map-callout-close {
+    .micro-map-callout-close {
         top: var(--space-large);
         right: var(--space-large);
         width: 1.5rem;
@@ -200,18 +205,18 @@ html:has(#home-page) {
     }
 }
 
-.map-marker-button {
+.micro-map-marker-button {
     box-shadow: 0 0.2rem 0.6rem var(--color-shadow-marker);
 
-    &:hover .map-marker-dot,
-    &:focus-visible .map-marker-dot,
-    &.is-selected .map-marker-dot {
+    &:hover .micro-map-marker-dot,
+    &:focus-visible .micro-map-marker-dot,
+    &.is-selected .micro-map-marker-dot {
         background: var(--color-map-marker-active);
         transform: scale(1.45);
     }
 }
 
-.map-marker-dot {
+.micro-map-marker-dot {
     transition:
         transform 150ms ease,
         background-color 150ms ease;

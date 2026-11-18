@@ -1,14 +1,16 @@
 {{ define "main" }}
 <div id="image-credits-page" class="page">
-  <section class="site-cards" aria-labelledby="image-credits-title">
+  <section class="image-credits-cards" aria-labelledby="image-credits-title">
     <a class="page-back" href="/">
       <sl-icon name="arrow-left" aria-hidden="true"></sl-icon>
       <span>Ecoacoustic Tour of Australia</span>
     </a>
-    <h1 id="image-credits-title">{{ .Title }}</h1>
-    {{ with .Content }}<div class="site-cards-intro">{{ . }}</div>{{ end }}
+    <div class="micro-map-cards-header">
+      <h1 id="image-credits-title">{{ .Title }}</h1>
+      {{ .Content }}
+    </div>
 
-    <div class="cards-grid">
+    <div class="micro-cards-fixed-width">
       {{- $licenseLinks := dict
         "cc-by" "https://creativecommons.org/licenses/by/4.0/"
         "cc-by-sa" "https://creativecommons.org/licenses/by-sa/4.0/"
@@ -16,7 +18,7 @@
       -}}
       {{ range $credit := .Params.credits }}
         {{ $image := resources.Get $credit.image }}
-        <article class="site-card image-credit">
+        <sl-card>
           <div class="site-info">
             <div class="site-info-visual">
               {{ with $image }}
@@ -25,7 +27,7 @@
               <h2 class="site-info-title">{{ $credit.title }}</h2>
             </div>
             <div class="site-info-content">
-              <p class="site-info-text">
+              <p class="site-info-text image-credit-meta">
                 {{ with $credit.author }}<span>&copy; {{ . }}</span>{{ end }}
                 {{ with $credit.source }}
                   {{ $sourceURL := urls.Parse . }}
@@ -44,7 +46,7 @@
               </p>
             </div>
           </div>
-        </article>
+        </sl-card>
       {{ end }}
     </div>
   </section>

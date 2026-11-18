@@ -109,7 +109,7 @@ html:has(#contribute-your-verifications) {
     }
 }
 
-#image-credits-page > .site-cards {
+#image-credits-page > .image-credits-cards {
     position: relative;
     padding-top: 6rem;
 }
@@ -295,7 +295,7 @@ html:has(#contribute-your-verifications) {
         }
     }
 
-    .cards-grid {
+    .micro-cards-fixed-width {
         text-align: left;
     }
 }
@@ -330,6 +330,4 @@ html:has(#contribute-your-verifications) {
         margin-top: 0;
     }
 }
-
-
 

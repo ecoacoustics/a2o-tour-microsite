@@ -1,17 +1,16 @@
 {{ define "main" }}
-{{- $site := index (where site.Params.map.sites "campaign" .Params.site_name) 0 -}}
+{{- $location := .Params -}}
 {{- $outline := resources.Get "images/maps/australia-coarse.svg" -}}
 {{- $banner := "" -}}
-{{- with $site.content.image -}}
+{{- with $location.image -}}
     {{- with resources.Get . -}}
         {{- $banner = (.Fill "1600x500 center webp").RelPermalink -}}
     {{- end -}}
 {{- end -}}
+{{- $verifyURL := printf "%sverify/" .RelPermalink -}}
 
-{{ with $site }}
-{{- $verifyURL := printf "%sverify/" .page -}}
-{{- $heroDescription := index (split (trim $.Params.banner_description "\n") "\n\n") 0 -}}
-<section class="site-information-hero fullbleed" data-site="{{ $.Params.site_name | urlize }}"{{ with $banner }} style="background-image: url('{{ . }}');"{{ end }}>
+{{ with $location }}
+<section class="site-information-hero fullbleed" data-site="{{ $.Title | urlize }}"{{ with $banner }} style="background-image: url('{{ . }}');"{{ end }}>
     <div class="page-back">
         <a href="/">
             <sl-icon name="arrow-left" aria-hidden="true"></sl-icon>
@@ -23,8 +22,8 @@
     </div>
     <div class="site-information-hero-content">
         <p class="site-information-eyebrow">{{ site.Title }}</p>
-        <h1>{{ .campaign }}</h1>
-        <div class="site-information-hero-description">{{ $heroDescription | markdownify }}</div>
+        <h1>{{ $.Title }}</h1>
+        <div class="site-information-hero-description">{{ $.Params.banner_description | markdownify }}</div>
         <sl-button class="a2o-tour-inline-button" id="site-information-verify-button" href="#contribute-your-verifications" variant="primary" pill><span class="verify-link-label">Verify Calls</span></sl-button>
     </div>
 </section>
@@ -45,21 +44,21 @@
                 {{ $east := 155.0 }}
                 {{ $north := -9.0 }}
                 {{ $south := -45.0 }}
-                {{ $latitude := float $site.latitude }}
-                {{ $longitude := float $site.longitude }}
+                {{ $latitude := float $location.latitude }}
+                {{ $longitude := float $location.longitude }}
                 {{ $x := mul (div (sub $longitude $west) (sub $east $west)) $width }}
                 {{ $y := mul (div (sub $north $latitude) (sub $north $south)) $height }}
-                <div class="site-information-map-canvas site-information-map-{{ $.Params.site_name | urlize }}">
+                <div class="site-information-map-canvas site-information-map-{{ $.Title | urlize }}">
                     <div class="site-information-map-outline" role="img" aria-label="Simplified map of Australia">
                         {{ .Content | safeHTML }}
                     </div>
                     <svg class="site-information-map-marker-svg" viewBox="-{{ $padding }} -{{ $padding }} {{ $viewboxWidth }} {{ $viewboxHeight }}" aria-labelledby="site-map-title site-map-description">
-                        <title id="site-map-title">{{ $.Params.site_name }} recording site</title>
-                        <desc id="site-map-description">A simplified map of Australia with the {{ $.Params.site_name }} recording site marked.</desc>
+                        <title id="site-map-title">{{ $.Title }} recording location</title>
+                        <desc id="site-map-description">A simplified map of Australia with the {{ $.Title }} recording location marked.</desc>
                         <circle class="site-information-map-ring" cx="{{ $x }}" cy="{{ $y }}" r="60" aria-hidden="true"></circle>
                         <circle class="site-information-map-ring" cx="{{ $x }}" cy="{{ $y }}" r="40" aria-hidden="true"></circle>
                         <circle class="site-information-map-marker" cx="{{ $x }}" cy="{{ $y }}" r="20">
-                            <title>{{ $.Params.site_name }}</title>
+                            <title>{{ $.Title }}</title>
                         </circle>
                     </svg>
                 </div>
@@ -77,13 +76,13 @@
     <div class="site-information-species-inner">
         <h2>Contribute Your Verifications</h2>
         <p>Google's Perch AI detected calls for these species. Can you help us verify the name matches the sound for each species? You can see some examples below.</p>
-        <div class="cards-grid">
-            {{ range .content.species }}
+        <div class="micro-cards-fixed-width">
+            {{ range .species }}
                 {{ $audio := "" }}
                 {{ range first 1 (.examples | default slice) }}
                     {{ $audio = .url }}
                 {{ end }}
-                {{ $spectrogramID := printf "site-species-%s-%s" ($.Params.site_name | urlize) (.name | urlize) }}
+                {{ $spectrogramID := printf "site-species-%s-%s" ($.Title | urlize) (.name | urlize) }}
                 {{ $speciesName := .name }}
                 {{ $speciesImage := "" }}
                 {{ with .image }}
@@ -91,14 +90,14 @@
                         {{ $speciesImage = (.Fill "600x400 center webp").RelPermalink }}
                     {{ end }}
                 {{ end }}
-                <article class="site-card">
+                <sl-card>
                     <div class="site-info">
                         <div class="site-info-visual">
                             {{ with $speciesImage }}<img class="site-info-image" src="{{ . }}" alt="{{ $speciesName }}" loading="lazy">{{ end }}
                             <div class="site-info-title-row">
                                 <h3 class="site-info-title">{{ .name }}</h3>
                                 {{- $focusTagIDs := delimit .tag_ids "," -}}
-                                {{- $speciesVerifyURL := printf "%sverify/?focus=%s" $site.page $focusTagIDs -}}
+                                {{- $speciesVerifyURL := printf "%s?focus=%s" $verifyURL $focusTagIDs -}}
                                 <sl-button href="{{ $speciesVerifyURL }}" class="a2o-tour-inline-button species-card-verify-button" variant="primary" pill>
                                     <span class="verify-button-label">Verify Calls</span><sl-icon name="arrow-right" aria-hidden="true"></sl-icon>
                                 </sl-button>
@@ -139,7 +138,7 @@
 
                         </div>
                     </div>
-                </article>
+                </sl-card>
             {{ end }}
         </div>
     </div>
