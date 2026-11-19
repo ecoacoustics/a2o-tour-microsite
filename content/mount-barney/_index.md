@@ -1,8 +1,6 @@
 ---
 title: Mount Barney
 type: site-information
-aliases:
-  - /site-information/mount-barney/
 campaign: Mount Barney
 image: images/sites/mtbarney/mtbarney.jpg
 banner_description: |-

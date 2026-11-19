@@ -1,8 +1,6 @@
 ---
 title: Marshmead
 type: site-information
-aliases:
-  - /site-information/marshmead/
 campaign: Marshmead
 image: images/sites/marshmead/marshmead.jpg
 banner_description: |-

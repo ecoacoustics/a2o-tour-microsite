@@ -1,8 +1,6 @@
 ---
 title: Daintree Rainforest
 type: site-information
-aliases:
-  - /site-information/daintree/
 campaign: Daintree Rainforest
 image: images/sites/daintree/daintree.jpg
 banner_description: |-

@@ -1,8 +1,6 @@
 ---
 title: Binya
 type: site-information
-aliases:
-  - /site-information/binya/
 campaign: Binya
 image: images/sites/binya/binya.jpg
 banner_description: |-

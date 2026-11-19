@@ -1,8 +1,6 @@
 ---
 title: Bowra Station
 type: site-information
-aliases:
-  - /site-information/bowra-station/
 campaign: Bowra Station
 image: images/sites/bowra/bowra.jpg
 banner_description: |-

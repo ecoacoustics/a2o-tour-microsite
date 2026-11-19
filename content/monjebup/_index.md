@@ -1,8 +1,6 @@
 ---
 title: Monjebup Reserve
 type: site-information
-aliases:
-  - /site-information/monjebup/
 campaign: Monjebup Reserve
 image: images/sites/monjebup/monjebup.jpg
 banner_description: |-
