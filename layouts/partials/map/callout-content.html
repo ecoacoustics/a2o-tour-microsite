@@ -1,5 +1,7 @@
 {{- $markerPage := .markerPage -}}
-{{- $location := $markerPage.Params -}}
+{{- $datasources := partial "map/datasources.html" $markerPage -}}
+{{- $locationPage := index $datasources "location" -}}
+{{- $callout := $markerPage.Params.callout | default dict -}}
 {{- $spectrogramPrefix := "map-callout-spectrogram" -}}
 {{- if eq .view "card" -}}
     {{- $spectrogramPrefix = "location-card-spectrogram" -}}
@@ -9,14 +11,16 @@
     Shared A2O location content for map callouts and cards.
 
     The theme supplies the outer map-callout or location-card wrapper.
-    The location page supplies its own content. The view selects a unique
-    spectrogram ID prefix; the displayed content is shared.
+    The marker page supplies the description. The image, link and species come from
+    its location datasource unless overridden by callout-specific fields.
+    The view selects a unique spectrogram ID prefix; the displayed content is shared.
 */}}
 {{- $clips := slice -}}
-{{- with $location.audio -}}
+{{- with $callout.audio -}}
     {{- $clips = slice (dict "name" "" "url" .) -}}
 {{- else -}}
-    {{- range $location.species -}}
+    {{- $species := $locationPage.Params.species | default slice -}}
+    {{- range $species -}}
         {{- $species := . -}}
         {{- range first 1 ($species.examples | default slice) -}}
             {{- $clips = $clips | append (dict "name" $species.name "url" .url) -}}
@@ -27,21 +31,18 @@
 {{- $audio := $clip.url -}}
 {{- $audioLabel := $clip.name -}}
 {{- $spectrogramID := printf "%s-%s" $spectrogramPrefix ($markerPage.Title | urlize) -}}
-{{- $image := "" -}}
-{{- with $location.image -}}
-    {{- with resources.Get . -}}
-        {{- $image = (.Fill "600x200 center webp").RelPermalink -}}
-    {{- end -}}
-{{- end -}}
+{{- $image := resources.Get ($callout.image | default $locationPage.Params.image) -}}
+{{- $image = ($image.Fill "600x200 center webp").RelPermalink -}}
+{{- $link := $callout.link | default $locationPage.RelPermalink -}}
 
 <div class="site-info">
     <div class="site-info-visual">
-        {{ with $image }}<img class="site-info-image" src="{{ . }}" alt="{{ $markerPage.Title }} field location">{{ end }}
+        <img class="site-info-image" src="{{ $image }}" alt="{{ $markerPage.Title }} field location">
         <h3 class="site-info-title">{{ $markerPage.Title }}</h3>
     </div>
 
     <div class="site-info-content">
-        <p class="site-info-text">{{ $location.description }}</p>
+        <p class="site-info-text">{{ $callout.description }}</p>
         {{ if $audio }}
         <div class="site-info-spectrogram">
             <oe-spectrogram
@@ -82,6 +83,6 @@
             </div>
         </div>
         {{ end }}
-        <sl-button class="a2o-tour-inline-button" href="{{ $markerPage.RelPermalink }}" variant="primary" size="small" pill>Learn More</sl-button>
+        <sl-button class="a2o-tour-inline-button" href="{{ $link }}" variant="primary" size="small" pill>{{ $callout.link_text | default "Learn More" }}</sl-button>
     </div>
 </div>

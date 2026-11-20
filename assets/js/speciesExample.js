@@ -110,7 +110,7 @@ class A2OTourSpeciesExample extends HTMLElement {
       this.#unsubscribe = unsubscribe;
     }
 
-    this.#updateSpecies(tile?.model?.subject.actual_tag?.id);
+    this.#updateSpecies(tile?.model?.subject?.workbench_tag?.id);
   };
 
   /** Create the component shadow-DOM its presentation. */

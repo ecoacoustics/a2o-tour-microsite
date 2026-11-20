@@ -1,12 +1,7 @@
 ---
 title: Binya
 type: site-information
-url: /binya/
 campaign: Binya
-weight: 6
-latitude: -34.219819
-longitude: 146.267081
-description: "Dry inland woodland in the Riverina of New South Wales."
 image: images/sites/binya/binya.jpg
 banner_description: |-
   Binya records the soundscape of dry inland woodland in the Riverina of New South Wales.

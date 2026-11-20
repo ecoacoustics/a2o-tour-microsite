@@ -1,8 +1,7 @@
 ---
-title: Verify Daintree Rainforest calls
+title: Verify Monjebup Reserve calls
 layout: verify
 type: verify
-url: /daintree/verify/
 ---
 
 {{< site-verification >}}

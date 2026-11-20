@@ -1,11 +1,8 @@
 {{- $campaign := .campaign -}}
 {{- $currentLocation := .locationPage -}}
-{{- $locationsSection := site.GetPage "locations" -}}
+{{- $mapMarkers := index (partial "map/resolve-markers.html" .) "markerPages" -}}
 {{- if not $currentLocation -}}
     {{- errorf "end-of-verification requires the current location page" -}}
-{{- end -}}
-{{- if not $locationsSection -}}
-    {{- errorf "end-of-verification requires the locations section" -}}
 {{- end -}}
 {{- $speciesLookup := slice -}}
 {{- range $species := $currentLocation.Params.species -}}
@@ -171,7 +168,10 @@
     <section class="choose-a-location end-of-verification-subsection">
         <p class="end-of-verification-intro" id="end-of-verification-site-intro">Or continue to a different location.</p>
         <div class="end-of-verification-grid">
-            {{- range $location := $locationsSection.Sections.ByWeight -}}
+            {{- range $marker := $mapMarkers -}}
+                {{- $datasources := partial "map/datasources.html" $marker -}}
+                {{- with index $datasources "location" -}}
+                {{- $location := . -}}
                 <a class="end-of-verification-card end-of-verification-site-card" href="{{ $location.RelPermalink }}" data-campaign="{{ $location.Params.campaign }}">
                         {{- with $location.Params.image -}}
                             {{- with resources.Get . -}}
@@ -181,6 +181,7 @@
                     <h3 class="end-of-verification-title">{{ $location.Title }}</h3>
                     <h4 class="site-completed-status incomplete"></h4>
                 </a>
+                {{- end -}}
             {{- end }}
         </div>
     </section>

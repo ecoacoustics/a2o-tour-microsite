@@ -1,8 +1,7 @@
 ---
-title: Verify Binya calls
+title: Verify Mount Barney calls
 layout: verify
 type: verify
-url: /binya/verify/
 ---
 
 {{< site-verification >}}

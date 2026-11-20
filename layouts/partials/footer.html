@@ -1,0 +1,20 @@
+<div class="oe-footer">
+    {{ with .Site.Menus.footer }}
+        <div class="oe-footer-row">
+            <ul>
+                {{- range . }}
+                <li><a href="{{ .PageRef }}">{{ .Name }}</a></li>
+                {{- end }}
+            </ul>
+        </div>
+    {{ end }}
+
+    <div class="oe-footer-row a2o-footer-bottom-row">
+        <p>This site is a part of the <a href="https://calldetective.org/">Call Detective</a> initiative</p>
+        <div class="a2o-footer-actions">
+            <sl-button href="{{ "image-credits/" | relURL }}" variant="default"{{ if site.Params.Style.RoundedButtons }} pill{{ end }}>Image Credits</sl-button>
+            {{ partial "auth-menu.html" . }}
+        </div>
+        <p>Copyright {{ now.Year }}. All rights reserved.</p>
+    </div>
+</div>

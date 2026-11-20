@@ -1,12 +1,7 @@
 ---
 title: Mount Barney
 type: site-information
-url: /mount-barney/
 campaign: Mount Barney
-weight: 2
-latitude: -28.234639
-longitude: 152.641407
-description: "South-east Queensland's most well-known mountain."
 image: images/sites/mtbarney/mtbarney.jpg
 banner_description: |-
   Mount Barney supports a diverse mix of woodland and mountain species.

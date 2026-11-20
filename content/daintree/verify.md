@@ -1,8 +1,7 @@
 ---
-title: Verify Mount Barney calls
+title: Verify Daintree Rainforest calls
 layout: verify
 type: verify
-url: /mount-barney/verify/
 ---
 
 {{< site-verification >}}

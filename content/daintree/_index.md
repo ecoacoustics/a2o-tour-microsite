@@ -1,12 +1,7 @@
 ---
 title: Daintree Rainforest
 type: site-information
-url: /daintree/
 campaign: Daintree Rainforest
-weight: 1
-latitude: -16.103236
-longitude: 145.452491
-description: "The oldest rainforest in the world, listed as a UNESCO Heritage Site."
 image: images/sites/daintree/daintree.jpg
 banner_description: |-
   The Daintree Rainforest Observatory captures sound from one of Australia's richest tropical ecosystems.

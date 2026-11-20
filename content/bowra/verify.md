@@ -1,8 +1,7 @@
 ---
-title: Verify Monjebup Reserve calls
+title: Verify Bowra Station calls
 layout: verify
 type: verify
-url: /monjebup/verify/
 ---
 
 {{< site-verification >}}
