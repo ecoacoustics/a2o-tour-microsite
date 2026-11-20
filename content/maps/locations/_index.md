@@ -7,19 +7,12 @@
 #   title: label for the marker
 #   weight: order of the marker, and of the location cards
 #   latitude, longitude: required marker position
-#   site_information_page: content path of the location's page, e.g. /binya. The callout takes its
-#     link, image and species from that page unless the marker overrides them
+#   datasources: named content-page paths whose data is available to
+#     the callout/card layout, e.g. location: /binya
 #   callout.description: short description shown in the callout and card
-#   callout.image, callout.link: optional overrides of the location page's image and URL
-#   species: optional override of the location page's species
+#   callout.image, callout.link: optional overrides of the location datasource's image and URL
 title: A2O Ecoacoustic Tour Map
-build:
-  render: never
-  list: local
-cascade:
-  - build:
-      render: never
-      list: local
+weight: 1
 map_options:
   min_zoom: 3
 ---

@@ -1,6 +1,10 @@
 {{ define "main" }}
 {{- $location := .Params -}}
-{{- $marker := partial "location/marker.html" . -}}
+{{- $mapMarkers := partial "map/datasources-reverse-lookup.html" (dict "page" .) -}}
+{{- if ne (len $mapMarkers) 1 -}}
+    {{- errorf "A2O location page %q must have exactly one marker in maps/locations; found %d" .Path (len $mapMarkers) -}}
+{{- end -}}
+{{- $marker := index $mapMarkers 0 -}}
 {{- $outline := resources.Get "images/maps/australia-coarse.svg" -}}
 {{- $banner := "" -}}
 {{- with $location.image -}}
