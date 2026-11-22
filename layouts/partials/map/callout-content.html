@@ -1,5 +1,5 @@
 {{- $markerPage := .markerPage -}}
-{{- $datasources := partial "map/datasources.html" $markerPage -}}
+{{- $datasources := partialCached "map/datasources.html" $markerPage $markerPage.Path -}}
 {{- $locationPage := index $datasources "location" -}}
 {{- $callout := $markerPage.Params.callout | default dict -}}
 {{- $spectrogramPrefix := "map-callout-spectrogram" -}}
@@ -10,10 +10,10 @@
 {{/*
     Shared A2O location content for map callouts and cards.
 
-    The theme supplies the outer map-callout or location-card wrapper.
-    The marker page supplies the description. The image, link and species come from
-    its location datasource unless overridden by callout-specific fields.
-    The view selects a unique spectrogram ID prefix; the displayed content is shared.
+    The theme supplies the outer wrapper. The marker provides the description;
+    its callout image and link can override the location datasource. A callout
+    audio URL replaces the datasource's species examples.
+    Otherwise, the location datasource provides the image, link, and species examples.
 */}}
 {{- $clips := slice -}}
 {{- with $callout.audio -}}

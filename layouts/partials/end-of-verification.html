@@ -1,6 +1,6 @@
 {{- $campaign := .campaign -}}
 {{- $currentLocation := .locationPage -}}
-{{- $mapMarkers := index (partial "map/resolve-markers.html" .) "markerPages" -}}
+{{- $mapMarkers := index (partial "map/resolve-markers.html" (dict "sections" (slice "maps/locations"))) "markerPages" -}}
 {{- if not $currentLocation -}}
     {{- errorf "end-of-verification requires the current location page" -}}
 {{- end -}}
@@ -169,10 +169,10 @@
         <p class="end-of-verification-intro" id="end-of-verification-site-intro">Or continue to a different location.</p>
         <div class="end-of-verification-grid">
             {{- range $marker := $mapMarkers -}}
-                {{- $datasources := partial "map/datasources.html" $marker -}}
+                {{- $datasources := partialCached "map/datasources.html" $marker $marker.Path -}}
                 {{- with index $datasources "location" -}}
                 {{- $location := . -}}
-                <a class="end-of-verification-card end-of-verification-site-card" href="{{ $location.RelPermalink }}" data-campaign="{{ $location.Params.campaign }}">
+                <a class="end-of-verification-card end-of-verification-site-card" href="{{ $location.RelPermalink }}" data-location="{{ $location.RelPermalink }}">
                         {{- with $location.Params.image -}}
                             {{- with resources.Get . -}}
                                 <img class="end-of-verification-image" src="{{ (.Fill "600x300 center webp").RelPermalink }}" alt="{{ $location.Title }} recording location" loading="lazy">
@@ -189,7 +189,7 @@
 
 <script type="module">
 (() => {
-    const campaign = {{ $campaign | jsonify | safeJS }};
+    const currentLocationPath = {{ $currentLocation.RelPermalink | jsonify | safeJS }};
     const locationName = {{ $currentLocation.Title | jsonify | safeJS }};
     const speciesLookup = {{ $speciesLookup | jsonify | safeJS }};
     const focusValue = new URLSearchParams(window.location.search).get("focus");
@@ -207,7 +207,7 @@
     const locationIntro = container?.querySelector("#end-of-verification-site-intro");
     const title = container?.querySelector("h2");
     const currentLocationCard = [...(locationSection?.querySelectorAll(".end-of-verification-site-card") ?? [])]
-        .find((card) => card.dataset.campaign === campaign);
+        .find((card) => card.dataset.location === currentLocationPath);
 
     if (!container) {
         return;
