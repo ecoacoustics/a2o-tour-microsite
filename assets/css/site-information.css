@@ -11,6 +11,7 @@ html:has(#contribute-your-verifications) {
 .site-information-hero,
 .site-information-why,
 .site-information-species,
+.location-story,
 .site-information-initiative {
     --micro-heading-color: var(--color-text-strong);
     --micro-font-color: var(--color-text);
@@ -301,6 +302,7 @@ html:has(#contribute-your-verifications) {
 }
 
 .site-sponsors {
+
     background: var(--color-surface);
 
     .sponsors-container {
@@ -313,6 +315,115 @@ html:has(#contribute-your-verifications) {
     }
 }
 
+.location-story {
+    --location-content-image-width: clamp(35%, 25% + 8rem, 45%);
+    --location-content-gap: var(--space-xlarge);
+    padding: var(--section-padding) 0;
+    background: var(--color-surface);
+    background: var(--color-surface-muted);
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+.location-story-inner {
+    grid-column: main;
+    display: grid;
+    grid-template-columns:
+        minmax(0, var(--location-content-image-width))
+        minmax(0, 1fr);
+    gap: var(--space-small) var(--location-content-gap);
+    width: min(100%, var(--content-width));
+    justify-self: center;
+}
+
+.location-story-images {
+    grid-column: 1;
+    display: grid;
+    grid-auto-rows: 1fr;
+    gap: var(--space-medium);
+    align-self: stretch;
+    container-type: inline-size;
+
+    figure {
+        margin: 0;
+        min-height: 0;
+    }
+
+    figcaption {
+        margin-top: var(--space-xsmall);
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 2px solid var(--color-white);
+        object-fit: cover;
+    }
+}
+
+.location-story-copy {
+    grid-column: 2;
+
+    > :first-child {
+        margin-top: 0;
+    }
+}
+
+.location-story-person > * {
+    display: block;
+}
+
+.location-story-copy > :last-child {
+    margin-bottom: 0;
+}
+
+.location-story-mount-barney {
+    --location-content-image-width: clamp(40%, 30% + 6rem, 48%);
+
+    .location-story-images img {
+        max-height: 125cqw;
+    }
+}
+
+.location-story-cape-barren {
+    --location-content-image-width: clamp(40%, 30% + 6rem, 48%);
+
+    .location-story-images img {
+        max-height: 125cqw;
+    }
+}
+
+.location-story-bowra {
+    --location-content-image-width: clamp(20%, 50% - 6rem, 48%);
+    .location-story-images img {
+        max-height: 125cqw;
+    }
+}
+
+@media (max-width: 48em) {
+    .location-story-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .location-story-images,
+    .location-story-copy {
+        grid-column: 1;
+    }
+
+    .location-story-images {
+        display: block;
+    }
+
+    .location-story-images figure {
+        margin-bottom: var(--space-medium);
+    }
+
+    .location-story-images img {
+        height: auto;
+        max-height: none;
+    }
+}
 
 .site-information-species .site-info-title-row {
     display: flex;

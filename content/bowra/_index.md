@@ -23,7 +23,7 @@ species:
   - name: "Red Tree Frog"
     description: "A small, reddish-brown tree frog of inland and northern Australia that gathers at temporary pools after rain and calls with a long, buzzing 'waaa'."
     tag_ids: [27655]
-    image: images/sites/bowra/bowra.jpg
+    image: images/species/Red-Tree-Frog.jpg
     examples:
       - url: "https://api.acousticobservatory.org/audio_recordings/1681043/media.mp3?end_offset=1165&start_offset=1145"
   - name: "Rainbow Bee-eater"
@@ -66,6 +66,26 @@ species:
 
 ## Why Your Contributions <em>Matter</em>
 
-Bowra Station captures the pulse of inland Queensland, where rainfall and water availability can reshape wildlife activity. Your verifications help document both the familiar daytime chorus and the less visible nocturnal species that use this open country.
+Located on Kunja Country, Bowra Station captures the pulse of inland Queensland, where rainfall and water availability can reshape wildlife activity. Your verifications help document both the familiar daytime chorus and the less visible nocturnal species that use this open country.
 
 These records make it possible to compare soundscapes across dry and productive periods, supporting a better understanding of how inland wildlife responds to a variable climate.
+
+<!--more-->
+
+<div class="location-story-images">
+    <figure>
+        <img src="sensor_setup_1.jpg" alt="A researcher installing an acoustic sensor on a post at Bowra Wildlife Sanctuary">
+        <figcaption>Installing an acoustic sensor at Bowra</figcaption>
+    </figure>
+</div>
+
+<div class="location-story-copy">
+
+  <p>Bowra Wildlife Sanctuary, in south-west Queensland, provides important habitat for the endangered eastern Pink Cockatoo (<em>Lophochroa leadbeateri leadbeateri</em>). Despite its striking appearance, relatively little is known about the species' ecology and habitat use in Queensland. My research at Bowra used passive acoustic monitoring to investigate when and where Pink Cockatoos are active, how they use different vegetation communities, and how their calling activity responds to environmental conditions such as rainfall and temperature. By combining long-term recordings from the Australian Acoustic Observatory with additional acoustic sensors deployed across the sanctuary, we can gain valuable insights into this threatened species. Projects like Call Detective offer an exciting opportunity for the public to contribute to biodiversity research by helping identify Pink Cockatoo calls in recordings, supporting our understanding of the species and its conservation needs.</p>
+
+  <div class="location-story-person">
+      <strong>Lola Lange</strong>
+      <span>PhD Candidate at QUT</span>
+  </div>
+
+</div>

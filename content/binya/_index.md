@@ -66,6 +66,8 @@ species:
 
 ## Why Your Contributions <em>Matter</em>
 
-Binya's woodlands support declining woodland birds, including the Painted Honeyeater, which follows fruiting mistletoe across the landscape. Your verifications help reveal when these species are present and how often they call.
+Located on Wiradjuri Country, Binya's woodlands support declining woodland birds, including the Painted Honeyeater, which follows fruiting mistletoe across the landscape. Your verifications help reveal when these species are present and how often they call.
 
 These records help monitor woodland bird populations that are hard to track through visual surveys alone.
+
+<!--more-->
