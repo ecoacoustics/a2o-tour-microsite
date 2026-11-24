@@ -101,11 +101,13 @@
                             {{ with $speciesImage }}<img class="site-info-image" src="{{ . }}" alt="{{ $speciesName }}" loading="lazy">{{ end }}
                             <div class="site-info-title-row">
                                 <h3 class="site-info-title">{{ .name }}</h3>
-                                {{- $focusTagIDs := delimit .tag_ids "," -}}
+                                {{- with .tag_ids -}}
+                                {{- $focusTagIDs := delimit . "," -}}
                                 {{- $speciesVerifyURL := printf "%s?focus=%s" $verifyURL $focusTagIDs -}}
                                 <sl-button href="{{ $speciesVerifyURL }}" class="a2o-tour-inline-button species-card-verify-button" variant="primary" pill>
                                     <span class="verify-button-label">Verify Calls</span><sl-icon name="arrow-right" aria-hidden="true"></sl-icon>
                                 </sl-button>
+                                {{- end -}}
                             </div>
                         </div>
                         <div class="site-info-content">

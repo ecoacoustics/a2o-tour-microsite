@@ -382,6 +382,14 @@ html:has(#contribute-your-verifications) {
     }
 }
 
+.location-story-cape-barren {
+    --location-content-image-width: clamp(40%, 30% + 6rem, 48%);
+
+    .location-story-images img {
+        max-height: 125cqw;
+    }
+}
+
 .location-story-bowra {
     --location-content-image-width: clamp(20%, 50% - 6rem, 48%);
     .location-story-images img {

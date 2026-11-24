@@ -36,7 +36,7 @@
                 {{ with $credit.license }}
                   {{ $licenseKey := lower . }}
                   <span></span>
-                    {{ with index $licenseLinks $licenseKey }}
+                    {{ with $credit.license_url | default (index $licenseLinks $licenseKey) }}
                       <a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ $credit.license }}</a>
                     {{ else }}
                       {{ $credit.license }}

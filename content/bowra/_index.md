@@ -23,7 +23,7 @@ species:
   - name: "Red Tree Frog"
     description: "A small, reddish-brown tree frog of inland and northern Australia that gathers at temporary pools after rain and calls with a long, buzzing 'waaa'."
     tag_ids: [27655]
-    image: images/sites/bowra/bowra.jpg
+    image: images/species/Red-Tree-Frog.jpg
     examples:
       - url: "https://api.acousticobservatory.org/audio_recordings/1681043/media.mp3?end_offset=1165&start_offset=1145"
   - name: "Rainbow Bee-eater"

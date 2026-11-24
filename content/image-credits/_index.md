@@ -40,6 +40,21 @@ credits:
     source: https://www.inaturalist.org/observations/2357400
     license: CC-BY
     image: images/species/Orange-footed-Scrubfowl.jpg
+  - title: Spectacled Flying-fox
+    author: Tim
+    source: https://www.inaturalist.org/observations/93013369
+    license: CC-BY
+    image: images/species/Spectacled-Flying-fox.jpg
+  - title: Australian Lace-lid Frog
+    author: dhfischer
+    source: https://www.inaturalist.org/observations/58321170
+    license: CC-BY
+    image: images/species/Australian-Lace-lid-Frog.jpg
+  - title: Orange-thighed Frog
+    author: dhfischer
+    source: https://www.inaturalist.org/observations/58321183
+    license: CC-BY
+    image: images/species/Orange-thighed-Frog.jpg
 
   # Mount Barney
   - title: Glossy-black Cockatoo
@@ -82,6 +97,11 @@ credits:
     source: https://www.inaturalist.org/photos/347547183
     license: CC-BY
     image: images/species/sugar-glider.jpg
+  - title: Great Barred Frog
+    author: Tony Eales
+    source: https://www.inaturalist.org/observations/135505817
+    license: CC-BY-SA
+    image: images/species/Great-Barred-Frog.jpg
 
   # Bowra Station
   - title: Pink Cockatoo
@@ -124,6 +144,11 @@ credits:
     source: https://www.inaturalist.org/observations/38822930
     license: CC-BY
     image: images/species/Magpie-lark.jpg
+  - title: Red Tree Frog
+    author: dhfischer
+    source: https://www.inaturalist.org/observations/55880429
+    license: CC-BY
+    image: images/species/Red-Tree-Frog.jpg
 
   # Monjebup Reserve
   - title: Western Whipbird
@@ -259,8 +284,134 @@ credits:
     source: https://www.inaturalist.org/observations/368209035
     license: CC0
     image: images/species/Rufous-Whistler.jpg
+
+  # Cape Barren Island
+  - title: Black Currawong
+    author: "Charles J. Sharp"
+    source: https://commons.wikimedia.org/wiki/File:Black_currawong_(Strepera_fuliginosa_fuligonosa)_Maria_Island.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/species/Black-Currawong.jpg
+  - title: Crescent Honeyeater
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Phylidonyris_pyrrhopterus_male.jpg
+    license: CC BY-SA 3.0
+    license_url: https://creativecommons.org/licenses/by-sa/3.0
+    image: images/species/Crescent-Honeyeater.jpg
+  - title: Flame Robin
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Flame_Robin_male_1_-_Jenolan_Caves.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/species/Flame-Robin.jpg
+  - title: Olive Whistler
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Pachycephala_olivacea_-_Melaleuca.jpg
+    license: CC BY-SA 3.0
+    license_url: https://creativecommons.org/licenses/by-sa/3.0
+    image: images/species/Olive-Whistler.jpg
+  - title: Lewin's Rail
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Lewins_Rail_2_-_Sydney.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/species/Lewins-Rail.jpg
+  - title: Musk Duck
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Musk_Duck_-_Lake_Wallace.jpg
+    license: CC BY-SA 3.0
+    license_url: https://creativecommons.org/licenses/by-sa/3.0
+    image: images/species/Musk-Duck.jpg
+  - title: Australasian Swamphen
+    author: "Charles J. Sharp"
+    source: https://commons.wikimedia.org/wiki/File:Australasian_swamphen_(Porphyrio_melanotus)_Tiritiri_Matangi.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/species/Australasian-Swamphen.jpg
+
+  # Litchfield Savanna
+  - title: Litchfield National Park
+    author: "W. Bulach"
+    source: https://commons.wikimedia.org/wiki/File:00_2446_Australien_Litchfield-Nationalpark.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/sites/litchfield/litchfield.jpg
+  - title: Red-tailed Black-Cockatoo
+    author: "Jean and Fred from Perth, Australia"
+    source: https://commons.wikimedia.org/wiki/File:Red-tailed_Black-Cockatoo_f_(33136608646).jpg
+    license: CC BY 2.0
+    license_url: https://creativecommons.org/licenses/by/2.0
+    image: images/species/Red-tailed-Black-Cockatoo.jpg
+  - title: Blue-winged Kookaburra
+    author: "PotMart186"
+    source: https://commons.wikimedia.org/wiki/File:Blue-winged_Kookaburra,_Kakadu_NP_5993.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/species/Blue-winged-Kookaburra.jpg
+  - title: Red-collared Lorikeet
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Red-collared_Lorikeet_-_Lyons.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/species/Red-collared-Lorikeet.jpg
+  - title: Dollarbird
+    author: "Jim Bendon from Karratha, Australia"
+    source: https://commons.wikimedia.org/wiki/File:Dollar_bird_(11724894603).jpg
+    license: CC BY-SA 2.0
+    license_url: https://creativecommons.org/licenses/by-sa/2.0
+    image: images/species/Dollarbird.jpg
+  - title: Brush Cuckoo
+    author: "Rolf Lawrenz"
+    source: https://www.inaturalist.org/observations/21446688
+    license: CC BY
+    license_url: https://creativecommons.org/licenses/by/4.0
+    image: images/species/Brush-Cuckoo.jpg
+  - title: Brown Honeyeater
+    author: "Andrew Mercer (www.baldwhiteguy.co.nz)"
+    source: https://commons.wikimedia.org/wiki/File:Brown_Honeyeater_-_AndrewMercer_-_DSC01010.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/species/Brown-Honeyeater.jpg
+
+  # Newhaven
+  - title: Crimson Chat
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Crimson_Chat_3_-_Round_Hill_Nature_Reserve.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/species/Crimson-Chat.jpg
+  - title: Pied Honeyeater
+    author: "Andrew Allen"
+    source: https://www.inaturalist.org/observations/31659148
+    license: CC BY
+    license_url: https://creativecommons.org/licenses/by/4.0
+    image: images/species/Pied-Honeyeater.jpg
+  - title: Black Honeyeater
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Black_Honeyeater_5935.jpg
+    license: CC BY-SA 3.0
+    license_url: https://creativecommons.org/licenses/by-sa/3.0
+    image: images/species/Black-Honeyeater.jpg
+  - title: Zebra Finch
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Australian_Zebra_Finch_0A2A3013.jpg
+    license: CC BY-SA 3.0
+    license_url: https://creativecommons.org/licenses/by-sa/3.0
+    image: images/species/Zebra-Finch.jpg
+  - title: Singing Honeyeater
+    author: "JJ Harrison"
+    source: https://commons.wikimedia.org/wiki/File:Singing_Honeyeater_343_-_Patchewollock.jpg
+    license: CC BY-SA 4.0
+    license_url: https://creativecommons.org/licenses/by-sa/4.0
+    image: images/species/Singing-Honeyeater.jpg
+  - title: Pallid Cuckoo
+    author: "Frankzed"
+    source: https://commons.wikimedia.org/wiki/File:Pallid_Cuckoo.jpg
+    license: CC BY 2.0
+    license_url: https://creativecommons.org/licenses/by/2.0
+    image: images/species/Pallid-Cuckoo.jpg
 ---
 
 Many thanks to the photographers who provided the images for this website. We really appreciate it.
 
-Photographers retain copyright of their images. Photographs from [BirdLife Photography](https://www.birdlifephotography.org.au/) are used with permission; they may not be copied, edited or reused without the photographer's permission. Photographs from [iNaturalist](https://www.inaturalist.org/) are used under the Creative Commons licence shown with each image.
+Photographers retain copyright of their images. Photographs from [BirdLife Photography](https://www.birdlifephotography.org.au/) are used with permission; they may not be copied, edited or reused without the photographer's permission. Photographs from [iNaturalist](https://www.inaturalist.org/) and [Wikimedia Commons](https://commons.wikimedia.org/) are used under the Creative Commons licence shown with each image.

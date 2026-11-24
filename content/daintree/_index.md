@@ -42,6 +42,27 @@ species:
     image: images/species/Sulphur-crested-Cockatoo.jpg
     examples:
       - url: "https://api.acousticobservatory.org/audio_recordings/1877393/media.mp3?end_offset=5515&start_offset=5495"
+  # The three species below come from a local Perch search and are not A2O audio events yet.
+  # Add their A2O tag IDs to tag_ids (and their event IDs to the Daintree campaign in hugo.yaml)
+  # once the detections have been imported, so they appear in the verification grid.
+  - name: "Spectacled Flying-fox"
+    description: "An endangered fruit bat of the Wet Tropics with pale fur around its eyes that feeds on rainforest fruit and blossom and squabbles noisily at night."
+    tag_ids: []
+    image: images/species/Spectacled-Flying-fox.jpg
+    examples:
+      - url: "https://api.acousticobservatory.org/audio_recordings/487083/media.mp3?end_offset=1738&start_offset=1718"
+  - name: "Australian Lace-lid Frog"
+    description: "An endangered stream frog of the Wet Tropics, named for the lace-like pattern on its lower eyelid, that calls softly from rocks and vegetation beside fast-flowing creeks."
+    tag_ids: []
+    image: images/species/Australian-Lace-lid-Frog.jpg
+    examples:
+      - url: "https://api.acousticobservatory.org/audio_recordings/1736498/media.mp3?end_offset=1159&start_offset=1139"
+  - name: "Orange-thighed Frog"
+    description: "A bright green tree frog with vivid orange thighs that gathers at pools after heavy wet-season rain, where males call in loud night-time choruses."
+    tag_ids: []
+    image: images/species/Orange-thighed-Frog.jpg
+    examples:
+      - url: "https://api.acousticobservatory.org/audio_recordings/492561/media.mp3?end_offset=6957&start_offset=6937"
 ---
 
 ## Why Your Contributions <em>Matter</em>

@@ -23,7 +23,7 @@ species:
   - name: "Great Barred Frog"
     description: "A large, dark-barred frog of rainforest and wet forest streams whose deep, guttural 'wark' calls carry along creek lines at night."
     tag_ids: [27662]
-    image: images/sites/mtbarney/mtbarney.jpg
+    image: images/species/Great-Barred-Frog.jpg
     examples:
       - url: "https://api.acousticobservatory.org/audio_recordings/1872603/media.mp3?end_offset=3055&start_offset=3035"
   - name: "Spotted Quail-thrush"
