@@ -345,6 +345,8 @@ html:has(#contribute-your-verifications) {
     container-type: inline-size;
 
     figure {
+        display: flex;
+        flex-direction: column;
         margin: 0;
         min-height: 0;
     }
@@ -356,7 +358,9 @@ html:has(#contribute-your-verifications) {
     img {
         display: block;
         width: 100%;
-        height: 100%;
+        min-height: 0;
+        height: auto;
+        flex: 1;
         border: 2px solid var(--color-white);
         object-fit: cover;
     }
