@@ -193,6 +193,11 @@
     }
 }
 
+#image-credits-page > .image-credits-cards {
+    position: relative;
+    padding-top: 6rem;
+}
+
 .species-verification-example-card {
     display: flex;
     flex-direction: column;

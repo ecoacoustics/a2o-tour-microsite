@@ -72,20 +72,19 @@ These records make it possible to compare soundscapes across dry and productive 
 
 <!--more-->
 
-<div class="location-story-images">
-    <figure>
-        <img src="sensor_setup_1.jpg" alt="A researcher installing an acoustic sensor on a post at Bowra Wildlife Sanctuary">
-        <figcaption>Installing an acoustic sensor at Bowra</figcaption>
-    </figure>
-</div>
+{{% location-story image_width="clamp(20%, 50% - 6rem, 48%)" %}}
+{{% location-story-images %}}
+{{< location-story-image
+    src="sensor_setup_1.jpg"
+    alt="A researcher installing an acoustic sensor on a post at Bowra Wildlife Sanctuary"
+    caption="Installing an acoustic sensor at Bowra"
+>}}
+{{% /location-story-images %}}
 
-<div class="location-story-copy">
-
-  <p>Bowra Wildlife Sanctuary, in south-west Queensland, provides important habitat for the endangered eastern Pink Cockatoo (<em>Lophochroa leadbeateri leadbeateri</em>). Despite its striking appearance, relatively little is known about the species' ecology and habitat use in Queensland. My research at Bowra used passive acoustic monitoring to investigate when and where Pink Cockatoos are active, how they use different vegetation communities, and how their calling activity responds to environmental conditions such as rainfall and temperature. By combining long-term recordings from the Australian Acoustic Observatory with additional acoustic sensors deployed across the sanctuary, we can gain valuable insights into this threatened species. Projects like Call Detective offer an exciting opportunity for the public to contribute to biodiversity research by helping identify Pink Cockatoo calls in recordings, supporting our understanding of the species and its conservation needs.</p>
-
-  <div class="location-story-person">
-      <strong>Lola Lange</strong>
-      <span>PhD Candidate at QUT</span>
-  </div>
-
-</div>
+{{% location-story-quote
+    name="Lola Lange"
+    titles="PhD Candidate at QUT"
+%}}
+Bowra Wildlife Sanctuary, in south-west Queensland, provides important habitat for the endangered eastern Pink Cockatoo (*Lophochroa leadbeateri leadbeateri*). Despite its striking appearance, relatively little is known about the species' ecology and habitat use in Queensland. My research at Bowra used passive acoustic monitoring to investigate when and where Pink Cockatoos are active, how they use different vegetation communities, and how their calling activity responds to environmental conditions such as rainfall and temperature. By combining long-term recordings from the Australian Acoustic Observatory with additional acoustic sensors deployed across the sanctuary, we can gain valuable insights into this threatened species. Projects like Call Detective offer an exciting opportunity for the public to contribute to biodiversity research by helping identify Pink Cockatoo calls in recordings, supporting our understanding of the species and its conservation needs.
+{{% /location-story-quote %}}
+{{% /location-story %}}

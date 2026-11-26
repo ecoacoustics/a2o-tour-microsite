@@ -5,6 +5,19 @@
 @import "./progress-counter-overrides.css";
 @import "./site-information.css";
 
+.site-sponsors {
+    background: var(--color-surface);
+
+    .sponsors-container {
+        --sponsor-logo-gap: 6rem;
+        max-width: var(--content-width);
+
+        .sponsor-logo {
+            margin-inline: 0;
+        }
+    }
+}
+
 sl-button.a2o-tour-inline-button {
     &::part(base) {
         align-items: center;

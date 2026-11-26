@@ -1,0 +1,12 @@
+{{- $source := .Get "src" -}}
+{{- if not $source -}}
+    {{- errorf "location-story-image requires src" -}}
+{{- end -}}
+{{- $image := .Page.Resources.Get $source -}}
+{{- if not $image -}}
+    {{- errorf "location-story-image %q was not found as a page resource" $source -}}
+{{- end -}}
+<figure>
+    <img src="{{ $image.RelPermalink }}" alt="{{ .Get "alt" }}" loading="lazy">
+    {{- with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end -}}
+</figure>

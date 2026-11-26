@@ -66,21 +66,19 @@ These records support the rangers' work to monitor bird biodiversity on the isla
 
 <!--more-->
 
-<div class="location-story-images">
-    <figure>
-        <img src="truwana-rangers.jpg" alt="The Truwana Rangers gathered around a solar-powered acoustic sensor in coastal scrub on Cape Barren Island">
-        <figcaption>The Truwana Rangers with an acoustic sensor on truwana</figcaption>
-    </figure>
-</div>
+{{% location-story  %}}
+{{% location-story-images %}}
+{{< location-story-image
+    src="truwana-rangers.jpg"
+    alt="The Truwana Rangers gathered around a solar-powered acoustic sensor in coastal scrub on Cape Barren Island"
+    caption="The Truwana Rangers with an acoustic sensor"
+>}}
+{{% /location-story-images %}}
 
-<div class="location-story-copy">
-
-  <p>Truwana's acoustic monitors provide a unique window into the island's rich natural environment &amp; showcasing the remarkable wildlife and ecological values of one of Tasmania's most unique island environments. The recordings help the Truwana Rangers to monitor &amp; manage bird biodiversity, detect environmental change, and identify species that may otherwise go unnoticed through traditional survey methods.</p>
-
-  <div class="location-story-person">
-      <strong>Steve Heggie</strong>
-      <span>Truwana Rangers Coordinator</span>
-      <span>Aboriginal Land Council of Tasmania (ALCT)</span>
-  </div>
-
-</div>
+{{% location-story-quote
+    name="Steve Heggie"
+    titles="Truwana Rangers Coordinator|Aboriginal Land Council of Tasmania (ALCT)"
+%}}
+Truwana's acoustic monitors provide a unique window into the island's rich natural environment and showcase the remarkable wildlife and ecological values of one of Tasmania's most unique island environments. The recordings help the Truwana Rangers to monitor and manage bird biodiversity, detect environmental change, and identify species that may otherwise go unnoticed through traditional survey methods.
+{{% /location-story-quote %}}
+{{% /location-story %}}

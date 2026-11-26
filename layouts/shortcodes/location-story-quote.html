@@ -1,0 +1,13 @@
+{{- $name := .Get "name" -}}
+{{- $titles := .Get "titles" | default "" -}}
+<div class="location-story-copy">
+    <blockquote>{{- .Inner -}}</blockquote>
+    {{- if $name -}}
+        <div class="location-story-person">
+            <strong>{{ $name }}</strong>
+            {{- range split $titles "|" -}}
+                {{- with strings.TrimSpace . }}<span>{{ . }}</span>{{ end -}}
+            {{- end -}}
+        </div>
+    {{- end -}}
+</div>

@@ -1,0 +1,5 @@
+{{- $imageWidth := .Get "image_width" | default "35%" -}}
+{{- $imageMaxHeight := .Get "image_max_height" | default "125cqw" -}}
+<div class="location-story-inner" style="--location-content-image-width: {{ $imageWidth | safeCSS }}; --location-story-image-max-height: {{ $imageMaxHeight | safeCSS }}">
+{{- .Inner -}}
+</div>

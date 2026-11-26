@@ -110,11 +110,6 @@ html:has(#contribute-your-verifications) {
     }
 }
 
-#image-credits-page > .image-credits-cards {
-    position: relative;
-    padding-top: 6rem;
-}
-
 .page-back {
     position: absolute;
     grid-column: fullbleed;
@@ -301,20 +296,6 @@ html:has(#contribute-your-verifications) {
     }
 }
 
-.site-sponsors {
-
-    background: var(--color-surface);
-
-    .sponsors-container {
-        --sponsor-logo-gap: 6rem;
-        max-width: var(--content-width);
-
-        .sponsor-logo {
-            margin-inline: 0;
-        }
-    }
-}
-
 .location-story {
     --location-content-image-width: clamp(35%, 25% + 8rem, 45%);
     --location-content-gap: var(--space-xlarge);
@@ -353,6 +334,7 @@ html:has(#contribute-your-verifications) {
 
     figcaption {
         margin-top: var(--space-xsmall);
+        font-size: 0.875rem;
     }
 
     img {
@@ -360,6 +342,7 @@ html:has(#contribute-your-verifications) {
         width: 100%;
         min-height: 0;
         height: auto;
+        max-height: var(--location-story-image-max-height);
         flex: 1;
         border: 2px solid var(--color-white);
         object-fit: cover;
@@ -368,6 +351,48 @@ html:has(#contribute-your-verifications) {
 
 .location-story-copy {
     grid-column: 2;
+
+    > blockquote {
+        margin: 0;
+        font-style: italic;
+        /* Quotation marks styling */
+        &::before,
+        &::after {
+            color: rgb(from var(--color-text) r g b / 16%);
+            font-family: Georgia, serif;
+            font-size: 6rem;
+
+        }
+
+        &::before {
+            content: "“";
+            float: left;
+            width: 3rem;
+            height: 1rem;
+            margin-right: 0.25rem;
+            margin-left: -0.5rem;
+            line-height: 0.75;
+        }
+
+        &::after {
+            content: "”";
+            display: inline-block;
+            width: 3rem;
+            margin-left: 1.25rem;
+            vertical-align: top;
+            height: 1rem;
+            line-height: 0.15;
+            float: right;
+        }
+
+        > :last-child {
+            &::after {
+                content: " ";
+                display: inline-block;
+                width: 3rem;
+            }
+        }
+    }
 
     > :first-child {
         margin-top: 0;
@@ -380,29 +405,6 @@ html:has(#contribute-your-verifications) {
 
 .location-story-copy > :last-child {
     margin-bottom: 0;
-}
-
-.location-story-mount-barney {
-    --location-content-image-width: clamp(40%, 30% + 6rem, 48%);
-
-    .location-story-images img {
-        max-height: 125cqw;
-    }
-}
-
-.location-story-cape-barren {
-    --location-content-image-width: clamp(40%, 30% + 6rem, 48%);
-
-    .location-story-images img {
-        max-height: 125cqw;
-    }
-}
-
-.location-story-bowra {
-    --location-content-image-width: clamp(20%, 50% - 6rem, 48%);
-    .location-story-images img {
-        max-height: 125cqw;
-    }
 }
 
 @media (max-width: 48em) {
