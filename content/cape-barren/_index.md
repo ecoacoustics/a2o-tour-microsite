@@ -50,7 +50,7 @@ species:
     image: images/species/Australasian-Swamphen.jpg
     examples:
       - url: "https://api.acousticobservatory.org/audio_recordings/812630/media.mp3?end_offset=5022&start_offset=5002"
-  - name: "Yellow-tailed Black-Cockatoo"
+  - name: "Mangana (Yellow-tailed Black-Cockatoo)"
     description: "A large black cockatoo with yellow cheek and tail panels that feeds on seeds and wood-boring grubs and gives a far-carrying, wailing call."
     tag_ids: [26797]
     image: images/species/Yellow-tailed-Black-Cockatoo.jpg
