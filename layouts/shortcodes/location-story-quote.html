@@ -1,0 +1,21 @@
+{{/*
+Renders the story quote and optional person attribution in the text column.
+Inner content is rendered as Markdown because callers use {{% %}} notation.
+
+@context {string} name Optional person attribution.
+@context {string} titles Optional "|" separated roles, one per output line.
+@context inner Markdown forming the quoted story.
+*/}}
+{{- $name := .Get "name" -}}
+{{- $titles := .Get "titles" | default "" -}}
+<div class="location-story-copy">
+    <blockquote>{{- .Inner -}}</blockquote>
+    {{- if $name -}}
+        <div class="location-story-person">
+            <strong>{{ $name }}</strong>
+            {{- range split $titles "|" -}}
+                {{- with strings.TrimSpace . }}<span>{{ . }}</span>{{ end -}}
+            {{- end -}}
+        </div>
+    {{- end -}}
+</div>

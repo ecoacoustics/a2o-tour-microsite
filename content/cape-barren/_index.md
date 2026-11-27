@@ -50,7 +50,7 @@ species:
     image: images/species/Australasian-Swamphen.jpg
     examples:
       - url: "https://api.acousticobservatory.org/audio_recordings/812630/media.mp3?end_offset=5022&start_offset=5002"
-  - name: "Yellow-tailed Black-Cockatoo"
+  - name: "Mangana (Yellow-tailed Black-Cockatoo)"
     description: "A large black cockatoo with yellow cheek and tail panels that feeds on seeds and wood-boring grubs and gives a far-carrying, wailing call."
     tag_ids: [26797]
     image: images/species/Yellow-tailed-Black-Cockatoo.jpg
@@ -66,21 +66,19 @@ These records support the rangers' work to monitor bird biodiversity on the isla
 
 <!--more-->
 
-<div class="location-story-images">
-    <figure>
-        <img src="truwana-rangers.jpg" alt="The Truwana Rangers gathered around a solar-powered acoustic sensor in coastal scrub on Cape Barren Island">
-        <figcaption>The Truwana Rangers with an acoustic sensor on truwana</figcaption>
-    </figure>
-</div>
+{{% location-story  %}}
+{{% location-story-images %}}
+{{< location-story-image
+    src="truwana-rangers.jpg"
+    alt="The Truwana Rangers gathered around a solar-powered acoustic sensor in coastal scrub on Cape Barren Island"
+    caption="The Truwana Rangers with an acoustic sensor"
+>}}
+{{% /location-story-images %}}
 
-<div class="location-story-copy">
-
-  <p>Truwana's acoustic monitors provide a unique window into the island's rich natural environment &amp; showcasing the remarkable wildlife and ecological values of one of Tasmania's most unique island environments. The recordings help the Truwana Rangers to monitor &amp; manage bird biodiversity, detect environmental change, and identify species that may otherwise go unnoticed through traditional survey methods.</p>
-
-  <div class="location-story-person">
-      <strong>Steve Heggie</strong>
-      <span>Truwana Rangers Coordinator</span>
-      <span>Aboriginal Land Council of Tasmania (ALCT)</span>
-  </div>
-
-</div>
+{{% location-story-quote
+    name="Steve Heggie"
+    titles="Truwana Rangers Coordinator|Aboriginal Land Council of Tasmania (ALCT)"
+%}}
+Truwana's acoustic monitors provide a unique window into the island's rich natural environment and showcase the remarkable wildlife and ecological values of one of Tasmania's most unique island environments. The recordings help the Truwana Rangers to monitor and manage bird biodiversity, detect environmental change, and identify species that may otherwise go unnoticed through traditional survey methods.
+{{% /location-story-quote %}}
+{{% /location-story %}}

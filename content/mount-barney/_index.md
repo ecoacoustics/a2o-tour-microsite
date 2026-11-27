@@ -72,21 +72,19 @@ By turning recordings into reliable observations, you help create a baseline for
 
 <!--more-->
 
-<div class="location-story-images">
-    <figure>
-        <img src="field.jpg" alt="A researcher and an acoustic sensor deployed on a tree in the field at Mount Barney">
-        <figcaption>Field work at Mount Barney</figcaption>
-    </figure>
-</div>
+{{% location-story %}}
+{{% location-story-images %}}
+{{< location-story-image
+    src="field.jpg"
+    alt="A researcher and an acoustic sensor deployed on a tree in the field at Mount Barney"
+    caption="Field work at Mount Barney"
+>}}
+{{% /location-story-images %}}
 
-<div class="location-story-copy">
-
-  <p>The Glossy Black-Cockatoo (<em>Calyptorhynchus lathami</em>) is a threatened and declining species in eastern Australia. In south-east Queensland, Mount Barney is one of its strongholds, providing critical feeding and breeding habitat. The area is also subject to wildfires, including the 2019-2020 Black Summer fires which impacted large areas of habitat. Using audio from the Australian Acoustic Observatory at Mount Barney, our project team has built an automated call recogniser for the Glossy Black-Cockatoo. This has allowed us to expand our bioacoustic monitoring program across southeast Queensland, where we have monitored the species since 2021. Mount Barney and surrounding areas continue to provide vital information on the long-term occupancy of Glossy Black-Cockatoos. This work is a collaboration with Queensland University of Technology, Griffith University and the University of the Sunshine Coast.</p>
-
-  <div class="location-story-person">
-      <strong>Dr Dani Teixeira</strong>
-      <span>ARC Industry Fellow at QUT</span>
-      <span>Chair of the Glossy Black-Cockatoo Recovery Team</span>
-  </div>
-
-</div>
+{{% location-story-quote
+    name="Dr Daniella Teixeira"
+    titles="ARC Industry Fellow at QUT|Chair of the South-eastern Glossy Black-Cockatoo Recovery Team"
+%}}
+The Glossy Black-Cockatoo (*Calyptorhynchus lathami*) is a threatened and declining species in eastern Australia. In south-east Queensland, Mount Barney is one of its strongholds, providing critical feeding and breeding habitat. The area is also subject to wildfires, including the 2019-2020 Black Summer fires which impacted large areas of habitat. Using audio from the Australian Acoustic Observatory at Mount Barney, our project team has built an automated call recogniser for the Glossy Black-Cockatoo. This has allowed us to expand our bioacoustic monitoring program across southeast Queensland, where we have monitored the species since 2021. Mount Barney and surrounding areas continue to provide vital information on the long-term occupancy of Glossy Black-Cockatoos. This work is a collaboration with Queensland University of Technology, Griffith University and the University of the Sunshine Coast.
+{{% /location-story-quote %}}
+{{% /location-story %}}

@@ -110,11 +110,6 @@ html:has(#contribute-your-verifications) {
     }
 }
 
-#image-credits-page > .image-credits-cards {
-    position: relative;
-    padding-top: 6rem;
-}
-
 .page-back {
     position: absolute;
     grid-column: fullbleed;
@@ -301,20 +296,6 @@ html:has(#contribute-your-verifications) {
     }
 }
 
-.site-sponsors {
-
-    background: var(--color-surface);
-
-    .sponsors-container {
-        --sponsor-logo-gap: 6rem;
-        max-width: var(--content-width);
-
-        .sponsor-logo {
-            margin-inline: 0;
-        }
-    }
-}
-
 .location-story {
     --location-content-image-width: clamp(35%, 25% + 8rem, 45%);
     --location-content-gap: var(--space-xlarge);
@@ -336,31 +317,55 @@ html:has(#contribute-your-verifications) {
     justify-self: center;
 }
 
+/*
+
+Location page content has an image on the left and text content on the right. 
+We want to be able to drop one or more images in the image column of different aspect ratios, 
+with content of varying length and have it look nice.  This means the total height of the images 
+should not be too much different from the total height of the text, or we end up with empty 
+space below the image or the text. We can do this by modifying the heights of the images to 
+fill the available height to match the content, however we need to constrain it so the aspect ratios 
+don't change too much from their natural aspect ratio, otherwise too much of the image is cropped. 
+
+To achieve this, hugo sets the aspect ratio of the original image as a css variable, and then the 
+max and min heights are calculated based off that ratio.
+
+If there is more than one image, hugo sets a css variable for the share of the vertical height that each 
+image should take. 
+
+*/
+
+
+
 .location-story-images {
     grid-column: 1;
-    display: grid;
-    grid-auto-rows: 1fr;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
     gap: var(--space-medium);
     align-self: stretch;
     container-type: inline-size;
 
     figure {
         display: flex;
+        flex: var(--location-story-image-share) 1 0;
         flex-direction: column;
         margin: 0;
-        min-height: 0;
+        min-height: calc(50cqw * var(--location-story-image-ratio));
+        max-height: calc(170cqw * var(--location-story-image-ratio));
     }
 
     figcaption {
         margin-top: var(--space-xsmall);
+        font-size: 0.875rem;
     }
 
     img {
         display: block;
         width: 100%;
         min-height: 0;
-        height: auto;
-        flex: 1;
+        height: 0;
+        flex: 1 1 0;
         border: 2px solid var(--color-white);
         object-fit: cover;
     }
@@ -368,6 +373,48 @@ html:has(#contribute-your-verifications) {
 
 .location-story-copy {
     grid-column: 2;
+
+    > blockquote {
+        margin: 0;
+        font-style: italic;
+        /* Quotation marks styling */
+        &::before,
+        &::after {
+            color: rgb(from var(--color-text) r g b / 16%);
+            font-family: Georgia, serif;
+            font-size: 6rem;
+
+        }
+
+        &::before {
+            content: "“";
+            float: left;
+            width: 3rem;
+            height: 1rem;
+            margin-right: 0.25rem;
+            margin-left: -0.5rem;
+            line-height: 0.75;
+        }
+
+        &::after {
+            content: "”";
+            display: inline-block;
+            width: 3rem;
+            margin-left: 1.25rem;
+            vertical-align: top;
+            height: 1rem;
+            line-height: 0.15;
+            float: right;
+        }
+
+        > :last-child {
+            &::after {
+                content: " ";
+                display: inline-block;
+                width: 3rem;
+            }
+        }
+    }
 
     > :first-child {
         margin-top: 0;
@@ -382,29 +429,6 @@ html:has(#contribute-your-verifications) {
     margin-bottom: 0;
 }
 
-.location-story-mount-barney {
-    --location-content-image-width: clamp(40%, 30% + 6rem, 48%);
-
-    .location-story-images img {
-        max-height: 125cqw;
-    }
-}
-
-.location-story-cape-barren {
-    --location-content-image-width: clamp(40%, 30% + 6rem, 48%);
-
-    .location-story-images img {
-        max-height: 125cqw;
-    }
-}
-
-.location-story-bowra {
-    --location-content-image-width: clamp(20%, 50% - 6rem, 48%);
-    .location-story-images img {
-        max-height: 125cqw;
-    }
-}
-
 @media (max-width: 48em) {
     .location-story-inner {
         grid-template-columns: 1fr;
@@ -417,6 +441,7 @@ html:has(#contribute-your-verifications) {
 
     .location-story-images {
         display: block;
+        min-height: 0;
     }
 
     .location-story-images figure {

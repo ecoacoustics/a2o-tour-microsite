@@ -152,10 +152,8 @@
 </section>
 
 {{ with $.ContentWithoutSummary }}
-<section class="location-story location-story-{{ $.Page.File.ContentBaseName }} fullbleed">
-    <div class="location-story-inner">
-        {{ . }}
-    </div>
+<section class="location-story fullbleed">
+    {{ . }}
 </section>
 {{ end }}
 
