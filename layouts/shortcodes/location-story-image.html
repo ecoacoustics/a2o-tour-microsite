@@ -1,3 +1,10 @@
+{{/*
+Renders one figure for an image associated with the location page.
+
+@context {string} src Page-resource filename, relative to the location page.
+@context {string} alt Alternative text for the image.
+@context {string} caption Optional visible caption.
+*/}}
 {{- $source := .Get "src" -}}
 {{- if not $source -}}
     {{- errorf "location-story-image requires src" -}}
@@ -6,7 +13,8 @@
 {{- if not $image -}}
     {{- errorf "location-story-image %q was not found as a page resource" $source -}}
 {{- end -}}
-<figure>
+{{- $imageRatio := div (float $image.Height) (float $image.Width) -}}
+<figure style="--location-story-image-ratio: {{ $imageRatio }}; --location-story-image-share: {{ $imageRatio }}">
     <img src="{{ $image.RelPermalink }}" alt="{{ .Get "alt" }}" loading="lazy">
     {{- with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end -}}
 </figure>

@@ -1,5 +1,8 @@
-{{- $imageWidth := .Get "image_width" | default "35%" -}}
-{{- $imageMaxHeight := .Get "image_max_height" | default "125cqw" -}}
-<div class="location-story-inner" style="--location-content-image-width: {{ $imageWidth | safeCSS }}; --location-story-image-max-height: {{ $imageMaxHeight | safeCSS }}">
+{{/*
+Creates the two-column grid for an extended location story.
+
+@context inner One location-story-images block and one location-story-quote block.
+*/}}
+<div class="location-story-inner">
 {{- .Inner -}}
 </div>

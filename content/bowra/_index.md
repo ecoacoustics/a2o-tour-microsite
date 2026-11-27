@@ -72,7 +72,7 @@ These records make it possible to compare soundscapes across dry and productive 
 
 <!--more-->
 
-{{% location-story image_width="clamp(20%, 50% - 6rem, 48%)" %}}
+{{% location-story %}}
 {{% location-story-images %}}
 {{< location-story-image
     src="sensor_setup_1.jpg"

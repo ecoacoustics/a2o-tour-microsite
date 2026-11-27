@@ -72,7 +72,7 @@ By turning recordings into reliable observations, you help create a baseline for
 
 <!--more-->
 
-{{% location-story image_width="clamp(40%, 30% + 6rem, 48%)" %}}
+{{% location-story %}}
 {{% location-story-images %}}
 {{< location-story-image
     src="field.jpg"
